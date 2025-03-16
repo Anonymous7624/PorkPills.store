@@ -160,8 +160,8 @@
     const alertContainer = document.createElement('div');
     document.body.appendChild(alertContainer);
 
-    // Create a fake alert modal
-    function createFakeAlert(message) {
+    // Create a fake alert modal. Pass isInitial=true for the very first alert.
+    function createFakeAlert(message, isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
       alertDiv.innerHTML = '<p>' + message + '</p>';
@@ -170,8 +170,13 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        if (currentAlerts <= 0) {
-          // When all current alerts are closed, double the multiplier and trigger new alerts
+        // If it's the initial alert and hasn't already triggered chaos, flood the screen immediately.
+        if (isInitial && !chaosStarted) {
+          chaosStarted = true;
+          alertMultiplier = 20; // Increase multiplier for a flood effect.
+          triggerAlerts();
+        } else if (currentAlerts <= 0) {
+          // Otherwise, keep doubling alerts.
           alertMultiplier *= 2;
           triggerAlerts();
         }
@@ -181,13 +186,13 @@
       currentAlerts++;
     }
 
-    // Trigger alerts with exponential doubling and a mass alert if idle for 2 seconds
+    // Trigger alerts: create a batch of alerts and, if idle for 2 seconds, spawn even more.
     function triggerAlerts() {
       if (alertTimeout) clearTimeout(alertTimeout);
       for (let i = 0; i < alertMultiplier; i++) {
         createFakeAlert('ALERT: Computer shutting down!!! Act now!');
       }
-      // If user ignores alerts for 2 seconds, spawn even more alerts.
+      // After 2 seconds of inactivity, create an additional flood of alerts.
       alertTimeout = setTimeout(() => {
         for (let i = 0; i < alertMultiplier * 5; i++) {
           createFakeAlert('ALERT: Immediate action required!');
@@ -202,11 +207,10 @@
       }
     }
 
-    // Trigger the fake hacking mode
+    // Trigger the fake hacking mode with glitch effects, scrolling terminal text, and sound effects.
     function triggerHackingMode() {
       hackingTriggered = true;
       document.body.classList.add('glitch');
-      // Change background and text to add to the chaos.
       document.body.style.background = '#000';
       document.body.style.color = '#0f0';
 
@@ -233,7 +237,7 @@
       playSirenAndVoice();
     }
 
-    // Use Web Audio API and SpeechSynthesis to play a siren sound and a robotic voice
+    // Play siren sound and a robotic voice alert.
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -248,21 +252,20 @@
       oscillator.start();
       oscillator.stop(audioCtx.currentTime + 5);
       
-      // Robotic voice alert
       const utterance = new SpeechSynthesisUtterance('WARNING! SYSTEM BREACH!');
       utterance.pitch = 0.5;
       utterance.rate = 0.9;
       window.speechSynthesis.speak(utterance);
     }
 
-    // Trigger a fake Blue Screen of Death
+    // Trigger a fake Blue Screen of Death overlay.
     function triggerBSOD() {
       bsodTriggered = true;
       const bsodOverlay = document.getElementById('bsodOverlay');
       bsodOverlay.style.display = 'block';
     }
 
-    // Randomly affect the cursor to add to the chaos
+    // Randomly affect the cursor to add extra chaos.
     function randomizeCursor() {
       const rand = Math.random();
       if (rand < 0.3) {
@@ -275,13 +278,14 @@
     }
     setInterval(randomizeCursor, 1000);
 
-    // Attach event listeners to all product buttons to start the chaos
+    // Additional chaos trigger via product buttons.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
     for (const btn of chaosButtons) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
         if (!chaosStarted) {
           chaosStarted = true;
+          alertMultiplier = 20;
           triggerAlerts();
         } else {
           triggerAlerts();
@@ -289,13 +293,18 @@
       });
     }
 
-    // Also count any extra clicks on the page toward triggering the BSOD
+    // Count extra clicks on the page toward triggering the BSOD.
     document.addEventListener('click', function() {
       totalActions++;
       if (totalActions > 100 && !bsodTriggered) {
         triggerBSOD();
       }
     });
+
+    // Immediately show an initial alert on page load.
+    window.onload = function() {
+      createFakeAlert("ALERT: Computer shutting down!!! Act now!", true);
+    };
   </script>
 </body>
 </html>
