@@ -148,7 +148,7 @@
   <div class="store-container">
     <!-- Updated realistic product listings -->
     <div class="product">
-      <img src="JohnPorkshirt.jpeg" alt="John Pork Shirt">
+      <img src="JohnPorkShirt.jpeg" alt="John Pork Shirt">
       <h3>John Pork Shirt</h3>
       <p class="price">$19.99</p>
       <p class="reviews">★★★★☆ (50 reviews)</p>
@@ -184,8 +184,8 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array of your custom alert image filenames (using .jpg)
-    const alertImages = ["Image1234.jpg", "image12345.jpg", "image123456.jpg"];
+    // Array of alert image filenames (now only includes "Image1234.jpg")
+    const alertImages = ["Image1234.jpg"];
 
     // Create a fake alert modal that shows a random image.
     // Pass isInitial=true for the very first alert.
@@ -193,10 +193,9 @@
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
 
-      // Create an image element and choose one randomly.
+      // Create an image element and choose from our array.
       const img = document.createElement('img');
-      const randomIndex = Math.floor(Math.random() * alertImages.length);
-      const randomImage = alertImages[randomIndex];
+      const randomImage = alertImages[0]; // Only one image in the array
       img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
