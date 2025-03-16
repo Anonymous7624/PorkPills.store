@@ -14,18 +14,70 @@
       background: #ffffff;
       transition: background 0.5s;
     }
-    header {
-      background: linear-gradient(to right, #444, #222);
+    /* Announcement Banner */
+    .announcement-banner {
+      background: #f44336;
       color: #fff;
-      padding: 20px;
       text-align: center;
+      padding: 8px;
+      font-size: 16px;
     }
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #333;
+      padding: 10px 20px;
+      color: #fff;
+    }
+    .navbar a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .navbar .nav-left, .navbar .nav-right {
+      display: flex;
+      align-items: center;
+    }
+    .navbar input[type="text"] {
+      padding: 5px 8px;
+      border-radius: 3px;
+      border: none;
+      margin-left: 10px;
+    }
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 10px 20px;
+      font-size: 14px;
+      background: #eee;
+    }
+    /* Sort & Filter Bar */
+    .sort-filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: #f9f9f9;
+      border-bottom: 1px solid #ddd;
+    }
+    .sort-filter select {
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    .filter-links a {
+      margin-right: 10px;
+      color: #007bff;
+      text-decoration: none;
+    }
+    /* Store Container */
     .store-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 30px;
       gap: 20px;
+      padding: 20px;
     }
     .product {
       background: #fff;
@@ -51,10 +103,10 @@
       margin: 10px 0 5px;
       font-size: 18px;
     }
-    .product p {
+    .product p.description {
+      font-size: 13px;
+      color: #666;
       margin: 5px 0;
-      font-size: 14px;
-      color: #555;
     }
     .price {
       font-size: 16px;
@@ -78,16 +130,61 @@
     .product button:hover {
       background: #0056b3;
     }
+    /* Pagination */
+    .pagination {
+      text-align: center;
+      padding: 15px;
+    }
+    .pagination a {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #007bff;
+      padding: 5px 10px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
     /* Footer */
     footer {
       background: #222;
       color: #ccc;
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       font-size: 14px;
-      margin-top: 20px;
     }
-    /* Fake Alert Styles */
+    footer .social a {
+      margin: 0 5px;
+      color: #ccc;
+      text-decoration: none;
+    }
+    footer form input[type="email"] {
+      padding: 5px;
+      border-radius: 3px;
+      border: none;
+    }
+    footer form input[type="submit"] {
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: none;
+      background: #f44336;
+      color: #fff;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    /* Live Chat Widget */
+    .chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #007bff;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 1100;
+    }
+    /* Fake Alert Styles (Chaos) */
     .fake-alert {
       position: fixed;
       background: #ffdddd;
@@ -161,15 +258,52 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>John Pork Merch</h1>
-    <p>Your one-stop shop for exclusive John Pork apparel!</p>
-  </header>
+  <!-- Announcement Banner -->
+  <div class="announcement-banner">
+    Big Sale! Free Shipping on Orders Over $50!
+  </div>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-right">
+      <input type="text" placeholder="Search products...">
+      <span style="margin-left:10px;">👤</span>
+      <span style="margin-left:10px;">🛒</span>
+    </div>
+  </div>
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb">
+    Home > Products
+  </div>
+  <!-- Sort & Filter Bar -->
+  <div class="sort-filter">
+    <div class="filter-links">
+      <a href="#">All</a>
+      <a href="#">Shirts</a>
+      <a href="#">Hats</a>
+      <a href="#">Accessories</a>
+    </div>
+    <div>
+      Sort by: 
+      <select>
+        <option>Relevance</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest</option>
+      </select>
+    </div>
+  </div>
+  <!-- Store Container with Product Listings -->
   <div class="store-container">
-    <!-- Product Listings -->
     <div class="product">
       <img src="JohnPorkShirt.jpeg" alt="John Pork Shirt">
       <h3>John Pork Shirt</h3>
+      <p class="description">A premium quality shirt for the modern pork enthusiast.</p>
       <p class="price">$19.99</p>
       <p class="reviews">★★★★☆ (50 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
@@ -177,6 +311,7 @@
     <div class="product">
       <img src="JohnPorkShirt1.jpeg" alt="John Pork Shirt">
       <h3>John Pork Shirt</h3>
+      <p class="description">Stylish and comfortable – made for pork lovers.</p>
       <p class="price">$21.99</p>
       <p class="reviews">★★★☆☆ (35 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
@@ -184,15 +319,41 @@
     <div class="product">
       <img src="JohnPorkShirt2.jpeg" alt="John Pork Shirt">
       <h3>John Pork Shirt</h3>
+      <p class="description">The perfect blend of comfort and style.</p>
       <p class="price">$17.99</p>
       <p class="reviews">★★★★★ (75 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
   </div>
+  <!-- Pagination Bar -->
+  <div class="pagination">
+    <a href="#">«</a>
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">»</a>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <p>Contact us: support@johnporkmerch.com | +1 (555) 123-4567</p>
+    <div class="social">
+      <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+    </div>
+    <form>
+      <label for="newsletter">Subscribe to our newsletter:</label>
+      <input type="email" id="newsletter" placeholder="Enter your email">
+      <input type="submit" value="Subscribe">
+    </form>
+    <p>&copy; 2025 John Pork Merch. All rights reserved.</p>
+  </footer>
+  <!-- Live Chat Widget -->
+  <div class="chat-widget">Chat with us</div>
 
-  <!-- Hacking Overlay -->
+  <!-- Hacking Overlay (Chaos Mode) -->
   <div id="hackingOverlay"></div>
-  <!-- BSOD Overlay -->
+  <!-- BSOD Overlay (Unused) -->
   <div id="bsodOverlay">
     <h1>:(</h1>
     <p>A problem has been detected and Windows has been shut down to prevent damage to your computer.</p>
@@ -200,18 +361,14 @@
     <p>...</p>
   </div>
 
-  <footer>
-    &copy; 2025 John Pork Merch. All rights reserved.
-  </footer>
-
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Alert images: using two images
+    // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
 
-    // Create a fake alert modal with a randomly chosen alert image.
+    // Create a fake alert modal with a random alert image.
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
@@ -229,7 +386,7 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, trigger flood after 5 seconds
+        // If initial alert closed and chaos not started, trigger flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
           setTimeout(triggerFlood, 5000);
@@ -237,47 +394,41 @@
       });
       alertDiv.appendChild(closeBtn);
 
-      // Place the alert at a random location
+      // Randomly position the alert
       alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
       alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       document.body.appendChild(alertDiv);
       currentAlerts++;
     }
 
-    // Flood the screen with alerts over 5 seconds (~50 alerts)
+    // Flood screen with alerts over 5 seconds (~50 alerts), then trigger hacking mode.
     function triggerFlood() {
       const floodDuration = 5000;
       const floodInterval = 100;
       const floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
       const floodTimer = setInterval(function() {
-         createFakeAlert();
-         count++;
-         if (count >= floods) {
-           clearInterval(floodTimer);
-           triggerHackingMode();
-         }
+        createFakeAlert();
+        count++;
+        if (count >= floods) {
+          clearInterval(floodTimer);
+          triggerHackingMode();
+        }
       }, floodInterval);
     }
 
-    // Generate a random code-like line
+    // Generate a random code-like line (using a mix of common code fragments)
     function generateRandomCodeLine() {
-      const snippets = [
-        "var x = 42;",
-        "function foo() { return 'bar'; }",
-        "console.log('Hello World');",
-        "if(a > b){ a--; }",
-        "while(true){ break; }",
-        "let result = computeValue();",
-        "document.body.style.background = '#000';",
-        "for(let i=0; i<10; i++){ console.log(i); }",
-        "const obj = { key: 'value' };",
-        "import {module} from 'lib';"
+      const parts = [
+        "var", "let", "const", "function", "if", "else", "return", "console.log", "document.getElementById", "for", "while", "true", "false"
       ];
-      return snippets[Math.floor(Math.random() * snippets.length)];
+      const randomPart = parts[Math.floor(Math.random() * parts.length)];
+      const randomNum = Math.floor(Math.random() * 1000);
+      return randomPart + " x" + randomNum + " = '" + Math.random().toString(36).substring(7) + "';";
     }
 
-    // Trigger the hacking mode with a rapidly updating code overlay and 5 simultaneous alarm sounds.
+    // Trigger hacking mode with rapidly generated code (approx 15 lines per second)
+    // and simultaneously play 5 alarm sounds.
     function triggerHackingMode() {
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
@@ -285,12 +436,11 @@
       
       const hackingOverlay = document.getElementById('hackingOverlay');
       hackingOverlay.style.display = 'block';
-      hackingOverlay.textContent = ""; // Clear previous content
+      hackingOverlay.textContent = "";
       
-      // Start generating random code lines at ~15 lines per second
+      // Append random code lines at about 15 lines per second (every 67ms)
       setInterval(function() {
         hackingOverlay.textContent += generateRandomCodeLine() + "\n";
-        // Auto-scroll to the bottom
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
@@ -300,13 +450,12 @@
       }
     }
 
-    // Play an alarm sound using Web Audio API (called 5 times)
+    // Play an alarm sound using Web Audio API
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
-      // Slightly vary frequency for each instance
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
@@ -341,7 +490,7 @@
       });
     }
 
-    // Show the initial alert after a 1.5 second delay.
+    // Show initial alert after a delay of 1.5 seconds.
     window.onload = function() {
       setTimeout(function() {
         createFakeAlert(true);
