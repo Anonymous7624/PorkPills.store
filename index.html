@@ -190,13 +190,12 @@
       background: #ffdddd;
       padding: 10px;
       z-index: 1000;
-      /* Default width for non-initial alerts */
       width: 300px;
       text-align: center;
       box-shadow: 0 0 10px red;
       margin: 10px;
     }
-    /* "X" Close button in the top-right corner for alerts */
+    /* "X" Close Button for Alerts */
     .fake-alert button {
       position: absolute;
       top: 5px;
@@ -375,9 +374,10 @@
       alertDiv.className = 'fake-alert';
 
       if (isInitial) {
-        alertDiv.style.width = "400px";
-        alertDiv.style.left = (window.innerWidth - 400) / 2 + "px";
-        alertDiv.style.top = (window.innerHeight - 200) / 2 + "px";
+        alertDiv.style.width = "500px";
+        // Center the alert both horizontally and vertically
+        alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
+        alertDiv.style.top = (window.innerHeight - 250) / 2 + "px";
       } else {
         alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
         alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
@@ -396,7 +396,7 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, trigger the flood after 5 seconds.
+        // If this is the initial alert and chaos hasn't started, trigger flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
           setTimeout(triggerFlood, 5000);
@@ -423,9 +423,9 @@
       }, floodInterval);
     }
 
-    // Generate a random code-like line with an expanded set of snippets including 7 new ideas.
+    // Generate a random code-like line with an expanded set of snippets.
     function generateRandomCodeLine() {
-      const snippets = [
+      const baseSnippets = [
         "var x = 42;",
         "function foo() { return 'bar'; }",
         "console.log('Hello World');",
@@ -435,17 +435,19 @@
         "document.body.style.background = '#000';",
         "for(let i=0; i<10; i++){ console.log(i); }",
         "const obj = { key: 'value' };",
-        "import {module} from 'lib';",
-        // 7 new ideas:
-        "var exploit = '0x' + Math.floor(Math.random()*0xFFFFFF).toString(16);",
-        "if(user.access){ system.override(); }",
-        "console.error('Critical failure at line ' + Math.floor(Math.random()*1000));",
-        "document.body.innerHTML = '<marquee>HACKED</marquee>';",
-        "SELECT * FROM users WHERE id = '" + Math.floor(Math.random()*10000) + "';",
-        "function breach(){ return 'SYSTEM BREACH'; }",
-        "import hacker from 'dark-web';"
+        "import {module} from 'lib';"
       ];
-      return snippets[Math.floor(Math.random() * snippets.length)];
+      const newIdeas = [
+        "AI.generateCode('Hello, World!');",                       // New idea 1
+        "while(system.check()) { hack(); }",                         // New idea 2
+        "alert('System failure: ' + Math.random());",                // New idea 3
+        "const result = await fetch('https://api.example.com/data');",// New idea 4
+        "debugger;",                                                 // New idea 5
+        "throw new Error('Random error occurred');",                 // New idea 6
+        "console.warn('Warning: AI detected anomaly');"              // New idea 7
+      ];
+      const combined = baseSnippets.concat(newIdeas);
+      return combined[Math.floor(Math.random() * combined.length)];
     }
 
     // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
