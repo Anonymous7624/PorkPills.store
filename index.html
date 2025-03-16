@@ -45,24 +45,44 @@
       cursor: pointer;
       border-radius: 3px;
     }
-    /* Fake alert modal styles */
+    /* Fake alert container styles */
     .fake-alert {
       position: fixed;
       background: #ffdddd;
       border: 2px solid red;
-      padding: 20px;
+      padding: 10px;
       z-index: 1000;
       width: 300px;
       text-align: center;
       box-shadow: 0 0 10px red;
+      margin: 10px;
+      /* Make the container relative so the close button can be positioned */
+      position: fixed;
     }
+    /* "X" Close button in the top-right corner */
     .fake-alert button {
-      margin-top: 10px;
-      padding: 5px 10px;
-      background: red;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: darkred;
       color: white;
       border: none;
       cursor: pointer;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+    /* Custom image alert styling with 5 visual effects */
+    .image-alert {
+      width: 280px;
+      max-width: 100%;
+      border: 2px solid red;          /* 1. Border */
+      box-shadow: 0 0 15px red;         /* 2. Glow effect */
+      animation: pulse 2s infinite;     /* 3. Pulsing effect (includes slight rotation & opacity change) */
+    }
+    @keyframes pulse {
+      0%   { transform: scale(1) rotate(0deg); opacity: 1; }
+      50%  { transform: scale(1.05) rotate(2deg); opacity: 0.9; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
     }
     /* Hacking animation overlay */
     #hackingOverlay {
@@ -148,41 +168,40 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array of realistic Microsoft-like alert messages with siren emojis
-    const realisticMessages = [
-      "🚨 Windows encountered a critical error. Your PC needs to restart.",
-      "🚨 System Error: A problem has been detected. Save your work immediately.",
-      "🚨 Critical Warning: Your system is not responding. Contact Microsoft Support.",
-      "🚨 Error 0x80070005: Access is denied. System integrity compromised.",
-      "🚨 Windows Alert: Unexpected error detected. Please close all applications."
-    ];
+    // Array of your custom image filenames
+    const alertImages = ["Image1234.jpeg", "image12345.jpeg", "image123456.jpeg"];
 
-    function getRandomAlertMessage() {
-      return realisticMessages[Math.floor(Math.random() * realisticMessages.length)];
-    }
-
-    // Create a fake alert modal with a random position on screen.
+    // Create a fake alert modal that shows a random image.
     // Pass isInitial=true for the very first alert.
-    function createFakeAlert(message, isInitial = false) {
+    function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
-      alertDiv.innerHTML = '<p>' + message + '</p>';
+
+      // Create an image element and assign one of your images randomly.
+      const img = document.createElement('img');
+      const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
+      img.src = randomImage;
+      img.className = 'image-alert';
+      alertDiv.appendChild(img);
+
+      // Create the close ("X") button and position it in the corner.
       const closeBtn = document.createElement('button');
-      closeBtn.textContent = 'Close Alert';
+      closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
         // If this is the initial alert and chaos hasn't started, begin the cascade
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
-          // Wait 3 seconds, then start flooding alerts
+          // Wait 3 seconds, then flood the screen with additional alerts, then immediately trigger hacking mode.
           setTimeout(triggerFlood, 3000);
         }
       });
       alertDiv.appendChild(closeBtn);
-      // Set random positions so alerts appear scattered over the screen
+
+      // Randomly place the alert on the screen.
       alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
-      alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 100)) + "px";
+      alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       document.body.appendChild(alertDiv);
       currentAlerts++;
     }
@@ -194,7 +213,7 @@
       let floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
       let floodTimer = setInterval(function() {
-         createFakeAlert(getRandomAlertMessage());
+         createFakeAlert();
          count++;
          if(count >= floods) {
            clearInterval(floodTimer);
@@ -279,9 +298,9 @@
       });
     }
 
-    // Immediately show an initial realistic alert on page load.
+    // Immediately show an initial image alert on page load.
     window.onload = function() {
-      createFakeAlert("🚨 Windows encountered a critical error. Your system needs to restart.", true);
+      createFakeAlert(true);
     };
   </script>
 </body>
