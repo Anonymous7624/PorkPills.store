@@ -146,7 +146,7 @@
     <p>Your one-stop shop for exclusive John Pork apparel!</p>
   </header>
   <div class="store-container">
-    <!-- Updated realistic product listings -->
+    <!-- Realistic product listings -->
     <div class="product">
       <img src="JohnPorkShirt.jpeg" alt="John Pork Shirt">
       <h3>John Pork Shirt</h3>
@@ -184,19 +184,18 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array of alert image filenames (now only includes "Image1234.jpg")
+    // Array of alert image filenames (only one image in the array)
     const alertImages = ["Image1234.jpg"];
 
-    // Create a fake alert modal that shows a random image.
+    // Create a fake alert modal that shows the alert image.
     // Pass isInitial=true for the very first alert.
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
 
-      // Create an image element and choose from our array.
+      // Create an image element and use our single alert image.
       const img = document.createElement('img');
-      const randomImage = alertImages[0]; // Only one image in the array
-      img.src = randomImage;
+      img.src = alertImages[0]; // Only "Image1234.jpg" is used.
       img.className = 'image-alert';
       alertDiv.appendChild(img);
 
@@ -206,10 +205,10 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, begin the cascade.
+        // If this is the initial alert and chaos hasn't started, start the hacking mode after 3 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
-          setTimeout(triggerFlood, 3000);
+          setTimeout(triggerHackingMode, 3000);
         }
       });
       alertDiv.appendChild(closeBtn);
@@ -219,22 +218,6 @@
       alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       document.body.appendChild(alertDiv);
       currentAlerts++;
-    }
-
-    // Flood alerts gradually over 3 seconds, then immediately trigger the hacking mode.
-    function triggerFlood() {
-      const floodDuration = 3000; // 3 seconds
-      const floodInterval = 300;  // spawn a new alert every 300ms
-      const floods = Math.floor(floodDuration / floodInterval);
-      let count = 0;
-      const floodTimer = setInterval(function() {
-         createFakeAlert();
-         count++;
-         if (count >= floods) {
-           clearInterval(floodTimer);
-           triggerHackingMode();
-         }
-      }, floodInterval);
     }
 
     // Trigger the fake hacking mode with glitch effects, scrolling text, and sound effects.
@@ -287,7 +270,7 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // Randomize the mouse cursor far more frequently.
+    // Randomize the mouse cursor frequently.
     function randomizeCursor() {
       const rand = Math.random();
       if (rand < 0.5) {
@@ -307,12 +290,12 @@
         e.preventDefault();
         if (!chaosStarted) {
           chaosStarted = true;
-          setTimeout(triggerFlood, 3000);
+          setTimeout(triggerHackingMode, 3000);
         }
       });
     }
 
-    // Immediately show an initial image alert on page load.
+    // Immediately show the initial image alert on page load.
     window.onload = function() {
       createFakeAlert(true);
     };
