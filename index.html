@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>John Pork Merch</title>
-  <!-- Import Google Font -->
+  <!-- Import Google Font with weights 400 and 500 -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
   <style>
     /* Global Styles */
@@ -130,7 +130,7 @@
     .product button:hover {
       background: #0056b3;
     }
-    /* Pagination */
+    /* Pagination (Centered, Professional Font) */
     .pagination {
       text-align: center;
       padding: 15px;
@@ -367,40 +367,40 @@
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
-
+    
     // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
-
+    
     // Create a fake alert modal with a random alert image.
     // If isInitial is true, center the alert and enlarge it.
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
-
+    
       if (isInitial) {
         alertDiv.style.width = "500px";
-        // Center the alert horizontally and vertically
+        // Center the alert horizontally and vertically (assume height ~250px)
         alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
         alertDiv.style.top = (window.innerHeight - 250) / 2 + "px";
       } else {
         alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
         alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       }
-
+    
       // Create image element using a random alert image.
       const img = document.createElement('img');
       const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
       img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
-
+    
       // Add close ("X") button.
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, trigger the flood after 5 seconds.
+        // If this is the initial alert and chaos hasn't started, trigger flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
           setTimeout(triggerFlood, 5000);
@@ -410,7 +410,7 @@
       document.body.appendChild(alertDiv);
       currentAlerts++;
     }
-
+    
     // Flood the screen with alerts over 5 seconds (~50 alerts), then trigger hacking mode.
     function triggerFlood() {
       const floodDuration = 5000;
@@ -426,8 +426,8 @@
         }
       }, floodInterval);
     }
-
-    // Generate a random code-like line with expanded snippet ideas.
+    
+    // Generate a random code-like line with an expanded set of snippets (including 7 new ideas).
     function generateRandomCodeLine() {
       const baseSnippets = [
         "var x = 42;",
@@ -453,9 +453,9 @@
       const combined = baseSnippets.concat(newIdeas);
       return combined[Math.floor(Math.random() * combined.length)];
     }
-
+    
     // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
-    // and play 5 alarm sounds plus the Danger Alarm sound continuously.
+    // and play 5 extended alarm sounds plus the Danger Alarm sound.
     function triggerHackingMode() {
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
@@ -471,7 +471,7 @@
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 5 individual alarm sounds simultaneously.
+      // Play 5 individual alarm sounds simultaneously (each lasting 10 seconds, louder)
       for (let i = 0; i < 5; i++) {
         playSirenAndVoice();
       }
@@ -481,24 +481,24 @@
         dangerAlarm.play();
       }
     }
-
+    
     // Play an alarm sound using the Web Audio API (10 seconds duration, louder).
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
-      gainNode.gain.setValueAtTime(1, audioCtx.currentTime); // increased volume
+      gainNode.gain.setValueAtTime(1.5, audioCtx.currentTime); // Increased volume
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 10); // lasts 10 seconds
+      oscillator.stop(audioCtx.currentTime + 10); // 10 seconds duration
     }
-
-    // Modify mouse cursor behavior: disappear for 1 second, reappear for 0.1 second, repeat.
+    
+    // Modify mouse cursor behavior: disappear for 1 second, reappear for 0.1 second every 1.1 seconds.
     function cycleCursor() {
       document.body.style.cursor = 'none';
       setTimeout(function() {
@@ -506,7 +506,7 @@
       }, 100);
     }
     setInterval(cycleCursor, 1100);
-
+    
     // Attach event listeners to product buttons to trigger chaos.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
     for (const btn of chaosButtons) {
@@ -518,7 +518,7 @@
         }
       });
     }
-
+    
     // Show the initial alert after a delay of 1.5 seconds.
     window.onload = function() {
       setTimeout(function() {
