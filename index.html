@@ -150,15 +150,21 @@
   </div>
 
   <script>
-    let alertMultiplier = 1;
-    let currentAlerts = 0;
-    let totalActions = 0;
     let chaosStarted = false;
-    let hackingTriggered = false;
-    let bsodTriggered = false;
-    let alertTimeout;
-    const alertContainer = document.createElement('div');
-    document.body.appendChild(alertContainer);
+    let currentAlerts = 0;
+
+    // Array of realistic alert messages
+    const realisticMessages = [
+      "System Warning: Critical error detected. Please save your work immediately!",
+      "Alert: Unstable system performance. Immediate action required!",
+      "Warning: Security breach detected. Do not disconnect from the network!",
+      "Error: Unexpected shutdown imminent. Save all unsaved data!",
+      "Caution: System integrity compromised. Contact support if issues persist!"
+    ];
+
+    function getRandomAlertMessage() {
+      return realisticMessages[Math.floor(Math.random() * realisticMessages.length)];
+    }
 
     // Create a fake alert modal. Pass isInitial=true for the very first alert.
     function createFakeAlert(message, isInitial = false) {
@@ -170,46 +176,37 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If it's the initial alert and hasn't already triggered chaos, flood the screen immediately.
+        // If this is the initial alert and chaos hasn't started, begin the cascade
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
-          alertMultiplier = 20; // Increase multiplier for a flood effect.
-          triggerAlerts();
-        } else if (currentAlerts <= 0) {
-          // Otherwise, keep doubling alerts.
-          alertMultiplier *= 2;
-          triggerAlerts();
+          // Wait 3 seconds, then start flooding alerts over 3 seconds, then trigger hacking mode after another 3 seconds.
+          setTimeout(triggerFlood, 3000);
         }
       });
       alertDiv.appendChild(closeBtn);
-      alertContainer.appendChild(alertDiv);
+      document.body.appendChild(alertDiv);
       currentAlerts++;
     }
 
-    // Trigger alerts: create a batch of alerts and, if idle for 2 seconds, spawn even more.
-    function triggerAlerts() {
-      if (alertTimeout) clearTimeout(alertTimeout);
-      for (let i = 0; i < alertMultiplier; i++) {
-        createFakeAlert('ALERT: Computer shutting down!!! Act now!');
-      }
-      // After 2 seconds of inactivity, create an additional flood of alerts.
-      alertTimeout = setTimeout(() => {
-        for (let i = 0; i < alertMultiplier * 5; i++) {
-          createFakeAlert('ALERT: Immediate action required!');
-        }
-      }, 2000);
-      totalActions += alertMultiplier;
-      if (!hackingTriggered && totalActions > 50) {
-        triggerHackingMode();
-      }
-      if (!bsodTriggered && totalActions > 100) {
-        triggerBSOD();
-      }
+    // Flood alerts gradually over a 3-second period, then trigger hacking mode after an additional 3 seconds.
+    function triggerFlood() {
+      let floodDuration = 3000; // 3 seconds
+      let floodInterval = 300;  // spawn a new alert every 300ms
+      let floods = Math.floor(floodDuration / floodInterval);
+      let count = 0;
+      let floodTimer = setInterval(function() {
+         createFakeAlert(getRandomAlertMessage());
+         count++;
+         if(count >= floods) {
+           clearInterval(floodTimer);
+           // After the alert flood, wait another 3 seconds before triggering the hacking mode
+           setTimeout(triggerHackingMode, 3000);
+         }
+      }, floodInterval);
     }
 
     // Trigger the fake hacking mode with glitch effects, scrolling terminal text, and sound effects.
     function triggerHackingMode() {
-      hackingTriggered = true;
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
       document.body.style.color = '#0f0';
@@ -217,11 +214,11 @@
       const hackingOverlay = document.getElementById('hackingOverlay');
       hackingOverlay.style.display = 'block';
       const messages = [
-        'SYSTEM COMPROMISED',
-        'ACCESSING SECURE DATA...',
-        'LOADING JOHN PORK OVERRIDE...',
-        'WARNING: UNAUTHORIZED ACCESS DETECTED!',
-        'INITIATING SYSTEM SHUTDOWN...'
+        "SECURITY ALERT: Unauthorized access detected.",
+        "DATA BREACH: Sensitive information compromised.",
+        "CRITICAL ERROR: System integrity compromised.",
+        "WARNING: Shutdown sequence initiated.",
+        "ALERT: Immediate action required. Contact support!"
       ];
       let index = 0;
       function scrollText() {
@@ -258,13 +255,6 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // Trigger a fake Blue Screen of Death overlay.
-    function triggerBSOD() {
-      bsodTriggered = true;
-      const bsodOverlay = document.getElementById('bsodOverlay');
-      bsodOverlay.style.display = 'block';
-    }
-
     // Randomly affect the cursor to add extra chaos.
     function randomizeCursor() {
       const rand = Math.random();
@@ -278,32 +268,23 @@
     }
     setInterval(randomizeCursor, 1000);
 
-    // Additional chaos trigger via product buttons.
+    // (Optional) Attach event listeners to product buttons.
+    // They no longer trigger the hacking mode since the initial alert sequence is automatic.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
     for (const btn of chaosButtons) {
       btn.addEventListener('click', function(e) {
         e.preventDefault();
+        // If chaos hasn't started yet, trigger the cascade from this button as well.
         if (!chaosStarted) {
           chaosStarted = true;
-          alertMultiplier = 20;
-          triggerAlerts();
-        } else {
-          triggerAlerts();
+          setTimeout(triggerFlood, 3000);
         }
       });
     }
 
-    // Count extra clicks on the page toward triggering the BSOD.
-    document.addEventListener('click', function() {
-      totalActions++;
-      if (totalActions > 100 && !bsodTriggered) {
-        triggerBSOD();
-      }
-    });
-
     // Immediately show an initial alert on page load.
     window.onload = function() {
-      createFakeAlert("ALERT: Computer shutting down!!! Act now!", true);
+      createFakeAlert("System Warning: Critical error detected. Please take immediate action!", true);
     };
   </script>
 </body>
