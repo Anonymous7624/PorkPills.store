@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>John Pork Merch</title>
   <!-- Import Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
   <style>
     /* Global Styles */
     body {
@@ -134,6 +134,8 @@
     .pagination {
       text-align: center;
       padding: 15px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
     }
     .pagination a {
       margin: 0 5px;
@@ -326,7 +328,7 @@
       <button class="chaos-btn">Buy Now</button>
     </div>
   </div>
-  <!-- Pagination Bar -->
+  <!-- Pagination Bar (Centered) -->
   <div class="pagination">
     <a href="#">«</a>
     <a href="#">1</a>
@@ -360,6 +362,8 @@
     <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
     <p>...</p>
   </div>
+  <!-- Danger Alarm Audio (Hidden) -->
+  <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -375,7 +379,7 @@
 
       if (isInitial) {
         alertDiv.style.width = "500px";
-        // Center the alert both horizontally and vertically
+        // Center the alert horizontally and vertically
         alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
         alertDiv.style.top = (window.innerHeight - 250) / 2 + "px";
       } else {
@@ -396,7 +400,7 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, trigger flood after 5 seconds.
+        // If this is the initial alert and chaos hasn't started, trigger the flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
           setTimeout(triggerFlood, 5000);
@@ -423,7 +427,7 @@
       }, floodInterval);
     }
 
-    // Generate a random code-like line with an expanded set of snippets.
+    // Generate a random code-like line with expanded snippet ideas.
     function generateRandomCodeLine() {
       const baseSnippets = [
         "var x = 42;",
@@ -438,20 +442,20 @@
         "import {module} from 'lib';"
       ];
       const newIdeas = [
-        "AI.generateCode('Hello, World!');",                       // New idea 1
-        "while(system.check()) { hack(); }",                         // New idea 2
-        "alert('System failure: ' + Math.random());",                // New idea 3
-        "const result = await fetch('https://api.example.com/data');",// New idea 4
-        "debugger;",                                                 // New idea 5
-        "throw new Error('Random error occurred');",                 // New idea 6
-        "console.warn('Warning: AI detected anomaly');"              // New idea 7
+        "AI.generateCode('Hello, World!');",                // New idea 1
+        "while(system.check()) { hack(); }",                  // New idea 2
+        "alert('System failure: ' + Math.random());",         // New idea 3
+        "const result = await fetch('https://api.example.com/data');", // New idea 4
+        "debugger;",                                          // New idea 5
+        "throw new Error('Random error occurred');",          // New idea 6
+        "console.warn('Warning: AI detected anomaly');"       // New idea 7
       ];
       const combined = baseSnippets.concat(newIdeas);
       return combined[Math.floor(Math.random() * combined.length)];
     }
 
     // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
-    // and play 5 alarm sounds simultaneously.
+    // and play 5 alarm sounds plus the Danger Alarm sound continuously.
     function triggerHackingMode() {
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
@@ -467,39 +471,41 @@
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 5 alarm sounds simultaneously.
+      // Play 5 individual alarm sounds simultaneously.
       for (let i = 0; i < 5; i++) {
         playSirenAndVoice();
       }
+      // Also play the Danger Alarm Sound Effect continuously.
+      const dangerAlarm = document.getElementById('dangerAlarm');
+      if (dangerAlarm) {
+        dangerAlarm.play();
+      }
     }
 
-    // Play an alarm sound using the Web Audio API.
+    // Play an alarm sound using the Web Audio API (10 seconds duration, louder).
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(1, audioCtx.currentTime); // increased volume
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 5);
+      oscillator.stop(audioCtx.currentTime + 10); // lasts 10 seconds
     }
 
-    // Randomize the mouse cursor frequently.
-    function randomizeCursor() {
-      const rand = Math.random();
-      if (rand < 0.5) {
-        document.body.style.cursor = 'none';
-      } else if (rand < 0.75) {
-        document.body.style.cursor = 'crosshair';
-      } else {
+    // Modify mouse cursor behavior: disappear for 1 second, reappear for 0.1 second, repeat.
+    function cycleCursor() {
+      document.body.style.cursor = 'none';
+      setTimeout(function() {
         document.body.style.cursor = 'default';
-      }
+      }, 100);
     }
-    setInterval(randomizeCursor, 40);
+    setInterval(cycleCursor, 1100);
 
     // Attach event listeners to product buttons to trigger chaos.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
