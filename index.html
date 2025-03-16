@@ -49,7 +49,6 @@
     .fake-alert {
       position: fixed;
       background: #ffdddd;
-      border: 2px solid red;
       padding: 10px;
       z-index: 1000;
       width: 300px;
@@ -69,18 +68,11 @@
       padding: 2px 6px;
       font-size: 12px;
     }
-    /* Custom image alert styling with 5 visual effects */
+    /* Custom image alert styling with only a glow effect */
     .image-alert {
       width: 280px;
       max-width: 100%;
-      border: 2px solid red;          /* 1. Border */
-      box-shadow: 0 0 15px red;         /* 2. Glow effect */
-      animation: pulse 2s infinite;     /* 3. Pulsing effect (includes slight rotation & opacity change) */
-    }
-    @keyframes pulse {
-      0%   { transform: scale(1) rotate(0deg); opacity: 1; }
-      50%  { transform: scale(1.05) rotate(2deg); opacity: 0.9; }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      box-shadow: 0 0 15px red;  /* Only the glow effect */
     }
     /* Hacking animation overlay */
     #hackingOverlay {
@@ -166,7 +158,7 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array of your custom image filenames (with .jpg extension)
+    // Array of your custom image filenames (using .jpg)
     const alertImages = ["Image1234.jpg", "image12345.jpg", "image123456.jpg"];
 
     // Create a fake alert modal that shows a random image.
@@ -175,23 +167,23 @@
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
 
-      // Create an image element and assign one of your images randomly.
+      // Create an image element and choose one randomly.
       const img = document.createElement('img');
-      const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
+      const randomIndex = Math.floor(Math.random() * alertImages.length);
+      const randomImage = alertImages[randomIndex];
       img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
 
-      // Create the close ("X") button and position it in the corner.
+      // Create the close ("X") button.
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, begin the cascade
+        // If this is the initial alert and chaos hasn't started, begin the cascade.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
-          // Wait 3 seconds, then flood the screen with additional alerts, then immediately trigger hacking mode.
           setTimeout(triggerFlood, 3000);
         }
       });
@@ -206,21 +198,21 @@
 
     // Flood alerts gradually over 3 seconds, then immediately trigger the hacking mode.
     function triggerFlood() {
-      let floodDuration = 3000; // 3 seconds
-      let floodInterval = 300;  // spawn a new alert every 300ms
-      let floods = Math.floor(floodDuration / floodInterval);
+      const floodDuration = 3000; // 3 seconds
+      const floodInterval = 300;  // spawn a new alert every 300ms
+      const floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
-      let floodTimer = setInterval(function() {
+      const floodTimer = setInterval(function() {
          createFakeAlert();
          count++;
-         if(count >= floods) {
+         if (count >= floods) {
            clearInterval(floodTimer);
            triggerHackingMode();
          }
       }, floodInterval);
     }
 
-    // Trigger the fake hacking mode with glitch effects, scrolling terminal text, and sound effects.
+    // Trigger the fake hacking mode with glitch effects, scrolling text, and sound effects.
     function triggerHackingMode() {
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
@@ -270,7 +262,7 @@
       window.speechSynthesis.speak(utterance);
     }
 
-    // Randomly affect the cursor to add extra chaos.
+    // Randomize the mouse cursor far more frequently (approximately 25× more often).
     function randomizeCursor() {
       const rand = Math.random();
       if (rand < 0.3) {
@@ -281,7 +273,8 @@
         document.body.style.cursor = 'default';
       }
     }
-    setInterval(randomizeCursor, 1000);
+    // Previously it was 1000ms; now set to 40ms.
+    setInterval(randomizeCursor, 40);
 
     // (Optional) Attach event listeners to product buttons.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
