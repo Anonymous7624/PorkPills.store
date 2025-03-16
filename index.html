@@ -8,7 +8,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #ffffff; /* realistic website background */
+      background: #ffffff;
       transition: background 0.5s;
     }
     header {
@@ -73,7 +73,7 @@
       z-index: 1000;
       width: 300px;
       text-align: center;
-      box-shadow: 0 0 10px red;  /* glow effect */
+      box-shadow: 0 0 10px red;
       margin: 10px;
     }
     /* "X" Close button in the top-right corner */
@@ -184,8 +184,8 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array of alert image filenames (only one image in the array)
-    const alertImages = ["Image1234.jpg"];
+    // Array now only uses "ErrorMessage.png" for alerts.
+    const alertImages = ["ErrorMessage.png"];
 
     // Create a fake alert modal that shows the alert image.
     // Pass isInitial=true for the very first alert.
@@ -193,9 +193,9 @@
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
 
-      // Create an image element and use our single alert image.
+      // Create an image element using the alert image.
       const img = document.createElement('img');
-      img.src = alertImages[0]; // Only "Image1234.jpg" is used.
+      img.src = alertImages[0];
       img.className = 'image-alert';
       alertDiv.appendChild(img);
 
@@ -295,7 +295,7 @@
       });
     }
 
-    // Immediately show the initial image alert on page load.
+    // Immediately show the initial alert on page load.
     window.onload = function() {
       createFakeAlert(true);
     };
