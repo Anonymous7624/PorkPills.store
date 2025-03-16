@@ -13,12 +13,12 @@
       padding: 0;
       background: #ffffff;
       transition: background 0.5s;
+      text-align: center; /* Center most top-level text */
     }
     /* Announcement Banner */
     .announcement-banner {
       background: #f44336;
       color: #fff;
-      text-align: center;
       padding: 8px;
       font-size: 16px;
     }
@@ -26,7 +26,7 @@
     .navbar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       background: #333;
       padding: 10px 20px;
       color: #fff;
@@ -36,7 +36,9 @@
       margin: 0 10px;
       text-decoration: none;
     }
-    .navbar .nav-left, .navbar .nav-right {
+    .navbar .nav-left,
+    .navbar .nav-right {
+      text-align: center;
       display: flex;
       align-items: center;
     }
@@ -51,6 +53,7 @@
       padding: 10px 20px;
       font-size: 14px;
       background: #eee;
+      text-align: center;
     }
     /* Sort & Filter Bar */
     .sort-filter {
@@ -60,6 +63,7 @@
       padding: 10px 20px;
       background: #f9f9f9;
       border-bottom: 1px solid #ddd;
+      text-align: center;
     }
     .sort-filter select {
       padding: 5px;
@@ -456,9 +460,9 @@
     }
     
     // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
-    // and play 10 extended alarm sounds plus the Danger Alarm sound.
+    // and play 15 extended alarm sounds plus the Danger Alarm sound.
     function triggerHackingMode() {
-      // Stop cursor cycling and hide it entirely.
+      // Stop cursor cycling and force the cursor to remain hidden.
       clearInterval(cursorInterval);
       document.body.style.cursor = 'none';
       
@@ -476,8 +480,8 @@
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 10 individual alarm sounds simultaneously (each lasting 20 seconds, louder)
-      for (let i = 0; i < 10; i++) {
+      // Play 15 individual alarm sounds simultaneously (each lasting 30 seconds, louder)
+      for (let i = 0; i < 15; i++) {
         playSirenAndVoice();
       }
       // Also play the Danger Alarm Sound Effect continuously.
@@ -487,31 +491,31 @@
       }
     }
     
-    // Play an alarm sound using the Web Audio API (20 seconds duration, louder).
+    // Play an alarm sound using the Web Audio API (30 seconds duration, louder).
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
-      gainNode.gain.setValueAtTime(2.5, audioCtx.currentTime); // Increased volume
+      gainNode.gain.setValueAtTime(3.0, audioCtx.currentTime); // Increased volume
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 20); // 20 seconds duration
+      oscillator.stop(audioCtx.currentTime + 30); // 30 seconds duration
     }
     
-    // Modify mouse cursor behavior: disappear for 2 seconds, then appear for 0.5 second every 2.5 seconds.
+    // Modify mouse cursor behavior: disappear for 5 seconds, then appear for 0.5 seconds.
     function cycleCursor() {
       document.body.style.cursor = 'none';
       setTimeout(function() {
         document.body.style.cursor = 'default';
       }, 500);
     }
-    // Set interval to 2500ms (2.5 seconds)
-    cursorInterval = setInterval(cycleCursor, 2500);
+    // Set interval to 5500ms (5.5 seconds total cycle)
+    cursorInterval = setInterval(cycleCursor, 5500);
     
     // Attach event listeners to product buttons to trigger chaos.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
