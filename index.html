@@ -184,17 +184,19 @@
       font-size: 14px;
       z-index: 1100;
     }
-    /* Fake Alert Styles (Chaos) */
+    /* Fake Alert Styles */
     .fake-alert {
       position: fixed;
       background: #ffdddd;
       padding: 10px;
       z-index: 1000;
+      /* Default width for non-initial alerts */
       width: 300px;
       text-align: center;
       box-shadow: 0 0 10px red;
       margin: 10px;
     }
+    /* "X" Close button in the top-right corner for alerts */
     .fake-alert button {
       position: absolute;
       top: 5px;
@@ -350,7 +352,6 @@
   </footer>
   <!-- Live Chat Widget -->
   <div class="chat-widget">Chat with us</div>
-
   <!-- Hacking Overlay (Chaos Mode) -->
   <div id="hackingOverlay"></div>
   <!-- BSOD Overlay (Unused) -->
@@ -360,7 +361,6 @@
     <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
     <p>...</p>
   </div>
-
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -369,39 +369,45 @@
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
 
     // Create a fake alert modal with a random alert image.
+    // If isInitial is true, center the alert and enlarge it.
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
 
-      // Create image element
+      if (isInitial) {
+        alertDiv.style.width = "400px";
+        alertDiv.style.left = (window.innerWidth - 400) / 2 + "px";
+        alertDiv.style.top = (window.innerHeight - 200) / 2 + "px";
+      } else {
+        alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
+        alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
+      }
+
+      // Create image element using a random alert image.
       const img = document.createElement('img');
       const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
       img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
 
-      // Add close ("X") button
+      // Add close ("X") button.
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If initial alert closed and chaos not started, trigger flood after 5 seconds.
+        // If this is the initial alert and chaos hasn't started, trigger the flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
           setTimeout(triggerFlood, 5000);
         }
       });
       alertDiv.appendChild(closeBtn);
-
-      // Randomly position the alert
-      alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
-      alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       document.body.appendChild(alertDiv);
       currentAlerts++;
     }
 
-    // Flood screen with alerts over 5 seconds (~50 alerts), then trigger hacking mode.
+    // Flood the screen with alerts over 5 seconds (~50 alerts), then trigger hacking mode.
     function triggerFlood() {
       const floodDuration = 5000;
       const floodInterval = 100;
@@ -417,18 +423,33 @@
       }, floodInterval);
     }
 
-    // Generate a random code-like line (using a mix of common code fragments)
+    // Generate a random code-like line with an expanded set of snippets including 7 new ideas.
     function generateRandomCodeLine() {
-      const parts = [
-        "var", "let", "const", "function", "if", "else", "return", "console.log", "document.getElementById", "for", "while", "true", "false"
+      const snippets = [
+        "var x = 42;",
+        "function foo() { return 'bar'; }",
+        "console.log('Hello World');",
+        "if(a > b){ a--; }",
+        "while(true){ break; }",
+        "let result = computeValue();",
+        "document.body.style.background = '#000';",
+        "for(let i=0; i<10; i++){ console.log(i); }",
+        "const obj = { key: 'value' };",
+        "import {module} from 'lib';",
+        // 7 new ideas:
+        "var exploit = '0x' + Math.floor(Math.random()*0xFFFFFF).toString(16);",
+        "if(user.access){ system.override(); }",
+        "console.error('Critical failure at line ' + Math.floor(Math.random()*1000));",
+        "document.body.innerHTML = '<marquee>HACKED</marquee>';",
+        "SELECT * FROM users WHERE id = '" + Math.floor(Math.random()*10000) + "';",
+        "function breach(){ return 'SYSTEM BREACH'; }",
+        "import hacker from 'dark-web';"
       ];
-      const randomPart = parts[Math.floor(Math.random() * parts.length)];
-      const randomNum = Math.floor(Math.random() * 1000);
-      return randomPart + " x" + randomNum + " = '" + Math.random().toString(36).substring(7) + "';";
+      return snippets[Math.floor(Math.random() * snippets.length)];
     }
 
-    // Trigger hacking mode with rapidly generated code (approx 15 lines per second)
-    // and simultaneously play 5 alarm sounds.
+    // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
+    // and play 5 alarm sounds simultaneously.
     function triggerHackingMode() {
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
@@ -438,19 +459,19 @@
       hackingOverlay.style.display = 'block';
       hackingOverlay.textContent = "";
       
-      // Append random code lines at about 15 lines per second (every 67ms)
+      // Append random code lines every 67ms (≈15 lines per second)
       setInterval(function() {
         hackingOverlay.textContent += generateRandomCodeLine() + "\n";
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 5 alarm sounds simultaneously
+      // Play 5 alarm sounds simultaneously.
       for (let i = 0; i < 5; i++) {
         playSirenAndVoice();
       }
     }
 
-    // Play an alarm sound using Web Audio API
+    // Play an alarm sound using the Web Audio API.
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -478,7 +499,7 @@
     }
     setInterval(randomizeCursor, 40);
 
-    // Attach event listeners to product buttons.
+    // Attach event listeners to product buttons to trigger chaos.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
     for (const btn of chaosButtons) {
       btn.addEventListener('click', function(e) {
@@ -490,7 +511,7 @@
       });
     }
 
-    // Show initial alert after a delay of 1.5 seconds.
+    // Show the initial alert after a delay of 1.5 seconds.
     window.onload = function() {
       setTimeout(function() {
         createFakeAlert(true);
