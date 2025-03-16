@@ -8,7 +8,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #ffffff;
+      background: #ffffff; /* realistic website background */
       transition: background 0.5s;
     }
     header {
@@ -73,7 +73,7 @@
       z-index: 1000;
       width: 300px;
       text-align: center;
-      box-shadow: 0 0 10px red;
+      box-shadow: 0 0 10px red;  /* glow effect */
       margin: 10px;
     }
     /* "X" Close button in the top-right corner */
@@ -184,18 +184,19 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array now only uses "ErrorMessage.png" for alerts.
-    const alertImages = ["ErrorMessage.png"];
+    // Use two alert images: "ErrorMessage.png" and "Image1234.jpg"
+    const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
 
-    // Create a fake alert modal that shows the alert image.
+    // Create a fake alert modal that shows one of our alert images randomly.
     // Pass isInitial=true for the very first alert.
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
 
-      // Create an image element using the alert image.
+      // Create an image element using a random image from our two choices.
       const img = document.createElement('img');
-      img.src = alertImages[0];
+      const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
+      img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
 
@@ -205,10 +206,10 @@
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, start the hacking mode after 3 seconds.
+        // If this is the initial alert and chaos hasn't started, start the flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
-          setTimeout(triggerHackingMode, 3000);
+          setTimeout(triggerFlood, 5000);
         }
       });
       alertDiv.appendChild(closeBtn);
@@ -218,6 +219,22 @@
       alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       document.body.appendChild(alertDiv);
       currentAlerts++;
+    }
+
+    // Flood alerts gradually over 5 seconds, then trigger the hacking mode.
+    function triggerFlood() {
+      const floodDuration = 5000; // 5 seconds
+      const floodInterval = 100;  // spawn a new alert every 100ms
+      const floods = Math.floor(floodDuration / floodInterval); // ~50 alerts
+      let count = 0;
+      const floodTimer = setInterval(function() {
+         createFakeAlert();
+         count++;
+         if (count >= floods) {
+           clearInterval(floodTimer);
+           triggerHackingMode();
+         }
+      }, floodInterval);
     }
 
     // Trigger the fake hacking mode with glitch effects, scrolling text, and sound effects.
@@ -233,7 +250,11 @@
         "DATA BREACH: Sensitive information compromised.",
         "CRITICAL ERROR: System integrity compromised.",
         "WARNING: Shutdown sequence initiated.",
-        "ALERT: Immediate action required. Contact support!"
+        "ALERT: Immediate action required. Contact support!",
+        "ERROR: System failure imminent.",
+        "FATAL: Kernel panic detected.",
+        "WARNING: Overload. Device malfunction imminent.",
+        "CRITICAL: All systems offline."
       ];
       let index = 0;
       function scrollText() {
@@ -290,14 +311,16 @@
         e.preventDefault();
         if (!chaosStarted) {
           chaosStarted = true;
-          setTimeout(triggerHackingMode, 3000);
+          setTimeout(triggerFlood, 5000);
         }
       });
     }
 
-    // Immediately show the initial alert on page load.
+    // Show the initial alert after a delay of 1.5 seconds.
     window.onload = function() {
-      createFakeAlert(true);
+      setTimeout(function() {
+        createFakeAlert(true);
+      }, 1500);
     };
   </script>
 </body>
