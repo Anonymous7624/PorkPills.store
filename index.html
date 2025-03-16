@@ -368,10 +368,10 @@
     let chaosStarted = false;
     let currentAlerts = 0;
     let cursorInterval;
-
+    
     // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
-
+    
     // Create a fake alert modal with a random alert image.
     // If isInitial is true, center the alert and enlarge it.
     function createFakeAlert(isInitial = false) {
@@ -456,9 +456,9 @@
     }
     
     // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
-    // and play 5 extended alarm sounds plus the Danger Alarm sound.
+    // and play 10 extended alarm sounds plus the Danger Alarm sound.
     function triggerHackingMode() {
-      // Stop mouse cursor cycling and hide cursor entirely.
+      // Stop cursor cycling and hide it entirely.
       clearInterval(cursorInterval);
       document.body.style.cursor = 'none';
       
@@ -476,8 +476,8 @@
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 5 individual alarm sounds simultaneously.
-      for (let i = 0; i < 5; i++) {
+      // Play 10 individual alarm sounds simultaneously (each lasting 20 seconds, louder)
+      for (let i = 0; i < 10; i++) {
         playSirenAndVoice();
       }
       // Also play the Danger Alarm Sound Effect continuously.
@@ -487,23 +487,23 @@
       }
     }
     
-    // Play an alarm sound using the Web Audio API (10 seconds duration, louder).
+    // Play an alarm sound using the Web Audio API (20 seconds duration, louder).
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
-      gainNode.gain.setValueAtTime(1.5, audioCtx.currentTime); // Increased volume
+      gainNode.gain.setValueAtTime(2.5, audioCtx.currentTime); // Increased volume
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 10); // 10 seconds duration
+      oscillator.stop(audioCtx.currentTime + 20); // 20 seconds duration
     }
     
-    // Modify mouse cursor behavior: disappear for 2 seconds, then appear for 0.5 second (cycle of 2.5 sec).
+    // Modify mouse cursor behavior: disappear for 2 seconds, then appear for 0.5 second every 2.5 seconds.
     function cycleCursor() {
       document.body.style.cursor = 'none';
       setTimeout(function() {
