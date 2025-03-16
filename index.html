@@ -13,7 +13,7 @@
       padding: 0;
       background: #ffffff;
       transition: background 0.5s;
-      text-align: center; /* Center most top-level text */
+      text-align: center; /* Center top elements */
     }
     /* Announcement Banner */
     .announcement-banner {
@@ -21,6 +21,7 @@
       color: #fff;
       padding: 8px;
       font-size: 16px;
+      text-align: center;
     }
     /* Navigation Bar */
     .navbar {
@@ -38,7 +39,6 @@
     }
     .navbar .nav-left,
     .navbar .nav-right {
-      text-align: center;
       display: flex;
       align-items: center;
     }
@@ -59,7 +59,7 @@
     .sort-filter {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       padding: 10px 20px;
       background: #f9f9f9;
       border-bottom: 1px solid #ddd;
@@ -262,6 +262,26 @@
       80% { opacity: 1; transform: translate(2px, 2px); }
       100% { opacity: 1; transform: translate(0, 0); }
     }
+    /* Loading Bar Overlay */
+    #loadingBar {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 2100;
+    }
+    #loadingBar img {
+      width: 100px;
+      height: auto;
+    }
+    #loadingBar div {
+      color: red;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 20px;
+      margin-top: 5px;
+    }
   </style>
 </head>
 <body>
@@ -366,6 +386,11 @@
     <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
     <p>...</p>
   </div>
+  <!-- Loading Bar Overlay -->
+  <div id="loadingBar">
+    <img src="ZKZg.gif" alt="Loading...">
+    <div>Downloading Viruses</div>
+  </div>
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <script>
@@ -432,7 +457,7 @@
       }, floodInterval);
     }
     
-    // Generate a random code-like line with expanded snippet ideas.
+    // Generate a random code-like line with an expanded set of snippet ideas.
     function generateRandomCodeLine() {
       const baseSnippets = [
         "var x = 42;",
@@ -447,15 +472,27 @@
         "import {module} from 'lib';"
       ];
       const newIdeas = [
-        "AI.generateCode('Hello, World!');",                // New idea 1
-        "while(system.check()) { hack(); }",                  // New idea 2
-        "alert('System failure: ' + Math.random());",         // New idea 3
-        "const result = await fetch('https://api.example.com/data');", // New idea 4
-        "debugger;",                                          // New idea 5
-        "throw new Error('Random error occurred');",          // New idea 6
-        "console.warn('Warning: AI detected anomaly');"       // New idea 7
+        "AI.generateCode('Hello, World!');",
+        "while(system.check()) { hack(); }",
+        "alert('System failure: ' + Math.random());",
+        "const result = await fetch('https://api.example.com/data');",
+        "debugger;",
+        "throw new Error('Random error occurred');",
+        "console.warn('Warning: AI detected anomaly');"
       ];
-      const combined = baseSnippets.concat(newIdeas);
+      const extraNewIdeas = [
+        "document.write('<h1>YOU ARE HACKED!</h1>');",
+        "setTimeout(() => { alert('Boom!'); }, 0);",
+        "console.log('%cSYSTEM OVERRIDE', 'color: red; font-size: 20px;');",
+        "fetch('https://evilapi.example.com/stealData');",
+        "var virus = new Virus(); virus.infect();",
+        "while(true){ console.error('Infinite loop detected'); }",
+        "debugger; // Pause execution",
+        "console.table([{id: 1, name: 'Error'}, {id: 2, name: 'Crash'}]);",
+        "throw 'Fatal Error: System Crash';",
+        "document.body.innerHTML += '<div style=\"position:fixed;top:0;left:0;width:100%;height:100%;background:red;opacity:0.5;z-index:10000;\">SYSTEM FAILURE</div>';"
+      ];
+      const combined = baseSnippets.concat(newIdeas).concat(extraNewIdeas);
       return combined[Math.floor(Math.random() * combined.length)];
     }
     
@@ -465,6 +502,9 @@
       // Stop cursor cycling and force the cursor to remain hidden.
       clearInterval(cursorInterval);
       document.body.style.cursor = 'none';
+      
+      // Show loading bar overlay
+      document.getElementById('loadingBar').style.display = 'block';
       
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
