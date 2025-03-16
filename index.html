@@ -367,10 +367,11 @@
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
-    
+    let cursorInterval;
+
     // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
-    
+
     // Create a fake alert modal with a random alert image.
     // If isInitial is true, center the alert and enlarge it.
     function createFakeAlert(isInitial = false) {
@@ -427,7 +428,7 @@
       }, floodInterval);
     }
     
-    // Generate a random code-like line with an expanded set of snippets (including 7 new ideas).
+    // Generate a random code-like line with expanded snippet ideas.
     function generateRandomCodeLine() {
       const baseSnippets = [
         "var x = 42;",
@@ -457,6 +458,10 @@
     // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
     // and play 5 extended alarm sounds plus the Danger Alarm sound.
     function triggerHackingMode() {
+      // Stop mouse cursor cycling and hide cursor entirely.
+      clearInterval(cursorInterval);
+      document.body.style.cursor = 'none';
+      
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
       document.body.style.color = '#0f0';
@@ -471,7 +476,7 @@
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 5 individual alarm sounds simultaneously (each lasting 10 seconds, louder)
+      // Play 5 individual alarm sounds simultaneously.
       for (let i = 0; i < 5; i++) {
         playSirenAndVoice();
       }
@@ -498,14 +503,15 @@
       oscillator.stop(audioCtx.currentTime + 10); // 10 seconds duration
     }
     
-    // Modify mouse cursor behavior: disappear for 1 second, reappear for 0.1 second every 1.1 seconds.
+    // Modify mouse cursor behavior: disappear for 2 seconds, then appear for 0.5 second (cycle of 2.5 sec).
     function cycleCursor() {
       document.body.style.cursor = 'none';
       setTimeout(function() {
         document.body.style.cursor = 'default';
-      }, 100);
+      }, 500);
     }
-    setInterval(cycleCursor, 1100);
+    // Set interval to 2500ms (2.5 seconds)
+    cursorInterval = setInterval(cycleCursor, 2500);
     
     // Attach event listeners to product buttons to trigger chaos.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
