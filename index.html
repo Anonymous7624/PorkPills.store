@@ -166,7 +166,7 @@
     let chaosStarted = false;
     let currentAlerts = 0;
 
-    // Array of your custom image filenames (now with .jpg extension)
+    // Array of your custom image filenames (with .jpg extension)
     const alertImages = ["Image1234.jpg", "image12345.jpg", "image123456.jpg"];
 
     // Create a fake alert modal that shows a random image.
@@ -284,7 +284,6 @@
     setInterval(randomizeCursor, 1000);
 
     // (Optional) Attach event listeners to product buttons.
-    // They no longer trigger the hacking mode since the initial alert sequence is automatic.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
     for (const btn of chaosButtons) {
       btn.addEventListener('click', function(e) {
