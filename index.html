@@ -262,6 +262,22 @@
       80% { opacity: 1; transform: translate(2px, 2px); }
       100% { opacity: 1; transform: translate(0, 0); }
     }
+    /* Additional Hacking Effects: Shake & Blur */
+    .hacking-effects {
+      animation: shake 0.5s infinite, blur 1s infinite;
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(5px, -5px); }
+      60% { transform: translate(-5px, -5px); }
+      80% { transform: translate(5px, 5px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes blur {
+      0%, 100% { filter: blur(0px); }
+      50% { filter: blur(3px); }
+    }
     /* Loading Bar Overlay */
     #loadingBar {
       display: none;
@@ -513,6 +529,8 @@
       const hackingOverlay = document.getElementById('hackingOverlay');
       hackingOverlay.style.display = 'block';
       hackingOverlay.textContent = "";
+      // Add extra visual effects (shake & blur)
+      hackingOverlay.classList.add('hacking-effects');
       
       // Append random code lines every 67ms (≈15 lines per second)
       setInterval(function() {
@@ -545,6 +563,24 @@
       gainNode.connect(audioCtx.destination);
       oscillator.start();
       oscillator.stop(audioCtx.currentTime + 30); // 30 seconds duration
+    }
+    
+    /* Additional Hacking Effects: Shake & Blur */
+    /* These extra effects make the code animation more chaotic and cool. */
+    .hacking-effects {
+      animation: shake 0.5s infinite, blur 1s infinite;
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(5px, -5px); }
+      60% { transform: translate(-5px, -5px); }
+      80% { transform: translate(5px, 5px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes blur {
+      0%, 100% { filter: blur(0px); }
+      50% { filter: blur(3px); }
     }
     
     // Modify mouse cursor behavior: disappear for 5 seconds, then appear for 0.5 seconds.
