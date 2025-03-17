@@ -55,7 +55,7 @@
       background: #eee;
       text-align: center;
     }
-    /* Sort & Filter Bar (Not centered; space-between) */
+    /* Sort & Filter Bar */
     .sort-filter {
       display: flex;
       align-items: center;
@@ -63,7 +63,7 @@
       padding: 10px 20px;
       background: #f9f9f9;
       border-bottom: 1px solid #ddd;
-      text-align: center;
+      text-align: left;
     }
     .sort-filter select {
       padding: 5px;
@@ -78,7 +78,7 @@
       color: #007bff;
       text-decoration: none;
     }
-    /* Featured Products Container */
+    /* Featured Products Section */
     #featured-products {
       display: flex;
       flex-wrap: wrap;
@@ -93,8 +93,8 @@
       background: #fff;
       border: 2px solid #007bff;
       border-radius: 10px;
-      padding: 15px;
-      width: 250px;
+      padding: 10px;
+      width: 200px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       transition: transform 0.3s;
@@ -113,6 +113,11 @@
       font-size: 20px;
       color: #007bff;
     }
+    .featured-product p.description {
+      font-size: 14px;
+      color: #555;
+      margin: 5px 0;
+    }
     .featured-product p.price {
       font-size: 18px;
       font-weight: bold;
@@ -123,6 +128,20 @@
       color: gold;
       white-space: nowrap;
       overflow: visible;
+    }
+    .featured-product button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 6px 10px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.3s;
+      font-size: 14px;
+    }
+    .featured-product button:hover {
+      background: #0056b3;
     }
     /* Store Container */
     .store-container {
@@ -396,14 +415,18 @@
     <div class="featured-product">
       <img src="PorkPill.png" alt="Brain Pork Pill">
       <h2>Brain Pork Pill</h2>
+      <p class="description">The Brain Pork Pill increases IQ by 50.</p>
       <p class="price">$0.99</p>
       <p class="rating">★★★★★</p>
+      <button>Buy Now</button>
     </div>
     <div class="featured-product">
       <img src="DiquaviousPorkPill.png" alt="Diquavious Pork Pill">
       <h2>Diquavious Pork Pill</h2>
+      <p class="description">The Diquavious Pork Pill turns you into a pig.</p>
       <p class="price">$4.99</p>
       <p class="rating">★★★★★★★★★★</p>
+      <button>Buy Now</button>
     </div>
   </div>
   <!-- Store Container with Product Listings -->
