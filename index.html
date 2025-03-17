@@ -13,7 +13,7 @@
       padding: 0;
       background: #ffffff;
       transition: background 0.5s;
-      text-align: center; /* Center top-level text elements */
+      text-align: center;
     }
     /* Announcement Banner */
     .announcement-banner {
@@ -53,9 +53,8 @@
       padding: 10px 20px;
       font-size: 14px;
       background: #eee;
-      text-align: center;
     }
-    /* Sort & Filter Bar (Not centered; space-between) */
+    /* Sort & Filter Bar */
     .sort-filter {
       display: flex;
       align-items: center;
@@ -78,7 +77,7 @@
       color: #007bff;
       text-decoration: none;
     }
-    /* Featured Products Section (Reduced Height, Wider) */
+    /* Featured Products Section */
     #featured-products {
       display: flex;
       flex-wrap: wrap;
@@ -93,8 +92,8 @@
       background: #fff;
       border: 2px solid #007bff;
       border-radius: 10px;
-      padding: 8px;
-      width: 180px;  /* Increased width */
+      padding: 4px;
+      width: 180px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       transition: transform 0.3s;
@@ -104,40 +103,40 @@
     }
     .featured-product img {
       width: 100%;
-      max-height: 100px; /* Limit image height */
+      max-height: 80px;
       object-fit: contain;
       border-radius: 5px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .featured-product h2 {
-      margin: 5px 0;
-      font-size: 18px;
+      margin: 4px 0;
+      font-size: 16px;
       color: #007bff;
     }
     .featured-product p.description {
       font-size: 12px;
       color: #555;
-      margin: 5px 0;
+      margin: 4px 0;
     }
     .featured-product p.price {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       color: #000;
-      margin: 5px 0;
+      margin: 4px 0;
     }
     .featured-product p.rating {
-      font-size: 14px;
+      font-size: 12px;
       color: gold;
       white-space: nowrap;
       overflow: visible;
-      margin: 5px 0;
+      margin: 4px 0;
     }
     .featured-product button {
       background: #007bff;
       border: none;
       color: white;
       padding: 4px 8px;
-      margin-top: 8px;
+      margin-top: 4px;
       cursor: pointer;
       border-radius: 3px;
       transition: background 0.3s;
@@ -205,7 +204,7 @@
     .product button:hover {
       background: #0056b3;
     }
-    /* Pagination (Centered, Professional Font) */
+    /* Pagination */
     .pagination {
       text-align: center;
       padding: 15px;
@@ -272,7 +271,6 @@
       box-shadow: 0 0 10px red;
       margin: 10px;
     }
-    /* "X" Close Button for Alerts */
     .fake-alert button {
       position: absolute;
       top: 5px;
@@ -289,7 +287,7 @@
       max-width: 100%;
       box-shadow: 0 0 15px red;
     }
-    /* Hacking Overlay (Code Animation) - Left Align the text */
+    /* Hacking Overlay (Code Animation) */
     #hackingOverlay {
       position: fixed;
       top: 0;
@@ -416,7 +414,7 @@
   <!-- Featured Products (Main Attraction) -->
   <div id="featured-products">
     <div class="featured-product">
-      <img src="PorkPill1.png" alt="Brain Pork Pill">
+      <img src="PorkPill.png" alt="Brain Pork Pill">
       <h2>Brain Pork Pill</h2>
       <p class="description">The Brain Pork Pill increases IQ by 50.</p>
       <p class="price">$0.99</p>
@@ -424,7 +422,7 @@
       <button>Buy Now</button>
     </div>
     <div class="featured-product">
-      <img src="DiquaviousPorkPill1.png" alt="Diquavious Pork Pill">
+      <img src="DiquaviousPorkPill.png" alt="Diquavious Pork Pill">
       <h2>Diquavious Pork Pill</h2>
       <p class="description">The Diquavious Pork Pill turns you into a pig.</p>
       <p class="price">$4.99</p>
@@ -459,7 +457,7 @@
       <button class="chaos-btn">Buy Now</button>
     </div>
   </div>
-  <!-- Pagination Bar (Centered) -->
+  <!-- Pagination Bar -->
   <div class="pagination">
     <a href="#">«</a>
     <a href="#">1</a>
@@ -510,15 +508,12 @@
     // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
     
-    // Create a fake alert modal with a random alert image.
-    // If isInitial is true, center the alert and enlarge it.
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
     
       if (isInitial) {
         alertDiv.style.width = "500px";
-        // Center the alert horizontally and vertically (assume height ~250px)
         alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
         alertDiv.style.top = (window.innerHeight - 250) / 2 + "px";
       } else {
@@ -526,20 +521,17 @@
         alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       }
     
-      // Create image element using a random alert image.
       const img = document.createElement('img');
       const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
       img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
     
-      // Add close ("X") button.
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
         currentAlerts--;
-        // If this is the initial alert and chaos hasn't started, trigger flood after 5 seconds.
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
           setTimeout(triggerFlood, 5000);
@@ -550,7 +542,6 @@
       currentAlerts++;
     }
     
-    // Flood the screen with alerts over 5 seconds (~50 alerts), then trigger hacking mode.
     function triggerFlood() {
       const floodDuration = 5000;
       const floodInterval = 100;
@@ -566,7 +557,6 @@
       }, floodInterval);
     }
     
-    // Generate a random code-like line with an expanded set of snippet ideas.
     function generateRandomCodeLine() {
       const baseSnippets = [
         "var x = 42;",
@@ -605,14 +595,10 @@
       return combined[Math.floor(Math.random() * combined.length)];
     }
     
-    // Trigger hacking mode: continuously append random code lines (≈15 lines/sec)
-    // and play 15 extended alarm sounds plus the Danger Alarm sound.
     function triggerHackingMode() {
-      // Stop cursor cycling and force the cursor to remain hidden.
       clearInterval(cursorInterval);
       document.body.style.cursor = 'none';
       
-      // Show loading bar overlay and start virus counter update.
       document.getElementById('loadingBar').style.display = 'block';
       virusCount = 1;
       document.getElementById('virusCounter').textContent = "Downloading Viruses: 1/124";
@@ -632,53 +618,45 @@
       const hackingOverlay = document.getElementById('hackingOverlay');
       hackingOverlay.style.display = 'block';
       hackingOverlay.textContent = "";
-      // Add extra visual effects (shake & blur)
       hackingOverlay.classList.add('hacking-effects');
       
-      // Append random code lines every 67ms (≈15 lines per second)
       setInterval(function() {
         hackingOverlay.textContent += generateRandomCodeLine() + "\n";
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
       
-      // Play 15 individual alarm sounds simultaneously (each lasting 30 seconds, louder)
       for (let i = 0; i < 15; i++) {
         playSirenAndVoice();
       }
-      // Also play the Danger Alarm Sound Effect continuously.
       const dangerAlarm = document.getElementById('dangerAlarm');
       if (dangerAlarm) {
         dangerAlarm.play();
       }
     }
     
-    // Play an alarm sound using the Web Audio API (30 seconds duration, louder).
     function playSirenAndVoice() {
       if (!window.AudioContext) return;
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
-      gainNode.gain.setValueAtTime(3.0, audioCtx.currentTime); // Increased volume
+      gainNode.gain.setValueAtTime(3.0, audioCtx.currentTime);
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
       oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 30); // 30 seconds duration
+      oscillator.stop(audioCtx.currentTime + 30);
     }
     
-    // Modify mouse cursor behavior: disappear for 5 seconds, then appear for 0.5 seconds.
     function cycleCursor() {
       document.body.style.cursor = 'none';
       setTimeout(function() {
         document.body.style.cursor = 'default';
       }, 500);
     }
-    // Set interval to 5500ms (5.5 seconds total cycle)
     cursorInterval = setInterval(cycleCursor, 5500);
     
-    // Attach event listeners to product buttons to trigger chaos.
     const chaosButtons = document.getElementsByClassName('chaos-btn');
     for (const btn of chaosButtons) {
       btn.addEventListener('click', function(e) {
@@ -690,7 +668,6 @@
       });
     }
     
-    // Show the initial alert after a delay of 1.5 seconds.
     window.onload = function() {
       setTimeout(function() {
         createFakeAlert(true);
