@@ -13,7 +13,7 @@
       padding: 0;
       background: #ffffff;
       transition: background 0.5s;
-      text-align: center; /* Center top elements */
+      text-align: center; /* Center top-level text elements */
     }
     /* Announcement Banner */
     .announcement-banner {
@@ -55,20 +55,22 @@
       background: #eee;
       text-align: center;
     }
-    /* Sort & Filter Bar */
+    /* Sort & Filter Bar (not centered; space-between) */
     .sort-filter {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       padding: 10px 20px;
       background: #f9f9f9;
       border-bottom: 1px solid #ddd;
-      text-align: center;
     }
     .sort-filter select {
       padding: 5px;
       border-radius: 3px;
       border: 1px solid #ccc;
+    }
+    .filter-links {
+      text-align: left;
     }
     .filter-links a {
       margin-right: 10px;
@@ -218,7 +220,7 @@
       max-width: 100%;
       box-shadow: 0 0 15px red;
     }
-    /* Hacking Overlay */
+    /* Hacking Overlay (Code Animation) - Left Align the text */
     #hackingOverlay {
       position: fixed;
       top: 0;
@@ -234,6 +236,7 @@
       overflow-y: auto;
       white-space: pre;
       padding: 20px;
+      text-align: left;
     }
     /* BSOD Overlay */
     #bsodOverlay {
@@ -278,25 +281,25 @@
       0%, 100% { filter: blur(0px); }
       50% { filter: blur(3px); }
     }
-    /* Loading Bar Overlay */
+    /* Loading Bar Overlay (Center-Right) */
     #loadingBar {
       display: none;
       position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
       text-align: center;
       z-index: 2100;
     }
     #loadingBar img {
-      width: 100px;
+      width: 150px;
       height: auto;
     }
-    #loadingBar div {
+    #loadingBar #virusCounter {
       color: red;
       font-family: "Courier New", Courier, monospace;
       font-size: 20px;
-      margin-top: 5px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -323,15 +326,15 @@
   <div class="breadcrumb">
     Home > Products
   </div>
-  <!-- Sort & Filter Bar -->
-  <div class="sort-filter">
+  <!-- Sort & Filter Bar (Not centered; space-between) -->
+  <div class="sort-filter" style="justify-content: space-between; text-align: left;">
     <div class="filter-links">
       <a href="#">All</a>
       <a href="#">Shirts</a>
       <a href="#">Hats</a>
       <a href="#">Accessories</a>
     </div>
-    <div>
+    <div style="text-align: right;">
       Sort by: 
       <select>
         <option>Relevance</option>
@@ -402,10 +405,10 @@
     <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
     <p>...</p>
   </div>
-  <!-- Loading Bar Overlay -->
+  <!-- Loading Bar Overlay (Center-Right) -->
   <div id="loadingBar">
+    <div id="virusCounter">Downloading Viruses: 1/124</div>
     <img src="ZKZg.gif" alt="Loading...">
-    <div>Downloading Viruses</div>
   </div>
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
@@ -413,6 +416,8 @@
     let chaosStarted = false;
     let currentAlerts = 0;
     let cursorInterval;
+    let virusCount = 1;
+    let virusInterval;
     
     // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
@@ -519,8 +524,18 @@
       clearInterval(cursorInterval);
       document.body.style.cursor = 'none';
       
-      // Show loading bar overlay
+      // Show loading bar overlay and start virus counter
       document.getElementById('loadingBar').style.display = 'block';
+      virusCount = 1;
+      document.getElementById('virusCounter').textContent = "Downloading Viruses: 1/124";
+      virusInterval = setInterval(function() {
+        if (virusCount < 124) {
+          virusCount++;
+          document.getElementById('virusCounter').textContent = "Downloading Viruses: " + virusCount + "/124";
+        } else {
+          clearInterval(virusInterval);
+        }
+      }, 500);
       
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
@@ -563,24 +578,6 @@
       gainNode.connect(audioCtx.destination);
       oscillator.start();
       oscillator.stop(audioCtx.currentTime + 30); // 30 seconds duration
-    }
-    
-    /* Additional Hacking Effects: Shake & Blur */
-    /* These extra effects make the code animation more chaotic and cool. */
-    .hacking-effects {
-      animation: shake 0.5s infinite, blur 1s infinite;
-    }
-    @keyframes shake {
-      0% { transform: translate(0, 0); }
-      20% { transform: translate(-5px, 5px); }
-      40% { transform: translate(5px, -5px); }
-      60% { transform: translate(-5px, -5px); }
-      80% { transform: translate(5px, 5px); }
-      100% { transform: translate(0, 0); }
-    }
-    @keyframes blur {
-      0%, 100% { filter: blur(0px); }
-      50% { filter: blur(3px); }
     }
     
     // Modify mouse cursor behavior: disappear for 5 seconds, then appear for 0.5 seconds.
