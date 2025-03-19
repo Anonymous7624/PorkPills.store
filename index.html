@@ -430,5 +430,22 @@
 
 
   </script>
-</body>
+  ...
+  <!-- Other content and elements go here -->
+
+  <!-- Inline script before the closing body tag -->
+  <script>
+    function playTransitionVideo() {
+      var hackingOverlay = document.getElementById('hackingOverlay');
+      if (hackingOverlay) {
+        hackingOverlay.style.display = 'none';
+      }
+      var videoContainer = document.getElementById('videoContainer');
+      videoContainer.style.display = 'flex';
+      var video = document.getElementById('transitionVideo');
+      video.play();
+    }
+    setTimeout(playTransitionVideo, 3000);
+  </script>
+  </body>
 </html>
