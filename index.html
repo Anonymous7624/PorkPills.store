@@ -396,21 +396,20 @@
       position: relative;
       transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
     }
-    /* New Wheel Options: Place text around the circle */
+    /* Position each wheel option using transforms */
     .wheel-option {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform-origin: 0 -100px;
+      transform-origin: 0 -120px; /* 120px radius */
       font-size: 16px;
     }
-    .option1 { transform: rotate(0deg) translate(0, -100px) rotate(0deg); }
-    .option2 { transform: rotate(60deg) translate(0, -100px) rotate(-60deg); }
-    .option3 { transform: rotate(120deg) translate(0, -100px) rotate(-120deg); }
-    .option4 { transform: rotate(180deg) translate(0, -100px) rotate(-180deg); }
-    .option5 { transform: rotate(240deg) translate(0, -100px) rotate(-240deg); }
-    .option6 { transform: rotate(300deg) translate(0, -100px) rotate(-300deg); }
-    /* Set text content directly in HTML for option6 ("You lose") */
+    .option1 { transform: rotate(0deg) translateY(-120px) rotate(0deg); }
+    .option2 { transform: rotate(60deg) translateY(-120px) rotate(-60deg); }
+    .option3 { transform: rotate(120deg) translateY(-120px) rotate(-120deg); }
+    .option4 { transform: rotate(180deg) translateY(-120px) rotate(-180deg); }
+    .option5 { transform: rotate(240deg) translateY(-120px) rotate(-240deg); }
+    .option6 { transform: rotate(300deg) translateY(-120px) rotate(-300deg); }
     /* Version Label */
     #versionLabel {
       position: fixed;
@@ -735,7 +734,7 @@
     function spinWheel() {
       const wheel = document.getElementById('wheel');
       // Spin the wheel to land on option6 ("You lose")
-      wheel.style.transform = "rotate(1620deg)"; // 1620deg = 1440 + 180 (lands on option6)
+      wheel.style.transform = "rotate(1620deg)"; // 1440+180 = 1620deg
       setTimeout(onWheelLanded, 4000);
     }
     
