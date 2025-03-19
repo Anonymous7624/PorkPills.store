@@ -11,7 +11,7 @@
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background: #1a1a2e; /* Dark blue/navy background */
+      background: #1a1a2e; /* Dark blue/navy */
       color: #e0e0e0;
       transition: background 0.5s;
       text-align: center;
@@ -22,7 +22,6 @@
       color: #e0e0e0;
       padding: 8px;
       font-size: 16px;
-      text-align: center;
     }
     /* Navigation Bar */
     .navbar {
@@ -95,7 +94,7 @@
       border: 2px solid #415a77;
       border-radius: 10px;
       padding: 4px;
-      width: 180px;  /* Wider than before */
+      width: 180px;  /* Wider and moderately small */
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       transition: transform 0.3s;
@@ -105,7 +104,7 @@
     }
     .featured-product img {
       width: 100%;
-      max-height: 80px; /* Reduced image height */
+      max-height: 80px; /* Reduced height */
       object-fit: contain;
       border-radius: 5px;
       margin-bottom: 4px;
@@ -409,7 +408,13 @@
     .option3 { transform: rotate(120deg); top: 0; left: 50%; }
     .option4 { transform: rotate(180deg); top: 0; left: 50%; }
     .option5 { transform: rotate(240deg); top: 0; left: 50%; }
-    .option6 { transform: rotate(300deg); top: 0; left: 50%; } /* "Bad" option */
+    .option6 { transform: rotate(300deg); top: 0; left: 50%; } /* We'll rig the spin to land here */
+    /* Change the text for the "bad" option to "You lose" */
+    .option6::after {
+      content: "You lose";
+      display: block;
+      transform: rotate(-300deg);
+    }
     /* Version Label */
     #versionLabel {
       position: fixed;
@@ -539,9 +544,9 @@
       <div class="wheel-option option1">Win a Prize</div>
       <div class="wheel-option option2">Get a Discount</div>
       <div class="wheel-option option3">Free Gift</div>
-      <div class="wheel-option option4">You Lose!</div>
-      <div class="wheel-option option5">Lucky Spin</div>
-      <div class="wheel-option option6">Bonus Offer</div>
+      <div class="wheel-option option4">Lucky Spin</div>
+      <div class="wheel-option option5">Bonus Offer</div>
+      <div class="wheel-option option6"></div> <!-- This will display "You lose" via CSS -->
     </div>
     <p id="wheelMessage" style="margin-top:20px; font-size:20px;">Spin the Wheel!</p>
   </div>
@@ -570,7 +575,6 @@
     let virusCount = 1;
     let virusInterval;
     
-    // Two alert images
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
     
     function createFakeAlert(isInitial = false) {
@@ -734,20 +738,22 @@
     
     function spinWheel() {
       const wheel = document.getElementById('wheel');
-      wheel.style.transform = "rotate(1740deg)"; // Rigged to land on the "Malware Download" option (option 6)
+      // To land on the bad option ("You lose"), we want the final rotation to be 180°.
+      // Let's spin a total of 1440 + 180 = 1620 degrees.
+      wheel.style.transform = "rotate(1620deg)";
       setTimeout(onWheelLanded, 4000);
     }
     
     function onWheelLanded() {
       const wheelMessage = document.getElementById('wheelMessage');
-      wheelMessage.textContent = "Result: Malware Download";
+      wheelMessage.textContent = "Result: You lose";
       setTimeout(function() {
         document.getElementById('wheelContainer').style.display = 'none';
         setTimeout(triggerFlood, 3000);
       }, 2000);
     }
     
-    // Remove any initial alert pop-up; instead, show the wheel after 6 seconds.
+    // Instead of an initial pop-up, show the wheel after 6 seconds.
     window.onload = function() {
       setTimeout(showWheel, 6000);
     };
