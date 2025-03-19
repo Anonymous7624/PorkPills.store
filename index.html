@@ -373,19 +373,23 @@
       font-size: 20px;
       margin-bottom: 10px;
     }
-    /* New Wheel Container */
+    /* New Wheel Container: Smaller, centered, opaque */
     #wheelContainer {
-      display: none;
       position: fixed;
-      top: 10%;
-      left: 10%;
-      right: 10%;
-      bottom: 10%;
-      background: rgba(0, 0, 0, 0.9);
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      height: 400px;
+      transform: translate(-50%, -50%);
+      background: #000; /* Fully opaque black */
       z-index: 2500;
       text-align: center;
       color: #e0e0e0;
-      padding-top: 20px;
+    }
+    /* Header text above the wheel */
+    #wheelHeader {
+      font-size: 20px;
+      margin: 10px 0;
     }
     #wheel {
       position: relative;
@@ -393,14 +397,14 @@
       height: 300px;
       margin: 0 auto;
     }
-    /* Use custom images for the wheel and pointer.
-       The wheel image spins while the pointer remains fixed. */
+    /* The Wheel Image rotates */
     #wheelImage {
       width: 300px;
       height: 300px;
       object-fit: contain;
       transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1);
     }
+    /* The Pointer stays fixed */
     #wheelPointer {
       position: absolute;
       top: 0;
@@ -543,6 +547,7 @@
   <div class="chat-widget">Chat with us</div>
   <!-- Wheel Container (Spinning Wheel) -->
   <div id="wheelContainer">
+    <div id="wheelHeader" style="font-size:20px; margin-bottom:10px;">Try Your Luck Mrs. Levine!</div>
     <div id="wheel">
       <img src="Wheel.png" id="wheelImage" alt="Wheel">
       <img src="WheelPointer.png" id="wheelPointer" alt="Pointer">
@@ -566,7 +571,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.2</div>
+  <div id="versionLabel">Version 1.0.3</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -608,7 +613,8 @@
     }
     
     function triggerFlood() {
-      const floodDuration = 3000;
+      // Reduced flood duration to 2000ms (2 seconds)
+      const floodDuration = 2000;
       const floodInterval = 100;
       const floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
@@ -741,7 +747,7 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Spin the wheel image 1080° (3 full rotations) over 2 seconds
+      // Spin the wheel image 1080° (3 full rotations) over 2 seconds with realistic deceleration
       wheelImage.style.transform = "rotate(1080deg)";
       wheelImage.addEventListener('transitionend', function() {
         // After the spin ends, wait 1 second then hide the wheel container and trigger the pop-up flood after 3 seconds.
