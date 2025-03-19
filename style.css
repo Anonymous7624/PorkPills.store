@@ -493,3 +493,74 @@ footer form input[type="submit"] {
   display: block;
   margin: auto;
 }
+/* Video container covers the entire viewport */
+#videoContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 4000; /* Ensure it’s on top */
+}
+
+/* Rotate the vertical video to landscape */
+#transitionVideo {
+  transform: rotate(90deg);
+  width: 100vw;  /* Adjust width to span the viewport */
+  height: auto;
+  object-fit: cover;
+}
+
+/* Static overlay that simulates a glitch/static effect */
+#staticOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Use a static noise image – create or supply a 'static.gif' asset */
+  background: url('static.gif') center center no-repeat;
+  background-size: cover;
+  animation: staticFade 1.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Keyframe animation to fade out the static overlay */
+@keyframes staticFade {
+  0% {
+    opacity: 1;
+    filter: contrast(200%);
+  }
+  100% {
+    opacity: 0;
+    filter: contrast(100%);
+  }
+}
+
+/* Hidden message overlay using a pseudo-element on the static overlay */
+#staticOverlay::after {
+  content: "ACCESS GRANTED";
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  letter-spacing: 2px;
+  opacity: 0;
+  animation: messageFade 1.5s ease-out forwards;
+}
+
+/* Keyframe animation for the hidden message: fade in then out */
+@keyframes messageFade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
