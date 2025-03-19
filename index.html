@@ -374,8 +374,8 @@
       position: fixed;
       top: 50%;
       left: 50%;
-      width: 400px;
-      height: 400px;
+      width: 250px;
+      height: 250px;
       transform: translate(-50%, -50%);
       background: #000;
       z-index: 2500;
@@ -393,28 +393,25 @@
     /* Wheel Element */
     #wheel {
       position: relative;
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       margin: 0 auto;
     }
-    /* Keyframe animation for the wheel spin (accelerate, then decelerate) */
+    /* Keyframe animation for the wheel spin */
     @keyframes spinWheelAnimation {
       0% { transform: rotate(0deg); }
-      20% { transform: rotate(300deg); }
-      50% { transform: rotate(1800deg); }
-      80% { transform: rotate(3000deg); }
-      100% { transform: rotate(3120deg); }
+      100% { transform: rotate(1080deg); }
     }
     .spin-animation {
-      animation: spinWheelAnimation 30s ease-out forwards;
+      animation: spinWheelAnimation 5s ease-out forwards;
     }
     /* The Pointer stays fixed */
     #wheelPointer {
       position: absolute;
       top: 0;
       left: 0;
-      width: 300px;
-      height: 300px;
+      width: 200px;
+      height: 200px;
       pointer-events: none;
     }
     /* Text overlay in the center of the wheel */
@@ -755,10 +752,9 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Add the spin-animation class to trigger the keyframe animation for a 30-second spin
+      // Trigger the keyframe animation by adding the class "spin-animation"
       wheelImage.classList.add("spin-animation");
       wheelImage.addEventListener('animationend', function() {
-        // After the spin ends, wait 1 second then hide the wheel container and show one initial alert after another 1 second
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
           setTimeout(function(){
