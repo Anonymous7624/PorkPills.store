@@ -481,3 +481,9 @@ footer form input[type="submit"] {
   color: #a0a0a0;
   padding: 5px;
 }
+
+#wheelImage {
+  transform-origin: center center; /* Sets the pivot point to the center */
+  display: block;
+  margin: auto;
+}
