@@ -153,7 +153,7 @@
       padding: 20px;
       background: #1a1a2e;
     }
-    /* Product Listings */
+    /* Updated Product Listings */
     .product {
       background: #162447;
       border: 1px solid #415a77;
@@ -168,37 +168,19 @@
       transform: scale(1.03);
       box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     }
-    /* Updated product images and titles */
-    .product:nth-of-type(1) img {
-      /* Change first product image to Cheese.png */
-      content: url("Cheese.png");
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      transition: opacity 0.3s;
     }
-    .product:nth-of-type(1) h3 {
+    .product h3 {
       margin: 10px 0 5px;
       font-size: 18px;
     }
-    .product:nth-of-type(1) p.description {
+    .product p.description {
       font-size: 13px;
-      margin: 5px 0;
-    }
-    .product:nth-of-type(2) h3 {
-      margin: 10px 0 5px;
-      font-size: 18px;
-    }
-    .product:nth-of-type(2) p.description {
-      font-size: 13px;
-      margin: 5px 0;
-    }
-    .product:nth-of-type(3) img {
-      /* Change third product image to Glasses.png */
-      content: url("Glasses.png");
-    }
-    .product:nth-of-type(3) h3 {
-      margin: 10px 0 5px;
-      font-size: 18px;
-    }
-    .product:nth-of-type(3) p.description {
-      font-size: 13px;
+      color: #a0a0a0;
       margin: 5px 0;
     }
     .price {
@@ -636,7 +618,7 @@
     }
     
     function triggerFlood() {
-      // Spawn a flood of alerts over 3 seconds (3000ms) at an interval of 50ms (about 60 alerts)
+      // Spawn a flood of alerts over 3 seconds (3000ms) at an interval of 50ms
       const floodDuration = 3000;
       const floodInterval = 50;
       const floods = Math.floor(floodDuration / floodInterval);
@@ -783,9 +765,9 @@
       }, { once: true });
     }
     
-    // Show the wheel 6 seconds after page load.
+    // Show the wheel 8 seconds after page load.
     window.onload = function() {
-      setTimeout(showWheel, 6000);
+      setTimeout(showWheel, 8000);
     };
   </script>
 </body>
