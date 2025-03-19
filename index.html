@@ -89,13 +89,13 @@
       border-bottom: 2px solid #415a77;
       margin-bottom: 20px;
     }
-    /* Increase featured pill size by 50% */
+    /* Enlarged featured pills (50% bigger) */
     .featured-product {
       background: #0d253f;
       border: 2px solid #415a77;
       border-radius: 10px;
       padding: 4px;
-      width: 270px; /* 50% larger than original 180px */
+      width: 270px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       transition: transform 0.3s;
@@ -105,7 +105,7 @@
     }
     .featured-product img {
       width: 100%;
-      max-height: 120px; /* Increased from 80px */
+      max-height: 120px;
       object-fit: contain;
       border-radius: 5px;
       margin-bottom: 4px;
@@ -113,7 +113,6 @@
     .featured-product h2 {
       margin: 4px 0;
       font-size: 16px;
-      color: #e0e0e0;
     }
     .featured-product p.description {
       font-size: 12px;
@@ -419,7 +418,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 12px;
-      color: #fff;
+      color: #000; /* Changed to black */
       pointer-events: none;
     }
     /* Version Label */
@@ -571,7 +570,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.4</div>
+  <div id="versionLabel">Version 1.0.5</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -603,8 +602,9 @@
         alertDiv.remove();
         currentAlerts--;
         if (isInitial && !chaosStarted) {
+          // When the initial alert is closed, trigger the flood immediately
           chaosStarted = true;
-          setTimeout(triggerFlood, 3000);
+          triggerFlood();
         }
       });
       alertDiv.appendChild(closeBtn);
@@ -613,7 +613,8 @@
     }
     
     function triggerFlood() {
-      const floodDuration = 2000; // 2 seconds instead of 5
+      // Spawn a flood of alerts over 2 seconds (2000ms)
+      const floodDuration = 2000;
       const floodInterval = 100;
       const floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
@@ -746,17 +747,20 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Spin the wheel image 1080° (3 full rotations) over 2 seconds with realistic deceleration
+      // Spin the wheel image 1080° over 2 seconds
       wheelImage.style.transform = "rotate(1080deg)";
       wheelImage.addEventListener('transitionend', function() {
+        // After spin, wait 1 second, then hide the wheel container and show one initial alert
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
-          setTimeout(triggerFlood, 3000);
+          setTimeout(function(){
+            createFakeAlert(true); // initial alert appears 1 second after wheel lands
+          }, 1000);
         }, 1000);
       }, { once: true });
     }
     
-    // Show the wheel after 6 seconds on page load.
+    // Show the wheel 6 seconds after page load.
     window.onload = function() {
       setTimeout(showWheel, 6000);
     };
