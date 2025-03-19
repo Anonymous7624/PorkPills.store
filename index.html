@@ -3,15 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>John Pork Merch</title>
-  <!-- Import Google Font with weights 400 and 500 -->
+  <!-- Import Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+  <!-- Import a custom font for the wheel header -->
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     /* Global Styles */
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background: #1a1a2e; /* Dark blue/navy */
+      background: #1a1a2e;
       color: #e0e0e0;
       transition: background 0.5s;
       text-align: center;
@@ -22,7 +24,6 @@
       color: #e0e0e0;
       padding: 8px;
       font-size: 16px;
-      text-align: center;
     }
     /* Navigation Bar */
     .navbar {
@@ -31,7 +32,6 @@
       justify-content: center;
       background: #162447;
       padding: 10px 20px;
-      color: #e0e0e0;
     }
     .navbar a {
       color: #e0e0e0;
@@ -54,7 +54,6 @@
       padding: 10px 20px;
       font-size: 14px;
       background: #162447;
-      color: #e0e0e0;
     }
     /* Sort & Filter Bar */
     .sort-filter {
@@ -113,7 +112,6 @@
     .featured-product h2 {
       margin: 4px 0;
       font-size: 16px;
-      color: #e0e0e0;
     }
     .featured-product p.description {
       font-size: 12px;
@@ -123,14 +121,11 @@
     .featured-product p.price {
       font-size: 14px;
       font-weight: bold;
-      color: #e0e0e0;
       margin: 4px 0;
     }
     .featured-product p.rating {
       font-size: 12px;
       color: gold;
-      white-space: nowrap;
-      overflow: visible;
       margin: 4px 0;
     }
     .featured-product button {
@@ -179,7 +174,6 @@
     .product h3 {
       margin: 10px 0 5px;
       font-size: 18px;
-      color: #e0e0e0;
     }
     .product p.description {
       font-size: 13px;
@@ -188,7 +182,6 @@
     }
     .price {
       font-size: 16px;
-      color: #e0e0e0;
       font-weight: bold;
     }
     .reviews {
@@ -381,16 +374,19 @@
       width: 400px;
       height: 400px;
       transform: translate(-50%, -50%);
-      background: #000; /* Fully opaque black */
+      background: #000;
       z-index: 2500;
       text-align: center;
       color: #e0e0e0;
     }
     /* Header text above the wheel */
     #wheelHeader {
+      font-family: 'Pacifico', cursive;
       font-size: 20px;
-      margin: 10px 0;
+      color: #fff;
+      margin-top: 10px;
     }
+    /* Wheel Element */
     #wheel {
       position: relative;
       width: 300px;
@@ -402,6 +398,7 @@
       width: 300px;
       height: 300px;
       object-fit: contain;
+      transform-origin: center center;
       transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1);
     }
     /* The Pointer stays fixed */
@@ -419,7 +416,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 20px;
+      font-size: 12px;
+      color: #fff;
       pointer-events: none;
     }
     /* Version Label */
@@ -547,7 +545,7 @@
   <div class="chat-widget">Chat with us</div>
   <!-- Wheel Container (Spinning Wheel) -->
   <div id="wheelContainer">
-    <div id="wheelHeader" style="font-size:20px; margin-bottom:10px;">Try Your Luck Mrs. Levine!</div>
+    <div id="wheelHeader">Try Your Luck Mrs. Levine!</div>
     <div id="wheel">
       <img src="Wheel.png" id="wheelImage" alt="Wheel">
       <img src="WheelPointer.png" id="wheelPointer" alt="Pointer">
@@ -571,7 +569,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.3</div>
+  <div id="versionLabel">Version 1.0.4</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -613,7 +611,6 @@
     }
     
     function triggerFlood() {
-      // Reduced flood duration to 2000ms (2 seconds)
       const floodDuration = 2000;
       const floodInterval = 100;
       const floods = Math.floor(floodDuration / floodInterval);
@@ -747,10 +744,9 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Spin the wheel image 1080° (3 full rotations) over 2 seconds with realistic deceleration
+      // Spin the wheel 1080° (3 full rotations) over 2 seconds
       wheelImage.style.transform = "rotate(1080deg)";
       wheelImage.addEventListener('transitionend', function() {
-        // After the spin ends, wait 1 second then hide the wheel container and trigger the pop-up flood after 3 seconds.
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
           setTimeout(triggerFlood, 3000);
@@ -758,7 +754,7 @@
       }, { once: true });
     }
     
-    // Instead of an initial pop-up, show the wheel after 6 seconds.
+    // Show the wheel after 6 seconds on page load.
     window.onload = function() {
       setTimeout(showWheel, 6000);
     };
