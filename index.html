@@ -393,13 +393,14 @@
       height: 300px;
       margin: 0 auto;
     }
-    /* The Wheel Image rotates */
+    /* Use custom images for the wheel and pointer.
+       The wheel image spins while the pointer remains fixed. */
     #wheelImage {
       width: 300px;
       height: 300px;
-      transition: transform 4s ease-out;
+      object-fit: contain;
+      transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1);
     }
-    /* The Pointer stays fixed */
     #wheelPointer {
       position: absolute;
       top: 0;
@@ -565,7 +566,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.1</div>
+  <div id="versionLabel">Version 1.0.2</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -733,18 +734,17 @@
       wheelContainer.style.display = 'block';
     }
     
-    // When the user clicks the wheel container, spin the wheel.
+    // Listen for click on the wheel container
     document.getElementById('wheelContainer').addEventListener('click', spinWheel);
     
     function spinWheel() {
-      // Remove the "Click to spin" text once clicked
+      // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Spin the wheel 1080 degrees (3 full rotations) with an ease-out transition
+      // Spin the wheel image 1080° (3 full rotations) over 2 seconds
       wheelImage.style.transform = "rotate(1080deg)";
-      // When the transition ends, reset (or keep it, since 1080 mod 360 = 0)
       wheelImage.addEventListener('transitionend', function() {
-        // After spinning, hide the wheel container and trigger the pop-up flood after a 3-second delay.
+        // After the spin ends, wait 1 second then hide the wheel container and trigger the pop-up flood after 3 seconds.
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
           setTimeout(triggerFlood, 3000);
