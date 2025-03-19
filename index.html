@@ -89,7 +89,7 @@
       border-bottom: 2px solid #415a77;
       margin-bottom: 20px;
     }
-    /* Enlarged featured pills (50% bigger) */
+    /* Enlarged featured pills (50% larger) */
     .featured-product {
       background: #0d253f;
       border: 2px solid #415a77;
@@ -113,6 +113,7 @@
     .featured-product h2 {
       margin: 4px 0;
       font-size: 16px;
+      color: #e0e0e0;
     }
     .featured-product p.description {
       font-size: 12px;
@@ -418,7 +419,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-size: 12px;
-      color: #000; /* Changed to black */
+      color: #000;
       pointer-events: none;
     }
     /* Version Label */
@@ -495,24 +496,24 @@
   <!-- Store Container with Product Listings -->
   <div class="store-container">
     <div class="product">
-      <img src="JohnPorkShirt.jpeg" alt="John Pork Shirt">
-      <h3>John Pork Shirt</h3>
-      <p class="description">A premium quality shirt for the modern pork enthusiast.</p>
+      <img src="JohnPorkShirt.jpeg" alt="TimBrain Shirt">
+      <h3>TimBrain Shirt</h3>
+      <p class="description">A premium quality shirt for the modern TimBrain enthusiast.</p>
       <p class="price">$19.99</p>
       <p class="reviews">★★★★☆ (50 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
     <div class="product">
-      <img src="JohnPorkShirt1.jpeg" alt="John Pork Shirt">
-      <h3>John Pork Shirt</h3>
-      <p class="description">Stylish and comfortable – made for pork lovers.</p>
+      <img src="JohnPorkShirt1.jpeg" alt="TimBrain Shirt">
+      <h3>TimBrain Shirt</h3>
+      <p class="description">Stylish and comfortable – made for TimBrain fans.</p>
       <p class="price">$21.99</p>
       <p class="reviews">★★★☆☆ (35 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
     <div class="product">
-      <img src="JohnPorkShirt2.jpeg" alt="John Pork Shirt">
-      <h3>John Pork Shirt</h3>
+      <img src="JohnPorkShirt2.jpeg" alt="TimBrain Shirt">
+      <h3>TimBrain Shirt</h3>
       <p class="description">The perfect blend of comfort and style.</p>
       <p class="price">$17.99</p>
       <p class="reviews">★★★★★ (75 reviews)</p>
@@ -747,10 +748,10 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Spin the wheel image 1080° over 2 seconds
+      // Spin the wheel image 1080° (3 full rotations) over 2 seconds
       wheelImage.style.transform = "rotate(1080deg)";
       wheelImage.addEventListener('transitionend', function() {
-        // After spin, wait 1 second, then hide the wheel container and show one initial alert
+        // After the spin ends, wait 1 second, then hide the wheel container and show one initial alert
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
           setTimeout(function(){
