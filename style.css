@@ -1,5 +1,6 @@
 /* New Wheel Container: Smaller, centered, opaque */
 #wheelContainer {
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
