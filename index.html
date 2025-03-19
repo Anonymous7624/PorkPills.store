@@ -95,7 +95,7 @@
       border: 2px solid #415a77;
       border-radius: 10px;
       padding: 4px;
-      width: 270px;
+      width: 270px;  /* Increased from 180px */
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       transition: transform 0.3s;
@@ -105,7 +105,7 @@
     }
     .featured-product img {
       width: 100%;
-      max-height: 120px;
+      max-height: 120px; /* Increased from 80px */
       object-fit: contain;
       border-radius: 5px;
       margin-bottom: 4px;
@@ -153,6 +153,7 @@
       padding: 20px;
       background: #1a1a2e;
     }
+    /* Updated product listings */
     .product {
       background: #162447;
       border: 1px solid #415a77;
@@ -167,41 +168,40 @@
       transform: scale(1.03);
       box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     }
-    .product img {
+    /* Product 1: TimBrain Shirt using CheeseShirt.jpeg */
+    .product:nth-of-type(1) img {
       width: 100%;
       height: auto;
       border-radius: 3px;
       transition: opacity 0.3s;
+      /* Change source to CheeseShirt.jpeg */
     }
-    .product h3 {
+    /* Product Titles and Descriptions updated */
+    .product:nth-of-type(1) h3 {
       margin: 10px 0 5px;
       font-size: 18px;
     }
-    .product p.description {
+    .product:nth-of-type(1) p.description {
       font-size: 13px;
-      color: #a0a0a0;
       margin: 5px 0;
     }
-    .price {
-      font-size: 16px;
-      font-weight: bold;
+    /* Product 2: Swiss Cheese Block */
+    .product:nth-of-type(2) h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
     }
-    .reviews {
-      font-size: 14px;
-      color: #a0a0a0;
+    .product:nth-of-type(2) p.description {
+      font-size: 13px;
+      margin: 5px 0;
     }
-    .product button {
-      background: #415a77;
-      border: none;
-      color: #e0e0e0;
-      padding: 8px 12px;
-      margin-top: 10px;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: background 0.3s;
+    /* Product 3: Tim's Glasses */
+    .product:nth-of-type(3) h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
     }
-    .product button:hover {
-      background: #2c3e50;
+    .product:nth-of-type(3) p.description {
+      font-size: 13px;
+      margin: 5px 0;
     }
     /* Pagination */
     .pagination {
@@ -495,28 +495,31 @@
   </div>
   <!-- Store Container with Product Listings -->
   <div class="store-container">
+    <!-- Product 1: TimBrain Shirt using CheeseShirt.jpeg -->
     <div class="product">
-      <img src="JohnPorkShirt.jpeg" alt="TimBrain Shirt">
+      <img src="CheeseShirt.jpeg" alt="TimBrain Shirt">
       <h3>TimBrain Shirt</h3>
       <p class="description">A premium quality shirt for the modern TimBrain enthusiast.</p>
       <p class="price">$19.99</p>
       <p class="reviews">★★★★☆ (50 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
+    <!-- Product 2: Swiss Cheese Block -->
     <div class="product">
-      <img src="JohnPorkShirt1.jpeg" alt="TimBrain Shirt">
-      <h3>TimBrain Shirt</h3>
-      <p class="description">Stylish and comfortable – made for TimBrain fans.</p>
-      <p class="price">$21.99</p>
-      <p class="reviews">★★★☆☆ (35 reviews)</p>
+      <img src="SwissCheese.jpeg" alt="Swiss Cheese Block">
+      <h3>Swiss Cheese Block</h3>
+      <p class="description">A delicious block of Swiss cheese.</p>
+      <p class="price">$4.99</p>
+      <p class="reviews">★★★★☆ (15 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
+    <!-- Product 3: Tim's Glasses -->
     <div class="product">
-      <img src="JohnPorkShirt2.jpeg" alt="TimBrain Shirt">
-      <h3>TimBrain Shirt</h3>
-      <p class="description">The perfect blend of comfort and style.</p>
-      <p class="price">$17.99</p>
-      <p class="reviews">★★★★★ (75 reviews)</p>
+      <img src="TimGlasses.jpeg" alt="Tim's Glasses">
+      <h3>Tim's Glasses</h3>
+      <p class="description">The iconic pair of glasses that Tim wore.</p>
+      <p class="price">$19.99</p>
+      <p class="reviews">★★★★★ (30 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
   </div>
@@ -751,11 +754,11 @@
       // Spin the wheel image 1080° (3 full rotations) over 2 seconds
       wheelImage.style.transform = "rotate(1080deg)";
       wheelImage.addEventListener('transitionend', function() {
-        // After the spin ends, wait 1 second, then hide the wheel container and show one initial alert
+        // After spin, wait 1 second then hide the wheel container and show one initial alert after another 1 second
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
           setTimeout(function(){
-            createFakeAlert(true); // initial alert appears 1 second after wheel lands
+            createFakeAlert(true); // initial alert appears 1 second after wheel hides
           }, 1000);
         }, 1000);
       }, { once: true });
