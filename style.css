@@ -444,8 +444,14 @@ footer form input[type="submit"] {
 /* Keyframe animation for the wheel spin */
 @keyframes spinWheelAnimation {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(1080deg); }
+  20% { transform: rotate(720deg); } /* Quick acceleration phase */
+  100% { transform: rotate(3600deg); } /* Long spin with deceleration */
 }
+
+.spin-animation {
+  animation: spinWheelAnimation 11s ease-out forwards;
+}
+
 
 .spin-animation {
   animation: spinWheelAnimation 5s ease-out forwards;
