@@ -396,25 +396,21 @@
       position: relative;
       transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
     }
+    /* New Wheel Options: Place text around the circle */
     .wheel-option {
       position: absolute;
-      width: 50%;
-      height: 50%;
-      text-align: center;
-      transform-origin: 100% 100%;
-      font-size: 14px;
+      left: 50%;
+      top: 50%;
+      transform-origin: 0 -100px;
+      font-size: 16px;
     }
-    .option1 { transform: rotate(0deg); top: 0; left: 50%; }
-    .option2 { transform: rotate(60deg); top: 0; left: 50%; }
-    .option3 { transform: rotate(120deg); top: 0; left: 50%; }
-    .option4 { transform: rotate(180deg); top: 0; left: 50%; }
-    .option5 { transform: rotate(240deg); top: 0; left: 50%; }
-    .option6 { transform: rotate(300deg); top: 0; left: 50%; }
-    .option6::after {
-      content: "You lose";
-      display: block;
-      transform: rotate(-300deg);
-    }
+    .option1 { transform: rotate(0deg) translate(0, -100px) rotate(0deg); }
+    .option2 { transform: rotate(60deg) translate(0, -100px) rotate(-60deg); }
+    .option3 { transform: rotate(120deg) translate(0, -100px) rotate(-120deg); }
+    .option4 { transform: rotate(180deg) translate(0, -100px) rotate(-180deg); }
+    .option5 { transform: rotate(240deg) translate(0, -100px) rotate(-240deg); }
+    .option6 { transform: rotate(300deg) translate(0, -100px) rotate(-300deg); }
+    /* Set text content directly in HTML for option6 ("You lose") */
     /* Version Label */
     #versionLabel {
       position: fixed;
@@ -546,13 +542,13 @@
       <div class="wheel-option option3">Free Gift</div>
       <div class="wheel-option option4">Lucky Spin</div>
       <div class="wheel-option option5">Bonus Offer</div>
-      <div class="wheel-option option6"></div> <!-- This option displays "You lose" -->
+      <div class="wheel-option option6">You lose</div>
     </div>
     <p id="wheelMessage" style="margin-top:20px; font-size:20px;">Spin the Wheel!</p>
   </div>
   <!-- Hacking Overlay (Chaos Mode) -->
   <div id="hackingOverlay"></div>
-  <!-- BSOD Overlay (Unused) -->
+  <!-- BSOD Overlay -->
   <div id="bsodOverlay">
     <h1>:(</h1>
     <p>A problem has been detected and Windows has been shut down to prevent damage to your computer.</p>
@@ -738,7 +734,8 @@
     
     function spinWheel() {
       const wheel = document.getElementById('wheel');
-      wheel.style.transform = "rotate(1620deg)"; // Rigged to land on option6 ("You lose")
+      // Spin the wheel to land on option6 ("You lose")
+      wheel.style.transform = "rotate(1620deg)"; // 1620deg = 1440 + 180 (lands on option6)
       setTimeout(onWheelLanded, 4000);
     }
     
