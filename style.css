@@ -1,10 +1,422 @@
-/* New Wheel Container: smaller */
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  transition: background 0.5s;
+  text-align: center;
+}
+
+/* Announcement Banner */
+.announcement-banner {
+  background: #0d253f;
+  color: #e0e0e0;
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #162447;
+  padding: 10px 20px;
+}
+
+.navbar a {
+  color: #e0e0e0;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.navbar .nav-left,
+.navbar .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar input[type="text"] {
+  padding: 5px 8px;
+  border-radius: 3px;
+  border: none;
+  margin-left: 10px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  padding: 10px 20px;
+  font-size: 14px;
+  background: #162447;
+}
+
+/* Sort & Filter Bar */
+.sort-filter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #1f4068;
+  border-bottom: 1px solid #415a77;
+  text-align: left;
+}
+
+.sort-filter select {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.filter-links {
+  text-align: left;
+}
+
+.filter-links a {
+  margin-right: 10px;
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+/* Featured Products Section */
+#featured-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: #162447;
+  border-bottom: 2px solid #415a77;
+  margin-bottom: 20px;
+}
+
+/* Enlarged Featured Products (50% larger) */
+.featured-product {
+  background: #0d253f;
+  border: 2px solid #415a77;
+  border-radius: 10px;
+  padding: 4px;
+  width: 270px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}
+
+.featured-product:hover {
+  transform: scale(1.05);
+}
+
+.featured-product img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  border-radius: 5px;
+  margin-bottom: 4px;
+}
+
+.featured-product h2 {
+  margin: 4px 0;
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+.featured-product p.description {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin: 4px 0;
+}
+
+.featured-product p.price {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+
+.featured-product p.rating {
+  font-size: 12px;
+  color: gold;
+  margin: 4px 0;
+}
+
+.featured-product button {
+  background: #415a77;
+  border: none;
+  color: #e0e0e0;
+  padding: 4px 8px;
+  margin-top: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.3s;
+  font-size: 12px;
+}
+
+.featured-product button:hover {
+  background: #2c3e50;
+}
+
+/* Store Container */
+.store-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: #1a1a2e;
+}
+
+/* Product Listings */
+.product {
+  background: #162447;
+  border: 1px solid #415a77;
+  border-radius: 5px;
+  padding: 15px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  transition: opacity 0.3s;
+}
+
+.product h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+.product p.description {
+  font-size: 13px;
+  color: #a0a0a0;
+  margin: 5px 0;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.reviews {
+  font-size: 14px;
+  color: #a0a0a0;
+}
+
+.product button {
+  background: #415a77;
+  border: none;
+  color: #e0e0e0;
+  padding: 8px 12px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.3s;
+}
+
+.product button:hover {
+  background: #2c3e50;
+}
+
+/* Pagination */
+.pagination {
+  text-align: center;
+  padding: 15px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  background: #162447;
+}
+
+.pagination a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: #e0e0e0;
+  padding: 5px 10px;
+  border: 1px solid #415a77;
+  border-radius: 3px;
+}
+
+/* Footer */
+footer {
+  background: #0d253f;
+  color: #e0e0e0;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
+
+footer .social a {
+  margin: 0 5px;
+  color: #a0a0a0;
+  text-decoration: none;
+}
+
+footer form input[type="email"] {
+  padding: 5px;
+  border-radius: 3px;
+  border: none;
+}
+
+footer form input[type="submit"] {
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: none;
+  background: #415a77;
+  color: #e0e0e0;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Live Chat Widget */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #415a77;
+  color: #e0e0e0;
+  padding: 10px 15px;
+  border-radius: 50px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 1100;
+}
+
+/* Fake Alert Styles */
+.fake-alert {
+  position: fixed;
+  background: #3a3a3a;
+  padding: 10px;
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 10px #000;
+  margin: 10px;
+}
+
+.fake-alert button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #aa0000;
+  color: #e0e0e0;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+
+.image-alert {
+  width: 280px;
+  max-width: 100%;
+  box-shadow: 0 0 15px #000;
+}
+
+/* Hacking Overlay (Code Animation) */
+#hackingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 14px;
+  display: none;
+  z-index: 2000;
+  overflow-y: auto;
+  white-space: pre;
+  padding: 20px;
+  text-align: left;
+}
+
+/* BSOD Overlay */
+#bsodOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000033;
+  color: #e0e0e0;
+  font-family: Consolas, monospace;
+  font-size: 18px;
+  display: none;
+  z-index: 3000;
+  padding: 20px;
+}
+
+/* Glitch Effect */
+.glitch {
+  animation: glitch-animation 0.2s infinite;
+}
+
+@keyframes glitch-animation {
+  0% { opacity: 1; }
+  20% { opacity: 0.8; transform: translate(-2px, 2px); }
+  40% { opacity: 1; transform: translate(2px, -2px); }
+  60% { opacity: 0.8; transform: translate(-2px, -2px); }
+  80% { opacity: 1; transform: translate(2px, 2px); }
+  100% { opacity: 1; transform: translate(0, 0); }
+}
+
+/* Additional Hacking Effects: Shake & Blur */
+.hacking-effects {
+  animation: shake 0.5s infinite, blur 1s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-5px, 5px); }
+  40% { transform: translate(5px, -5px); }
+  60% { transform: translate(-5px, -5px); }
+  80% { transform: translate(5px, 5px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes blur {
+  0%, 100% { filter: blur(0px); }
+  50% { filter: blur(3px); }
+}
+
+/* Loading Bar Overlay (Center-Right) */
+#loadingBar {
+  display: none;
+  position: fixed;
+  top: 50%;
+  right: 10%;
+  transform: translateY(-50%);
+  text-align: center;
+  z-index: 2100;
+}
+
+#loadingBar img {
+  width: 150px;
+  height: auto;
+}
+
+#loadingBar #virusCounter {
+  color: red;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* New Wheel Container: Smaller, centered, opaque */
 #wheelContainer {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 250px;      /* Reduced from 400px */
-  height: 250px;     /* Reduced from 400px */
+  width: 250px;
+  height: 250px;
   transform: translate(-50%, -50%);
   background: #000;
   z-index: 2500;
@@ -13,35 +425,59 @@
   display: none; /* Hidden initially */
 }
 
-/* Wheel element: smaller dimensions */
+/* Header text above the wheel */
+#wheelHeader {
+  font-family: 'Pacifico', cursive;
+  font-size: 20px;
+  color: #fff;
+  margin-top: 10px;
+}
+
+/* Wheel Element */
 #wheel {
   position: relative;
-  width: 200px;      /* Reduced from 300px */
-  height: 200px;     /* Reduced from 300px */
+  width: 200px;
+  height: 200px;
   margin: 0 auto;
 }
 
-/* Wheel Image: use a faster animation */
+/* Keyframe animation for the wheel spin */
 @keyframes spinWheelAnimation {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(1080deg); } /* 1080° = 3 full rotations */
-}
-.spin-animation {
-  animation: spinWheelAnimation 5s ease-out forwards;  /* 5 seconds spin */
-}
-/* Force the wheel image to be exactly 200×200 */
-#wheelImage {
-  width: 200px !important;
-  height: 200px !important;
-  max-width: 200px;
-  max-height: 200px;
-  object-fit: contain;
-  transform-origin: center center;
+  100% { transform: rotate(1080deg); }
 }
 
-/* Also ensure the pointer is 200×200 */
+.spin-animation {
+  animation: spinWheelAnimation 5s ease-out forwards;
+}
+
+/* The Pointer stays fixed */
 #wheelPointer {
-  width: 200px !important;
-  height: 200px !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
   pointer-events: none;
+}
+
+/* Text overlay in the center of the wheel */
+#wheelText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: #000;
+  pointer-events: none;
+}
+
+/* Version Label */
+#versionLabel {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-size: 10px;
+  color: #a0a0a0;
+  padding: 5px;
 }
