@@ -29,3 +29,19 @@
 .spin-animation {
   animation: spinWheelAnimation 5s ease-out forwards;  /* 5 seconds spin */
 }
+/* Force the wheel image to be exactly 200×200 */
+#wheelImage {
+  width: 200px !important;
+  height: 200px !important;
+  max-width: 200px;
+  max-height: 200px;
+  object-fit: contain;
+  transform-origin: center center;
+}
+
+/* Also ensure the pointer is 200×200 */
+#wheelPointer {
+  width: 200px !important;
+  height: 200px !important;
+  pointer-events: none;
+}
