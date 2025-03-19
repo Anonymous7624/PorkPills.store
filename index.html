@@ -89,7 +89,7 @@
       border-bottom: 2px solid #415a77;
       margin-bottom: 20px;
     }
-    /* Enlarged featured pills (50% larger) */
+    /* Enlarged Featured Products (50% larger) */
     .featured-product {
       background: #0d253f;
       border: 2px solid #415a77;
@@ -381,7 +381,7 @@
       z-index: 2500;
       text-align: center;
       color: #e0e0e0;
-      display: none; /* Hide initially */
+      display: none; /* Hidden initially */
     }
     /* Header text above the wheel */
     #wheelHeader {
@@ -467,7 +467,7 @@
       <a href="#">Accessories</a>
     </div>
     <div style="text-align: right;">
-      Sort by: 
+      Sort by:
       <select>
         <option>Relevance</option>
         <option>Price: Low to High</option>
@@ -506,7 +506,7 @@
       <p class="reviews">★★★★☆ (50 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
-    <!-- Product 2: Cheese Block using Cheese1.png -->
+    <!-- Product 2: Swiss Cheese Block using Cheese1.png -->
     <div class="product">
       <img src="Cheese1.png" alt="Swiss Cheese Block">
       <h3>Swiss Cheese Block</h3>
@@ -576,7 +576,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.6</div>
+  <div id="versionLabel">Version 1.0.7</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -739,7 +739,7 @@
       });
     }
     
-    // Wheel functions using custom images
+    // Wheel functions
     function showWheel() {
       const wheelContainer = document.getElementById('wheelContainer');
       wheelContainer.style.display = 'block';
@@ -752,7 +752,7 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Trigger the keyframe animation by adding the class "spin-animation"
+      // Add the spin-animation class to trigger the keyframe animation
       wheelImage.classList.add("spin-animation");
       wheelImage.addEventListener('animationend', function() {
         setTimeout(function() {
