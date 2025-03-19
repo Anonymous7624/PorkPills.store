@@ -397,7 +397,7 @@
       height: 300px;
       margin: 0 auto;
     }
-    /* The Wheel Image rotates using keyframe animation to simulate acceleration then deceleration */
+    /* Keyframe animation for the wheel spin (accelerate, then decelerate) */
     @keyframes spinWheelAnimation {
       0% { transform: rotate(0deg); }
       20% { transform: rotate(300deg); }
@@ -500,9 +500,9 @@
   </div>
   <!-- Store Container with Product Listings -->
   <div class="store-container">
-    <!-- Product 1: TimBrain Shirt using Cheese.png -->
+    <!-- Product 1: TimBrain Shirt using Cheese1.png -->
     <div class="product">
-      <img src="Cheese.png" alt="TimBrain Shirt">
+      <img src="Cheese1.png" alt="TimBrain Shirt">
       <h3>TimBrain Shirt</h3>
       <p class="description">A premium quality shirt for the modern TimBrain enthusiast.</p>
       <p class="price">$19.99</p>
@@ -755,7 +755,7 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Add the spin-animation class to trigger the CSS keyframe animation
+      // Add the spin-animation class to trigger the keyframe animation for a 30-second spin
       wheelImage.classList.add("spin-animation");
       wheelImage.addEventListener('animationend', function() {
         // After the spin ends, wait 1 second then hide the wheel container and show one initial alert after another 1 second
@@ -770,7 +770,7 @@
     
     // Show the wheel 8 seconds after page load.
     window.onload = function() {
-      setTimeout(showWheel, 10000);
+      setTimeout(showWheel, 8000);
     };
   </script>
 </body>
