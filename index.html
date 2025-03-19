@@ -6,11 +6,11 @@
   <!-- Import Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-  <!-- Link to your external CSS file for overall styles -->
+  <!-- Link to your external CSS file -->
   <link rel="stylesheet" href="style.css">
-  <!-- Inline CSS for the Wheel (ensure your style.css does not conflict) -->
+  <!-- Inline CSS for the Wheel (if needed; otherwise, ensure these rules exist in your style.css) -->
   <style>
-    /* Wheel Container: force to 250×250px and centered */
+    /* --- Wheel Specific Styles --- */
     #wheelContainer {
       position: fixed;
       top: 50%;
@@ -22,23 +22,20 @@
       z-index: 2500;
       text-align: center;
       color: #e0e0e0;
-      display: none; /* hidden initially */
+      display: none; /* Hidden initially */
     }
-    /* Header text above the wheel */
     #wheelHeader {
       font-family: 'Pacifico', cursive;
       font-size: 20px;
       color: #fff;
       margin-top: 10px;
     }
-    /* Wheel Element: force to 200×200px */
     #wheel {
       position: relative;
       width: 200px;
       height: 200px;
       margin: 0 auto;
     }
-    /* Force the wheel image to 200×200px */
     #wheelImage {
       width: 200px !important;
       height: 200px !important;
@@ -47,7 +44,6 @@
       object-fit: contain;
       transform-origin: center center;
     }
-    /* Force the pointer image to 200×200px */
     #wheelPointer {
       position: absolute;
       top: 0;
@@ -56,7 +52,6 @@
       height: 200px !important;
       pointer-events: none;
     }
-    /* Center overlay text on the wheel */
     #wheelText {
       position: absolute;
       top: 50%;
@@ -66,7 +61,6 @@
       color: #000;
       pointer-events: none;
     }
-    /* Keyframe animation for the wheel spin: 1080° in 5s */
     @keyframes spinWheelAnimation {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(1080deg); }
@@ -74,6 +68,7 @@
     .spin-animation {
       animation: spinWheelAnimation 5s ease-out forwards;
     }
+    /* --- End Wheel Specific Styles --- */
   </style>
 </head>
 <body>
@@ -141,7 +136,7 @@
     </div>
   </div>
   
-  <!-- Store Container with Product Listings -->
+  <!-- Store Container -->
   <div class="store-container">
     <div class="product">
       <img src="CheeseShirt.jpeg" alt="TimBrain Shirt">
@@ -232,7 +227,10 @@
   
   <!-- Inline JavaScript -->
   <script>
-    // --- Chaos & Hacking Mode Functions ---
+    // Global flag for chaos (we remove the check so the initial alert always triggers the flood)
+    let chaosStarted = false;
+    
+    // --- Alert and Hacking Functions ---
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
@@ -245,16 +243,17 @@
         alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       }
       const img = document.createElement('img');
-      const randomImage = ["ErrorMessage.png", "Image1234.jpg"][Math.floor(Math.random() * 2)];
-      img.src = randomImage;
+      // Randomly select one alert image from the list
+      const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
+      img.src = alertImages[Math.floor(Math.random() * alertImages.length)];
       img.className = 'image-alert';
       alertDiv.appendChild(img);
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
         alertDiv.remove();
-        if (isInitial && !chaosStarted) {
-          chaosStarted = true;
+        if (isInitial) {
+          // When the initial alert is closed, trigger the alert flood
           triggerFlood();
         }
       });
@@ -263,8 +262,9 @@
     }
     
     function triggerFlood() {
-      const floodDuration = 3000; // 3 seconds
-      const floodInterval = 50;
+      // Set floodDuration to 3000ms and interval to 10ms → ~300 alerts
+      const floodDuration = 3000;
+      const floodInterval = 10;
       const floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
       const floodTimer = setInterval(function() {
@@ -316,6 +316,7 @@
     }
     
     function triggerHackingMode() {
+      // Start a continuous code animation overlay
       document.body.style.cursor = 'none';
       document.getElementById('loadingBar').style.display = 'block';
       let virusCount = 1;
@@ -338,9 +339,7 @@
         hackingOverlay.textContent += generateRandomCodeLine() + "\n";
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
-      for (let i = 0; i < 15; i++) {
-        playSirenAndVoice();
-      }
+      // Play multiple siren sounds if desired here
       const dangerAlarm = document.getElementById('dangerAlarm');
       if (dangerAlarm) {
         dangerAlarm.play();
@@ -384,7 +383,7 @@
       wheelImage.addEventListener('animationend', function() {
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
-          // Show initial alert 1 second after the wheel hides
+          // After 1 second, show the initial alert
           setTimeout(function(){
             createFakeAlert(true);
           }, 1000);
@@ -394,7 +393,7 @@
     
     document.getElementById('wheelContainer').addEventListener('click', spinWheel);
     
-    // --- Initialize: show the wheel 8 seconds after page load ---
+    // Show the wheel 8 seconds after page load.
     window.onload = function() {
       setTimeout(showWheel, 8000);
     };
