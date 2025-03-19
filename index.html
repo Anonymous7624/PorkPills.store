@@ -6,8 +6,75 @@
   <!-- Import Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-  <!-- Link to your external CSS file -->
+  <!-- Link to your external CSS file for overall styles -->
   <link rel="stylesheet" href="style.css">
+  <!-- Inline CSS for the Wheel (ensure your style.css does not conflict) -->
+  <style>
+    /* Wheel Container: force to 250×250px and centered */
+    #wheelContainer {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 250px;
+      height: 250px;
+      transform: translate(-50%, -50%);
+      background: #000;
+      z-index: 2500;
+      text-align: center;
+      color: #e0e0e0;
+      display: none; /* hidden initially */
+    }
+    /* Header text above the wheel */
+    #wheelHeader {
+      font-family: 'Pacifico', cursive;
+      font-size: 20px;
+      color: #fff;
+      margin-top: 10px;
+    }
+    /* Wheel Element: force to 200×200px */
+    #wheel {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+    /* Force the wheel image to 200×200px */
+    #wheelImage {
+      width: 200px !important;
+      height: 200px !important;
+      max-width: 200px;
+      max-height: 200px;
+      object-fit: contain;
+      transform-origin: center center;
+    }
+    /* Force the pointer image to 200×200px */
+    #wheelPointer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px !important;
+      height: 200px !important;
+      pointer-events: none;
+    }
+    /* Center overlay text on the wheel */
+    #wheelText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12px;
+      color: #000;
+      pointer-events: none;
+    }
+    /* Keyframe animation for the wheel spin: 1080° in 5s */
+    @keyframes spinWheelAnimation {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1080deg); }
+    }
+    .spin-animation {
+      animation: spinWheelAnimation 5s ease-out forwards;
+    }
+  </style>
 </head>
 <body>
   <!-- Announcement Banner -->
@@ -163,29 +230,173 @@
   <!-- Version Label -->
   <div id="versionLabel">Version 1.0.7</div>
   
-  <!-- Inline JavaScript for the Wheel -->
+  <!-- Inline JavaScript -->
   <script>
+    // --- Chaos & Hacking Mode Functions ---
+    function createFakeAlert(isInitial = false) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = 'fake-alert';
+      if (isInitial) {
+        alertDiv.style.width = "500px";
+        alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
+        alertDiv.style.top = (window.innerHeight - 250) / 2 + "px";
+      } else {
+        alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
+        alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
+      }
+      const img = document.createElement('img');
+      const randomImage = ["ErrorMessage.png", "Image1234.jpg"][Math.floor(Math.random() * 2)];
+      img.src = randomImage;
+      img.className = 'image-alert';
+      alertDiv.appendChild(img);
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = 'X';
+      closeBtn.addEventListener('click', function() {
+        alertDiv.remove();
+        if (isInitial && !chaosStarted) {
+          chaosStarted = true;
+          triggerFlood();
+        }
+      });
+      alertDiv.appendChild(closeBtn);
+      document.body.appendChild(alertDiv);
+    }
+    
+    function triggerFlood() {
+      const floodDuration = 3000; // 3 seconds
+      const floodInterval = 50;
+      const floods = Math.floor(floodDuration / floodInterval);
+      let count = 0;
+      const floodTimer = setInterval(function() {
+        createFakeAlert();
+        count++;
+        if (count >= floods) {
+          clearInterval(floodTimer);
+          triggerHackingMode();
+        }
+      }, floodInterval);
+    }
+    
+    function generateRandomCodeLine() {
+      const baseSnippets = [
+        "var x = 42;",
+        "function foo() { return 'bar'; }",
+        "console.log('Hello World');",
+        "if(a > b){ a--; }",
+        "while(true){ break; }",
+        "let result = computeValue();",
+        "document.body.style.background = '#000';",
+        "for(let i=0; i<10; i++){ console.log(i); }",
+        "const obj = { key: 'value' };",
+        "import {module} from 'lib';"
+      ];
+      const newIdeas = [
+        "AI.generateCode('Hello, World!');",
+        "while(system.check()) { hack(); }",
+        "alert('System failure: ' + Math.random());",
+        "const result = await fetch('https://api.example.com/data');",
+        "debugger;",
+        "throw new Error('Random error occurred');",
+        "console.warn('Warning: AI detected anomaly');"
+      ];
+      const extraNewIdeas = [
+        "document.write('<h1>YOU ARE HACKED!</h1>');",
+        "setTimeout(() => { alert('Boom!'); }, 0);",
+        "console.log('%cSYSTEM OVERRIDE', 'color: red; font-size: 20px;');",
+        "fetch('https://evilapi.example.com/stealData');",
+        "var virus = new Virus(); virus.infect();",
+        "while(true){ console.error('Infinite loop detected'); }",
+        "debugger; // Pause execution",
+        "console.table([{id: 1, name: 'Error'}, {id: 2, name: 'Crash'}]);",
+        "throw 'Fatal Error: System Crash';",
+        "document.body.innerHTML += '<div style=\"position:fixed;top:0;left:0;width:100%;height:100%;background:red;opacity:0.5;z-index:10000;\">SYSTEM FAILURE</div>';"
+      ];
+      const combined = baseSnippets.concat(newIdeas).concat(extraNewIdeas);
+      return combined[Math.floor(Math.random() * combined.length)];
+    }
+    
+    function triggerHackingMode() {
+      document.body.style.cursor = 'none';
+      document.getElementById('loadingBar').style.display = 'block';
+      let virusCount = 1;
+      const virusInterval = setInterval(function() {
+        if (virusCount < 124) {
+          virusCount++;
+          document.getElementById('virusCounter').textContent = "Downloading Viruses: " + virusCount + "/124";
+        } else {
+          clearInterval(virusInterval);
+        }
+      }, 500);
+      document.body.classList.add('glitch');
+      document.body.style.background = '#000';
+      document.body.style.color = '#0f0';
+      const hackingOverlay = document.getElementById('hackingOverlay');
+      hackingOverlay.style.display = 'block';
+      hackingOverlay.textContent = "";
+      hackingOverlay.classList.add('hacking-effects');
+      setInterval(function() {
+        hackingOverlay.textContent += generateRandomCodeLine() + "\n";
+        hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
+      }, 67);
+      for (let i = 0; i < 15; i++) {
+        playSirenAndVoice();
+      }
+      const dangerAlarm = document.getElementById('dangerAlarm');
+      if (dangerAlarm) {
+        dangerAlarm.play();
+      }
+    }
+    
+    function playSirenAndVoice() {
+      if (!window.AudioContext) return;
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(3.0, audioCtx.currentTime);
+      oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
+      oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + 30);
+    }
+    
+    function cycleCursor() {
+      document.body.style.cursor = 'none';
+      setTimeout(function() {
+        document.body.style.cursor = 'default';
+      }, 500);
+    }
+    setInterval(cycleCursor, 5500);
+    
+    // --- Wheel Functions ---
     function showWheel() {
       document.getElementById('wheelContainer').style.display = 'block';
     }
+    
     function spinWheel() {
-      // Hide the "Click to spin" overlay text
+      // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Start the spin animation
+      // Add the spin-animation class to trigger the spin
       wheelImage.classList.add("spin-animation");
       wheelImage.addEventListener('animationend', function() {
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
-          // (Alert sequence or further actions can be triggered here)
+          // Show initial alert 1 second after the wheel hides
+          setTimeout(function(){
+            createFakeAlert(true);
+          }, 1000);
         }, 1000);
       }, { once: true });
     }
+    
     document.getElementById('wheelContainer').addEventListener('click', spinWheel);
+    
+    // --- Initialize: show the wheel 8 seconds after page load ---
     window.onload = function() {
-      setTimeout(showWheel, 8000); // Show wheel 8 seconds after load
-      window.onload = function() {
-      setTimeout(showWheel, 8000); // Show wheel 8 seconds after load
+      setTimeout(showWheel, 8000);
     };
   </script>
 </body>
