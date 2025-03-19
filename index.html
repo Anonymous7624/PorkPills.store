@@ -5,7 +5,7 @@
   <title>TimBrain - Revolutionary</title>
   <!-- Import Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
-  <!-- Import custom font for the wheel header -->
+  <!-- Import custom font for wheel header -->
   <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     /* Global Styles */
@@ -15,18 +15,367 @@
       padding: 0;
       background: #1a1a2e;
       color: #e0e0e0;
+      transition: background 0.5s;
       text-align: center;
     }
-    /* (Other styles for your header, navigation, and products would go here) */
-    
-    /* --- Wheel Styles --- */
-    /* The container is now 800×800px */
+    /* Announcement Banner */
+    .announcement-banner {
+      background: #0d253f;
+      color: #e0e0e0;
+      padding: 8px;
+      font-size: 16px;
+    }
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #162447;
+      padding: 10px 20px;
+    }
+    .navbar a {
+      color: #e0e0e0;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    .navbar .nav-left,
+    .navbar .nav-right {
+      display: flex;
+      align-items: center;
+    }
+    .navbar input[type="text"] {
+      padding: 5px 8px;
+      border-radius: 3px;
+      border: none;
+      margin-left: 10px;
+    }
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: 10px 20px;
+      font-size: 14px;
+      background: #162447;
+    }
+    /* Sort & Filter Bar */
+    .sort-filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: #1f4068;
+      border-bottom: 1px solid #415a77;
+      text-align: left;
+    }
+    .sort-filter select {
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    .filter-links {
+      text-align: left;
+    }
+    .filter-links a {
+      margin-right: 10px;
+      color: #a0a0a0;
+      text-decoration: none;
+    }
+    /* Featured Products Section */
+    #featured-products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      background: #162447;
+      border-bottom: 2px solid #415a77;
+      margin-bottom: 20px;
+    }
+    /* Enlarged Featured Products (50% larger) */
+    .featured-product {
+      background: #0d253f;
+      border: 2px solid #415a77;
+      border-radius: 10px;
+      padding: 4px;
+      width: 270px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+    .featured-product:hover {
+      transform: scale(1.05);
+    }
+    .featured-product img {
+      width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+      border-radius: 5px;
+      margin-bottom: 4px;
+    }
+    .featured-product h2 {
+      margin: 4px 0;
+      font-size: 16px;
+      color: #e0e0e0;
+    }
+    .featured-product p.description {
+      font-size: 12px;
+      color: #a0a0a0;
+      margin: 4px 0;
+    }
+    .featured-product p.price {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 4px 0;
+    }
+    .featured-product p.rating {
+      font-size: 12px;
+      color: gold;
+      margin: 4px 0;
+    }
+    .featured-product button {
+      background: #415a77;
+      border: none;
+      color: #e0e0e0;
+      padding: 4px 8px;
+      margin-top: 4px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.3s;
+      font-size: 12px;
+    }
+    .featured-product button:hover {
+      background: #2c3e50;
+    }
+    /* Store Container */
+    .store-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      background: #1a1a2e;
+    }
+    /* Product Listings */
+    .product {
+      background: #162447;
+      border: 1px solid #415a77;
+      border-radius: 5px;
+      padding: 15px;
+      width: 220px;
+      text-align: center;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+      border-radius: 3px;
+      transition: opacity 0.3s;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+      font-size: 18px;
+    }
+    .product p.description {
+      font-size: 13px;
+      color: #a0a0a0;
+      margin: 5px 0;
+    }
+    .price {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .reviews {
+      font-size: 14px;
+      color: #a0a0a0;
+    }
+    .product button {
+      background: #415a77;
+      border: none;
+      color: #e0e0e0;
+      padding: 8px 12px;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.3s;
+    }
+    .product button:hover {
+      background: #2c3e50;
+    }
+    /* Pagination */
+    .pagination {
+      text-align: center;
+      padding: 15px;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      background: #162447;
+    }
+    .pagination a {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #e0e0e0;
+      padding: 5px 10px;
+      border: 1px solid #415a77;
+      border-radius: 3px;
+    }
+    /* Footer */
+    footer {
+      background: #0d253f;
+      color: #e0e0e0;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+    footer .social a {
+      margin: 0 5px;
+      color: #a0a0a0;
+      text-decoration: none;
+    }
+    footer form input[type="email"] {
+      padding: 5px;
+      border-radius: 3px;
+      border: none;
+    }
+    footer form input[type="submit"] {
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: none;
+      background: #415a77;
+      color: #e0e0e0;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    /* Live Chat Widget */
+    .chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #415a77;
+      color: #e0e0e0;
+      padding: 10px 15px;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 1100;
+    }
+    /* Fake Alert Styles */
+    .fake-alert {
+      position: fixed;
+      background: #3a3a3a;
+      padding: 10px;
+      z-index: 1000;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px #000;
+      margin: 10px;
+    }
+    .fake-alert button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: #aa0000;
+      color: #e0e0e0;
+      border: none;
+      cursor: pointer;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+    .image-alert {
+      width: 280px;
+      max-width: 100%;
+      box-shadow: 0 0 15px #000;
+    }
+    /* Hacking Overlay (Code Animation) */
+    #hackingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000;
+      color: #0f0;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 14px;
+      display: none;
+      z-index: 2000;
+      overflow-y: auto;
+      white-space: pre;
+      padding: 20px;
+      text-align: left;
+    }
+    /* BSOD Overlay */
+    #bsodOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000033;
+      color: #e0e0e0;
+      font-family: Consolas, monospace;
+      font-size: 18px;
+      display: none;
+      z-index: 3000;
+      padding: 20px;
+    }
+    /* Glitch Effect */
+    .glitch {
+      animation: glitch-animation 0.2s infinite;
+    }
+    @keyframes glitch-animation {
+      0% { opacity: 1; }
+      20% { opacity: 0.8; transform: translate(-2px, 2px); }
+      40% { opacity: 1; transform: translate(2px, -2px); }
+      60% { opacity: 0.8; transform: translate(-2px, -2px); }
+      80% { opacity: 1; transform: translate(2px, 2px); }
+      100% { opacity: 1; transform: translate(0, 0); }
+    }
+    /* Additional Hacking Effects: Shake & Blur */
+    .hacking-effects {
+      animation: shake 0.5s infinite, blur 1s infinite;
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      20% { transform: translate(-5px, 5px); }
+      40% { transform: translate(5px, -5px); }
+      60% { transform: translate(-5px, -5px); }
+      80% { transform: translate(5px, 5px); }
+      100% { transform: translate(0, 0); }
+    }
+    @keyframes blur {
+      0%, 100% { filter: blur(0px); }
+      50% { filter: blur(3px); }
+    }
+    /* Loading Bar Overlay (Center-Right) */
+    #loadingBar {
+      display: none;
+      position: fixed;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
+      text-align: center;
+      z-index: 2100;
+    }
+    #loadingBar img {
+      width: 150px;
+      height: auto;
+    }
+    #loadingBar #virusCounter {
+      color: red;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    /* New Wheel Container: Smaller, centered, opaque */
     #wheelContainer {
       position: fixed;
       top: 50%;
       left: 50%;
-      width: 800px;
-      height: 800px;
+      width: 250px;
+      height: 250px;
       transform: translate(-50%, -50%);
       background: #000;
       z-index: 2500;
@@ -34,43 +383,21 @@
       color: #e0e0e0;
       display: none; /* Hidden initially */
     }
-    /* Optional header above the wheel */
+    /* Header text above the wheel */
     #wheelHeader {
       font-family: 'Pacifico', cursive;
       font-size: 20px;
       color: #fff;
       margin-top: 10px;
     }
-    /* The wheel container inside fills the parent */
+    /* Wheel Element */
     #wheel {
       position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    /* Let the wheel image display at its natural size and center it */
-    #wheelImage {
-      display: block;
+      width: 200px;
+      height: 200px;
       margin: 0 auto;
-      /* Remove forced sizing to "accept" its giant nature */
-      transform-origin: center center;
     }
-    /* Center the pointer image too */
-    #wheelPointer {
-      display: block;
-      margin: 0 auto;
-      pointer-events: none;
-    }
-    /* Bigger overlay text in the center */
-    #wheelText {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 24px;
-      color: #fff;
-      pointer-events: none;
-    }
-    /* Keyframe animation for spinning the wheel 1080° in 5 seconds */
+    /* Keyframe animation for the wheel spin */
     @keyframes spinWheelAnimation {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(1080deg); }
@@ -78,13 +405,78 @@
     .spin-animation {
       animation: spinWheelAnimation 5s ease-out forwards;
     }
-    /* --- End Wheel Styles --- */
+    /* The Pointer stays fixed */
+    #wheelPointer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      pointer-events: none;
+    }
+    /* Text overlay in the center of the wheel */
+    #wheelText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12px;
+      color: #000;
+      pointer-events: none;
+    }
+    /* Version Label */
+    #versionLabel {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      font-size: 10px;
+      color: #a0a0a0;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
-  <!-- Your other content (header, navigation, products, etc.) goes here -->
-  
-  <!-- Example Product Listing (for context) -->
+  <!-- Announcement Banner -->
+  <div class="announcement-banner">
+    Big Sale! Free Shipping on Orders Over $50!
+  </div>
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-right">
+      <input type="text" placeholder="Search products...">
+      <span style="margin-left:10px;">👤</span>
+      <span style="margin-left:10px;">🛒</span>
+    </div>
+  </div>
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb">
+    Home > Products
+  </div>
+  <!-- Sort & Filter Bar -->
+  <div class="sort-filter" style="justify-content: space-between; text-align: left;">
+    <div class="filter-links">
+      <a href="#">All</a>
+      <a href="#">Shirts</a>
+      <a href="#">Hats</a>
+      <a href="#">Accessories</a>
+    </div>
+    <div style="text-align: right;">
+      Sort by:
+      <select>
+        <option>Relevance</option>
+        <option>Price: Low to High</option>
+        <option>Price: High to Low</option>
+        <option>Newest</option>
+      </select>
+    </div>
+  </div>
+  <!-- Featured Products (Main Attraction) -->
   <div id="featured-products">
     <div class="featured-product">
       <img src="BlackPill.jpg" alt="TimBrain Pill">
@@ -103,8 +495,9 @@
       <button>Buy Now</button>
     </div>
   </div>
-  
+  <!-- Store Container with Product Listings -->
   <div class="store-container">
+    <!-- Product 1: TimBrain Shirt using CheeseShirt.jpeg -->
     <div class="product">
       <img src="CheeseShirt.jpeg" alt="TimBrain Shirt">
       <h3>TimBrain Shirt</h3>
@@ -113,6 +506,7 @@
       <p class="reviews">★★★★☆ (50 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
+    <!-- Product 2: Swiss Cheese Block using Cheese1.png -->
     <div class="product">
       <img src="Cheese1.png" alt="Swiss Cheese Block">
       <h3>Swiss Cheese Block</h3>
@@ -121,6 +515,7 @@
       <p class="reviews">★★★★☆ (15 reviews)</p>
       <button class="chaos-btn">Buy Now</button>
     </div>
+    <!-- Product 3: Tim's Glasses using Glasses.png -->
     <div class="product">
       <img src="Glasses.png" alt="Tim's Glasses">
       <h3>Tim's Glasses</h3>
@@ -130,8 +525,32 @@
       <button class="chaos-btn">Buy Now</button>
     </div>
   </div>
-  
-  <!-- Wheel Container -->
+  <!-- Pagination Bar -->
+  <div class="pagination">
+    <a href="#">«</a>
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">»</a>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <p>Contact us: support@johnporkmerch.com | +1 (555) 123-4567</p>
+    <div class="social">
+      <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
+    </div>
+    <form>
+      <label for="newsletter">Subscribe to our newsletter:</label>
+      <input type="email" id="newsletter" placeholder="Enter your email">
+      <input type="submit" value="Subscribe">
+    </form>
+    <p>&copy; 2025 John Pork Merch. All rights reserved.</p>
+  </footer>
+  <!-- Live Chat Widget -->
+  <div class="chat-widget">Chat with us</div>
+  <!-- Wheel Container (Spinning Wheel) -->
   <div id="wheelContainer">
     <div id="wheelHeader">Try Your Luck Mrs. Levine!</div>
     <div id="wheel">
@@ -140,31 +559,212 @@
       <div id="wheelText">Click to spin</div>
     </div>
   </div>
-  
-  <!-- JavaScript for the Wheel -->
+  <!-- Hacking Overlay (Chaos Mode) -->
+  <div id="hackingOverlay"></div>
+  <!-- BSOD Overlay -->
+  <div id="bsodOverlay">
+    <h1>:(</h1>
+    <p>A problem has been detected and Windows has been shut down to prevent damage to your computer.</p>
+    <p>If this is the first time you've seen this stop error screen, restart your computer. If this screen appears again, follow these steps:</p>
+    <p>...</p>
+  </div>
+  <!-- Loading Bar Overlay (Center-Right) -->
+  <div id="loadingBar">
+    <div id="virusCounter">Downloading Viruses: 1/124</div>
+    <img src="ZKZg.gif" alt="Loading...">
+  </div>
+  <!-- Danger Alarm Audio (Hidden) -->
+  <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
+  <!-- Version Label -->
+  <div id="versionLabel">Version 1.0.7</div>
   <script>
-    function showWheel() {
-      document.getElementById('wheelContainer').style.display = 'block';
+    let chaosStarted = false;
+    let currentAlerts = 0;
+    let cursorInterval;
+    let virusCount = 1;
+    let virusInterval;
+    
+    const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
+    
+    function createFakeAlert(isInitial = false) {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = 'fake-alert';
+      if (isInitial) {
+        alertDiv.style.width = "500px";
+        alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
+        alertDiv.style.top = (window.innerHeight - 250) / 2 + "px";
+      } else {
+        alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
+        alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
+      }
+      const img = document.createElement('img');
+      const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
+      img.src = randomImage;
+      img.className = 'image-alert';
+      alertDiv.appendChild(img);
+      const closeBtn = document.createElement('button');
+      closeBtn.textContent = 'X';
+      closeBtn.addEventListener('click', function() {
+        alertDiv.remove();
+        currentAlerts--;
+        if (isInitial && !chaosStarted) {
+          chaosStarted = true;
+          triggerFlood();
+        }
+      });
+      alertDiv.appendChild(closeBtn);
+      document.body.appendChild(alertDiv);
+      currentAlerts++;
     }
     
+    function triggerFlood() {
+      // Spawn a flood of alerts over 3 seconds (3000ms) at an interval of 50ms
+      const floodDuration = 3000;
+      const floodInterval = 50;
+      const floods = Math.floor(floodDuration / floodInterval);
+      let count = 0;
+      const floodTimer = setInterval(function() {
+        createFakeAlert();
+        count++;
+        if (count >= floods) {
+          clearInterval(floodTimer);
+          triggerHackingMode();
+        }
+      }, floodInterval);
+    }
+    
+    function generateRandomCodeLine() {
+      const baseSnippets = [
+        "var x = 42;",
+        "function foo() { return 'bar'; }",
+        "console.log('Hello World');",
+        "if(a > b){ a--; }",
+        "while(true){ break; }",
+        "let result = computeValue();",
+        "document.body.style.background = '#000';",
+        "for(let i=0; i<10; i++){ console.log(i); }",
+        "const obj = { key: 'value' };",
+        "import {module} from 'lib';"
+      ];
+      const newIdeas = [
+        "AI.generateCode('Hello, World!');",
+        "while(system.check()) { hack(); }",
+        "alert('System failure: ' + Math.random());",
+        "const result = await fetch('https://api.example.com/data');",
+        "debugger;",
+        "throw new Error('Random error occurred');",
+        "console.warn('Warning: AI detected anomaly');"
+      ];
+      const extraNewIdeas = [
+        "document.write('<h1>YOU ARE HACKED!</h1>');",
+        "setTimeout(() => { alert('Boom!'); }, 0);",
+        "console.log('%cSYSTEM OVERRIDE', 'color: red; font-size: 20px;');",
+        "fetch('https://evilapi.example.com/stealData');",
+        "var virus = new Virus(); virus.infect();",
+        "while(true){ console.error('Infinite loop detected'); }",
+        "debugger; // Pause execution",
+        "console.table([{id: 1, name: 'Error'}, {id: 2, name: 'Crash'}]);",
+        "throw 'Fatal Error: System Crash';",
+        "document.body.innerHTML += '<div style=\"position:fixed;top:0;left:0;width:100%;height:100%;background:red;opacity:0.5;z-index:10000;\">SYSTEM FAILURE</div>';"
+      ];
+      const combined = baseSnippets.concat(newIdeas).concat(extraNewIdeas);
+      return combined[Math.floor(Math.random() * combined.length)];
+    }
+    
+    function triggerHackingMode() {
+      clearInterval(cursorInterval);
+      document.body.style.cursor = 'none';
+      document.getElementById('loadingBar').style.display = 'block';
+      virusCount = 1;
+      document.getElementById('virusCounter').textContent = "Downloading Viruses: 1/124";
+      virusInterval = setInterval(function() {
+        if (virusCount < 124) {
+          virusCount++;
+          document.getElementById('virusCounter').textContent = "Downloading Viruses: " + virusCount + "/124";
+        } else {
+          clearInterval(virusInterval);
+        }
+      }, 500);
+      document.body.classList.add('glitch');
+      document.body.style.background = '#000';
+      document.body.style.color = '#0f0';
+      const hackingOverlay = document.getElementById('hackingOverlay');
+      hackingOverlay.style.display = 'block';
+      hackingOverlay.textContent = "";
+      hackingOverlay.classList.add('hacking-effects');
+      setInterval(function() {
+        hackingOverlay.textContent += generateRandomCodeLine() + "\n";
+        hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
+      }, 67);
+      for (let i = 0; i < 15; i++) {
+        playSirenAndVoice();
+      }
+      const dangerAlarm = document.getElementById('dangerAlarm');
+      if (dangerAlarm) {
+        dangerAlarm.play();
+      }
+    }
+    
+    function playSirenAndVoice() {
+      if (!window.AudioContext) return;
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      gainNode.gain.setValueAtTime(3.0, audioCtx.currentTime);
+      oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
+      oscillator.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 1);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + 30);
+    }
+    
+    function cycleCursor() {
+      document.body.style.cursor = 'none';
+      setTimeout(function() {
+        document.body.style.cursor = 'default';
+      }, 500);
+    }
+    cursorInterval = setInterval(cycleCursor, 5500);
+    
+    const chaosButtons = document.getElementsByClassName('chaos-btn');
+    for (const btn of chaosButtons) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!chaosStarted) {
+          chaosStarted = true;
+          setTimeout(triggerFlood, 3000);
+        }
+      });
+    }
+    
+    // Wheel functions
+    function showWheel() {
+      const wheelContainer = document.getElementById('wheelContainer');
+      wheelContainer.style.display = 'block';
+    }
+    
+    // Listen for click on the wheel container
+    document.getElementById('wheelContainer').addEventListener('click', spinWheel);
+    
     function spinWheel() {
-      // Hide the center text
+      // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Add the spin-animation class to start the spin
+      // Add the spin-animation class to trigger the keyframe animation
       wheelImage.classList.add("spin-animation");
       wheelImage.addEventListener('animationend', function() {
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
-          // Trigger alert sequence if needed here...
+          setTimeout(function(){
+            createFakeAlert(true); // initial alert appears 1 second after wheel hides
+          }, 1000);
         }, 1000);
       }, { once: true });
     }
     
-    // Attach click event to the wheel container
-    document.getElementById('wheelContainer').addEventListener('click', spinWheel);
-    
-    // Show the wheel 8 seconds after page load
+    // Show the wheel 8 seconds after page load.
     window.onload = function() {
       setTimeout(showWheel, 8000);
     };
