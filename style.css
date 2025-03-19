@@ -1,19 +1,17 @@
-/* New Wheel Container: Smaller, centered, opaque */
 #wheelContainer {
-  display: none;
+  display: none; /* Hidden initially */
   position: fixed;
   top: 50%;
   left: 50%;
   width: 400px;
   height: 400px;
   transform: translate(-50%, -50%);
-  background: #000; /* Fully opaque black */
+  background: #000;
   z-index: 2500;
   text-align: center;
   color: #e0e0e0;
 }
 
-/* Wheel element inside the container */
 #wheel {
   position: relative;
   width: 300px;
@@ -21,14 +19,14 @@
   margin: 0 auto;
 }
 
-/* The Wheel Image rotates */
 #wheelImage {
   width: 300px;
   height: 300px;
   object-fit: contain;
-  transform-origin: center center;  /* Ensure it spins around its center */
-  transition: transform 2s cubic-bezier(0.33, 1, 0.68, 1);
+  transform-origin: center center;
+  transition: transform 30s cubic-bezier(0.33, 1, 0.68, 1);
 }
+
 
 /* The Pointer stays fixed */
 #wheelPointer {
