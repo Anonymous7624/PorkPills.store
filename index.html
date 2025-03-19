@@ -22,6 +22,7 @@
       color: #e0e0e0;
       padding: 8px;
       font-size: 16px;
+      text-align: center;
     }
     /* Navigation Bar */
     .navbar {
@@ -94,7 +95,7 @@
       border: 2px solid #415a77;
       border-radius: 10px;
       padding: 4px;
-      width: 180px;  /* Wider and moderately small */
+      width: 180px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
       transition: transform 0.3s;
@@ -104,7 +105,7 @@
     }
     .featured-product img {
       width: 100%;
-      max-height: 80px; /* Reduced height */
+      max-height: 80px;
       object-fit: contain;
       border-radius: 5px;
       margin-bottom: 4px;
@@ -408,8 +409,7 @@
     .option3 { transform: rotate(120deg); top: 0; left: 50%; }
     .option4 { transform: rotate(180deg); top: 0; left: 50%; }
     .option5 { transform: rotate(240deg); top: 0; left: 50%; }
-    .option6 { transform: rotate(300deg); top: 0; left: 50%; } /* We'll rig the spin to land here */
-    /* Change the text for the "bad" option to "You lose" */
+    .option6 { transform: rotate(300deg); top: 0; left: 50%; }
     .option6::after {
       content: "You lose";
       display: block;
@@ -470,7 +470,7 @@
   <!-- Featured Products (Main Attraction) -->
   <div id="featured-products">
     <div class="featured-product">
-      <img src="PorkPill.png" alt="TimBrain Pill">
+      <img src="BlackPill.jpg" alt="TimBrain Pill">
       <h2>TimBrain Pill</h2>
       <p class="description">Increases IQ by at least 50.</p>
       <p class="price">$0.99</p>
@@ -478,7 +478,7 @@
       <button>Buy Now</button>
     </div>
     <div class="featured-product">
-      <img src="DiquaviousPorkPill.png" alt="Marvin Beak Pill">
+      <img src="GreyPill.jpg" alt="Marvin Beak Pill">
       <h2>Marvin Beak Pill</h2>
       <p class="description">Improves your ability to fly by 100%.</p>
       <p class="price">$4.99</p>
@@ -546,7 +546,7 @@
       <div class="wheel-option option3">Free Gift</div>
       <div class="wheel-option option4">Lucky Spin</div>
       <div class="wheel-option option5">Bonus Offer</div>
-      <div class="wheel-option option6"></div> <!-- This will display "You lose" via CSS -->
+      <div class="wheel-option option6"></div> <!-- This option displays "You lose" -->
     </div>
     <p id="wheelMessage" style="margin-top:20px; font-size:20px;">Spin the Wheel!</p>
   </div>
@@ -567,7 +567,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.0</div>
+  <div id="versionLabel">Version 1.0.1</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -738,9 +738,7 @@
     
     function spinWheel() {
       const wheel = document.getElementById('wheel');
-      // To land on the bad option ("You lose"), we want the final rotation to be 180°.
-      // Let's spin a total of 1440 + 180 = 1620 degrees.
-      wheel.style.transform = "rotate(1620deg)";
+      wheel.style.transform = "rotate(1620deg)"; // Rigged to land on option6 ("You lose")
       setTimeout(onWheelLanded, 4000);
     }
     
