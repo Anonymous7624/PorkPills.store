@@ -1,55 +1,31 @@
+/* New Wheel Container: smaller */
 #wheelContainer {
-  display: none; /* Hidden initially */
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 400px;
-  height: 400px;
+  width: 250px;      /* Reduced from 400px */
+  height: 250px;     /* Reduced from 400px */
   transform: translate(-50%, -50%);
   background: #000;
   z-index: 2500;
   text-align: center;
   color: #e0e0e0;
+  display: none; /* Hidden initially */
 }
 
+/* Wheel element: smaller dimensions */
 #wheel {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 200px;      /* Reduced from 300px */
+  height: 200px;     /* Reduced from 300px */
   margin: 0 auto;
 }
 
-#wheelImage {
-  width: 300px;
-  height: 300px;
-  object-fit: contain;
-  transform-origin: center center;
-  transition: transform 30s cubic-bezier(0.33, 1, 0.68, 1);
+/* Wheel Image: use a faster animation */
+@keyframes spinWheelAnimation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1080deg); } /* 1080° = 3 full rotations */
 }
-
-
-/* The Pointer stays fixed */
-#wheelPointer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 300px;
-  height: 300px;
-  pointer-events: none;
-}
-
-/* Text overlay in the center of the wheel */
-#wheelText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  pointer-events: none;
-}
-
-/* Header text above the wheel */
-#wheelHeader {
-  font-size: 20px;
-  margin-bottom: 10px;
+.spin-animation {
+  animation: spinWheelAnimation 5s ease-out forwards;  /* 5 seconds spin */
 }
