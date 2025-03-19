@@ -373,7 +373,7 @@
       font-size: 20px;
       margin-bottom: 10px;
     }
-    /* Wheel Container for Spinning Wheel */
+    /* New Wheel Container */
     #wheelContainer {
       display: none;
       position: fixed;
@@ -388,28 +388,35 @@
       padding-top: 20px;
     }
     #wheel {
+      position: relative;
       width: 300px;
       height: 300px;
       margin: 0 auto;
-      border: 5px solid #e0e0e0;
-      border-radius: 50%;
-      position: relative;
-      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
     }
-    /* Position each wheel option using transforms */
-    .wheel-option {
+    /* The Wheel Image rotates */
+    #wheelImage {
+      width: 300px;
+      height: 300px;
+      transition: transform 4s ease-out;
+    }
+    /* The Pointer stays fixed */
+    #wheelPointer {
       position: absolute;
-      left: 50%;
-      top: 50%;
-      transform-origin: 0 -120px; /* 120px radius */
-      font-size: 16px;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      pointer-events: none;
     }
-    .option1 { transform: rotate(0deg) translateY(-120px) rotate(0deg); }
-    .option2 { transform: rotate(60deg) translateY(-120px) rotate(-60deg); }
-    .option3 { transform: rotate(120deg) translateY(-120px) rotate(-120deg); }
-    .option4 { transform: rotate(180deg) translateY(-120px) rotate(-180deg); }
-    .option5 { transform: rotate(240deg) translateY(-120px) rotate(-240deg); }
-    .option6 { transform: rotate(300deg) translateY(-120px) rotate(-300deg); }
+    /* Text overlay in the center of the wheel */
+    #wheelText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      pointer-events: none;
+    }
     /* Version Label */
     #versionLabel {
       position: fixed;
@@ -536,14 +543,10 @@
   <!-- Wheel Container (Spinning Wheel) -->
   <div id="wheelContainer">
     <div id="wheel">
-      <div class="wheel-option option1">Win a Prize</div>
-      <div class="wheel-option option2">Get a Discount</div>
-      <div class="wheel-option option3">Free Gift</div>
-      <div class="wheel-option option4">Lucky Spin</div>
-      <div class="wheel-option option5">Bonus Offer</div>
-      <div class="wheel-option option6">You lose</div>
+      <img src="Wheel.png" id="wheelImage" alt="Wheel">
+      <img src="WheelPointer.png" id="wheelPointer" alt="Pointer">
+      <div id="wheelText">Click to spin</div>
     </div>
-    <p id="wheelMessage" style="margin-top:20px; font-size:20px;">Spin the Wheel!</p>
   </div>
   <!-- Hacking Overlay (Chaos Mode) -->
   <div id="hackingOverlay"></div>
@@ -724,27 +727,29 @@
       });
     }
     
-    // Wheel functions
+    // Wheel functions using custom images
     function showWheel() {
       const wheelContainer = document.getElementById('wheelContainer');
       wheelContainer.style.display = 'block';
-      spinWheel();
     }
+    
+    // When the user clicks the wheel container, spin the wheel.
+    document.getElementById('wheelContainer').addEventListener('click', spinWheel);
     
     function spinWheel() {
-      const wheel = document.getElementById('wheel');
-      // Spin the wheel to land on option6 ("You lose")
-      wheel.style.transform = "rotate(1620deg)"; // 1440+180 = 1620deg
-      setTimeout(onWheelLanded, 4000);
-    }
-    
-    function onWheelLanded() {
-      const wheelMessage = document.getElementById('wheelMessage');
-      wheelMessage.textContent = "Result: You lose";
-      setTimeout(function() {
-        document.getElementById('wheelContainer').style.display = 'none';
-        setTimeout(triggerFlood, 3000);
-      }, 2000);
+      // Remove the "Click to spin" text once clicked
+      document.getElementById('wheelText').style.display = 'none';
+      const wheelImage = document.getElementById('wheelImage');
+      // Spin the wheel 1080 degrees (3 full rotations) with an ease-out transition
+      wheelImage.style.transform = "rotate(1080deg)";
+      // When the transition ends, reset (or keep it, since 1080 mod 360 = 0)
+      wheelImage.addEventListener('transitionend', function() {
+        // After spinning, hide the wheel container and trigger the pop-up flood after a 3-second delay.
+        setTimeout(function() {
+          document.getElementById('wheelContainer').style.display = 'none';
+          setTimeout(triggerFlood, 3000);
+        }, 1000);
+      }, { once: true });
     }
     
     // Instead of an initial pop-up, show the wheel after 6 seconds.
