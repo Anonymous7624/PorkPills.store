@@ -11,14 +11,15 @@
       font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
-      background: #ffffff;
+      background: #1a1a2e; /* Dark blue/navy background */
+      color: #e0e0e0;
       transition: background 0.5s;
       text-align: center;
     }
     /* Announcement Banner */
     .announcement-banner {
-      background: #f44336;
-      color: #fff;
+      background: #0d253f;
+      color: #e0e0e0;
       padding: 8px;
       font-size: 16px;
       text-align: center;
@@ -28,12 +29,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #333;
+      background: #162447;
       padding: 10px 20px;
-      color: #fff;
+      color: #e0e0e0;
     }
     .navbar a {
-      color: #fff;
+      color: #e0e0e0;
       margin: 0 10px;
       text-decoration: none;
     }
@@ -52,7 +53,8 @@
     .breadcrumb {
       padding: 10px 20px;
       font-size: 14px;
-      background: #eee;
+      background: #162447;
+      color: #e0e0e0;
     }
     /* Sort & Filter Bar */
     .sort-filter {
@@ -60,8 +62,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
-      background: #f9f9f9;
-      border-bottom: 1px solid #ddd;
+      background: #1f4068;
+      border-bottom: 1px solid #415a77;
       text-align: left;
     }
     .sort-filter select {
@@ -74,7 +76,7 @@
     }
     .filter-links a {
       margin-right: 10px;
-      color: #007bff;
+      color: #a0a0a0;
       text-decoration: none;
     }
     /* Featured Products Section */
@@ -84,18 +86,18 @@
       justify-content: center;
       gap: 20px;
       padding: 20px;
-      background: #f7f7f7;
-      border-bottom: 2px solid #ddd;
+      background: #162447;
+      border-bottom: 2px solid #415a77;
       margin-bottom: 20px;
     }
     .featured-product {
-      background: #fff;
-      border: 2px solid #007bff;
+      background: #0d253f;
+      border: 2px solid #415a77;
       border-radius: 10px;
       padding: 4px;
-      width: 180px;
+      width: 180px;  /* Wider than before */
       text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
       transition: transform 0.3s;
     }
     .featured-product:hover {
@@ -103,7 +105,7 @@
     }
     .featured-product img {
       width: 100%;
-      max-height: 80px;
+      max-height: 80px; /* Reduced image height */
       object-fit: contain;
       border-radius: 5px;
       margin-bottom: 4px;
@@ -111,17 +113,17 @@
     .featured-product h2 {
       margin: 4px 0;
       font-size: 16px;
-      color: #007bff;
+      color: #e0e0e0;
     }
     .featured-product p.description {
       font-size: 12px;
-      color: #555;
+      color: #a0a0a0;
       margin: 4px 0;
     }
     .featured-product p.price {
       font-size: 14px;
       font-weight: bold;
-      color: #000;
+      color: #e0e0e0;
       margin: 4px 0;
     }
     .featured-product p.rating {
@@ -132,9 +134,9 @@
       margin: 4px 0;
     }
     .featured-product button {
-      background: #007bff;
+      background: #415a77;
       border: none;
-      color: white;
+      color: #e0e0e0;
       padding: 4px 8px;
       margin-top: 4px;
       cursor: pointer;
@@ -143,7 +145,7 @@
       font-size: 12px;
     }
     .featured-product button:hover {
-      background: #0056b3;
+      background: #2c3e50;
     }
     /* Store Container */
     .store-container {
@@ -152,20 +154,21 @@
       justify-content: center;
       gap: 20px;
       padding: 20px;
+      background: #1a1a2e;
     }
     .product {
-      background: #fff;
-      border: 1px solid #ddd;
+      background: #162447;
+      border: 1px solid #415a77;
       border-radius: 5px;
       padding: 15px;
       width: 220px;
       text-align: center;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
       transition: transform 0.3s, box-shadow 0.3s;
     }
     .product:hover {
       transform: scale(1.03);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     }
     .product img {
       width: 100%;
@@ -176,25 +179,26 @@
     .product h3 {
       margin: 10px 0 5px;
       font-size: 18px;
+      color: #e0e0e0;
     }
     .product p.description {
       font-size: 13px;
-      color: #666;
+      color: #a0a0a0;
       margin: 5px 0;
     }
     .price {
       font-size: 16px;
-      color: #000;
+      color: #e0e0e0;
       font-weight: bold;
     }
     .reviews {
       font-size: 14px;
-      color: #888;
+      color: #a0a0a0;
     }
     .product button {
-      background: #007bff;
+      background: #415a77;
       border: none;
-      color: white;
+      color: #e0e0e0;
       padding: 8px 12px;
       margin-top: 10px;
       cursor: pointer;
@@ -202,7 +206,7 @@
       transition: background 0.3s;
     }
     .product button:hover {
-      background: #0056b3;
+      background: #2c3e50;
     }
     /* Pagination */
     .pagination {
@@ -210,26 +214,27 @@
       padding: 15px;
       font-family: 'Roboto', sans-serif;
       font-weight: 500;
+      background: #162447;
     }
     .pagination a {
       margin: 0 5px;
       text-decoration: none;
-      color: #007bff;
+      color: #e0e0e0;
       padding: 5px 10px;
-      border: 1px solid #ddd;
+      border: 1px solid #415a77;
       border-radius: 3px;
     }
     /* Footer */
     footer {
-      background: #222;
-      color: #ccc;
+      background: #0d253f;
+      color: #e0e0e0;
       text-align: center;
       padding: 20px;
       font-size: 14px;
     }
     footer .social a {
       margin: 0 5px;
-      color: #ccc;
+      color: #a0a0a0;
       text-decoration: none;
     }
     footer form input[type="email"] {
@@ -241,8 +246,8 @@
       padding: 5px 10px;
       border-radius: 3px;
       border: none;
-      background: #f44336;
-      color: #fff;
+      background: #415a77;
+      color: #e0e0e0;
       cursor: pointer;
       margin-left: 5px;
     }
@@ -251,11 +256,11 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #007bff;
-      color: #fff;
+      background: #415a77;
+      color: #e0e0e0;
       padding: 10px 15px;
       border-radius: 50px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
       cursor: pointer;
       font-size: 14px;
       z-index: 1100;
@@ -263,20 +268,20 @@
     /* Fake Alert Styles */
     .fake-alert {
       position: fixed;
-      background: #ffdddd;
+      background: #3a3a3a;
       padding: 10px;
       z-index: 1000;
       width: 300px;
       text-align: center;
-      box-shadow: 0 0 10px red;
+      box-shadow: 0 0 10px #000;
       margin: 10px;
     }
     .fake-alert button {
       position: absolute;
       top: 5px;
       right: 5px;
-      background: darkred;
-      color: white;
+      background: #aa0000;
+      color: #e0e0e0;
       border: none;
       cursor: pointer;
       padding: 2px 6px;
@@ -285,7 +290,7 @@
     .image-alert {
       width: 280px;
       max-width: 100%;
-      box-shadow: 0 0 15px red;
+      box-shadow: 0 0 15px #000;
     }
     /* Hacking Overlay (Code Animation) */
     #hackingOverlay {
@@ -294,8 +299,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: black;
-      color: lime;
+      background: #000;
+      color: #0f0;
       font-family: "Courier New", Courier, monospace;
       font-size: 14px;
       display: none;
@@ -312,8 +317,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #0000aa;
-      color: white;
+      background: #000033;
+      color: #e0e0e0;
       font-family: Consolas, monospace;
       font-size: 18px;
       display: none;
@@ -368,6 +373,52 @@
       font-size: 20px;
       margin-bottom: 10px;
     }
+    /* Wheel Container for Spinning Wheel */
+    #wheelContainer {
+      display: none;
+      position: fixed;
+      top: 10%;
+      left: 10%;
+      right: 10%;
+      bottom: 10%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2500;
+      text-align: center;
+      color: #e0e0e0;
+      padding-top: 20px;
+    }
+    #wheel {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      border: 5px solid #e0e0e0;
+      border-radius: 50%;
+      position: relative;
+      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .wheel-option {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      text-align: center;
+      transform-origin: 100% 100%;
+      font-size: 14px;
+    }
+    .option1 { transform: rotate(0deg); top: 0; left: 50%; }
+    .option2 { transform: rotate(60deg); top: 0; left: 50%; }
+    .option3 { transform: rotate(120deg); top: 0; left: 50%; }
+    .option4 { transform: rotate(180deg); top: 0; left: 50%; }
+    .option5 { transform: rotate(240deg); top: 0; left: 50%; }
+    .option6 { transform: rotate(300deg); top: 0; left: 50%; } /* "Bad" option */
+    /* Version Label */
+    #versionLabel {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      font-size: 10px;
+      color: #a0a0a0;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
@@ -414,17 +465,17 @@
   <!-- Featured Products (Main Attraction) -->
   <div id="featured-products">
     <div class="featured-product">
-      <img src="PorkPill.png" alt="Brain Pork Pill">
-      <h2>Brain Pork Pill</h2>
-      <p class="description">The Brain Pork Pill increases IQ by 50.</p>
+      <img src="PorkPill.png" alt="TimBrain Pill">
+      <h2>TimBrain Pill</h2>
+      <p class="description">Increases IQ by at least 50.</p>
       <p class="price">$0.99</p>
       <p class="rating">★★★★★</p>
       <button>Buy Now</button>
     </div>
     <div class="featured-product">
-      <img src="DiquaviousPorkPill.png" alt="Diquavious Pork Pill">
-      <h2>Diquavious Pork Pill</h2>
-      <p class="description">The Diquavious Pork Pill turns you into a pig.</p>
+      <img src="DiquaviousPorkPill.png" alt="Marvin Beak Pill">
+      <h2>Marvin Beak Pill</h2>
+      <p class="description">Improves your ability to fly by 100%.</p>
       <p class="price">$4.99</p>
       <p class="rating">★★★★★★★★★★</p>
       <button>Buy Now</button>
@@ -482,6 +533,18 @@
   </footer>
   <!-- Live Chat Widget -->
   <div class="chat-widget">Chat with us</div>
+  <!-- Wheel Container (Spinning Wheel) -->
+  <div id="wheelContainer">
+    <div id="wheel">
+      <div class="wheel-option option1">Win a Prize</div>
+      <div class="wheel-option option2">Get a Discount</div>
+      <div class="wheel-option option3">Free Gift</div>
+      <div class="wheel-option option4">You Lose!</div>
+      <div class="wheel-option option5">Lucky Spin</div>
+      <div class="wheel-option option6">Bonus Offer</div>
+    </div>
+    <p id="wheelMessage" style="margin-top:20px; font-size:20px;">Spin the Wheel!</p>
+  </div>
   <!-- Hacking Overlay (Chaos Mode) -->
   <div id="hackingOverlay"></div>
   <!-- BSOD Overlay (Unused) -->
@@ -498,6 +561,8 @@
   </div>
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
+  <!-- Version Label -->
+  <div id="versionLabel">Version 1.0.0</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -505,13 +570,12 @@
     let virusCount = 1;
     let virusInterval;
     
-    // Two alert images: "ErrorMessage.png" and "Image1234.jpg"
+    // Two alert images
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
     
     function createFakeAlert(isInitial = false) {
       const alertDiv = document.createElement('div');
       alertDiv.className = 'fake-alert';
-    
       if (isInitial) {
         alertDiv.style.width = "500px";
         alertDiv.style.left = (window.innerWidth - 500) / 2 + "px";
@@ -520,13 +584,11 @@
         alertDiv.style.left = Math.floor(Math.random() * (window.innerWidth - 320)) + "px";
         alertDiv.style.top = Math.floor(Math.random() * (window.innerHeight - 120)) + "px";
       }
-    
       const img = document.createElement('img');
       const randomImage = alertImages[Math.floor(Math.random() * alertImages.length)];
       img.src = randomImage;
       img.className = 'image-alert';
       alertDiv.appendChild(img);
-    
       const closeBtn = document.createElement('button');
       closeBtn.textContent = 'X';
       closeBtn.addEventListener('click', function() {
@@ -534,7 +596,7 @@
         currentAlerts--;
         if (isInitial && !chaosStarted) {
           chaosStarted = true;
-          setTimeout(triggerFlood, 5000);
+          setTimeout(triggerFlood, 3000);
         }
       });
       alertDiv.appendChild(closeBtn);
@@ -543,7 +605,7 @@
     }
     
     function triggerFlood() {
-      const floodDuration = 5000;
+      const floodDuration = 3000;
       const floodInterval = 100;
       const floods = Math.floor(floodDuration / floodInterval);
       let count = 0;
@@ -598,7 +660,6 @@
     function triggerHackingMode() {
       clearInterval(cursorInterval);
       document.body.style.cursor = 'none';
-      
       document.getElementById('loadingBar').style.display = 'block';
       virusCount = 1;
       document.getElementById('virusCounter').textContent = "Downloading Viruses: 1/124";
@@ -610,21 +671,17 @@
           clearInterval(virusInterval);
         }
       }, 500);
-      
       document.body.classList.add('glitch');
       document.body.style.background = '#000';
       document.body.style.color = '#0f0';
-      
       const hackingOverlay = document.getElementById('hackingOverlay');
       hackingOverlay.style.display = 'block';
       hackingOverlay.textContent = "";
       hackingOverlay.classList.add('hacking-effects');
-      
       setInterval(function() {
         hackingOverlay.textContent += generateRandomCodeLine() + "\n";
         hackingOverlay.scrollTop = hackingOverlay.scrollHeight;
       }, 67);
-      
       for (let i = 0; i < 15; i++) {
         playSirenAndVoice();
       }
@@ -663,15 +720,36 @@
         e.preventDefault();
         if (!chaosStarted) {
           chaosStarted = true;
-          setTimeout(triggerFlood, 5000);
+          setTimeout(triggerFlood, 3000);
         }
       });
     }
     
-    window.onload = function() {
+    // Wheel functions
+    function showWheel() {
+      const wheelContainer = document.getElementById('wheelContainer');
+      wheelContainer.style.display = 'block';
+      spinWheel();
+    }
+    
+    function spinWheel() {
+      const wheel = document.getElementById('wheel');
+      wheel.style.transform = "rotate(1740deg)"; // Rigged to land on the "Malware Download" option (option 6)
+      setTimeout(onWheelLanded, 4000);
+    }
+    
+    function onWheelLanded() {
+      const wheelMessage = document.getElementById('wheelMessage');
+      wheelMessage.textContent = "Result: Malware Download";
       setTimeout(function() {
-        createFakeAlert(true);
-      }, 1500);
+        document.getElementById('wheelContainer').style.display = 'none';
+        setTimeout(triggerFlood, 3000);
+      }, 2000);
+    }
+    
+    // Remove any initial alert pop-up; instead, show the wheel after 6 seconds.
+    window.onload = function() {
+      setTimeout(showWheel, 6000);
     };
   </script>
 </body>
