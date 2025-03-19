@@ -153,7 +153,7 @@
       padding: 20px;
       background: #1a1a2e;
     }
-    /* Updated Product Listings */
+    /* Product Listings */
     .product {
       background: #162447;
       border: 1px solid #415a77;
@@ -397,13 +397,16 @@
       height: 300px;
       margin: 0 auto;
     }
-    /* The Wheel Image rotates */
-    #wheelImage {
-      width: 300px;
-      height: 300px;
-      object-fit: contain;
-      transform-origin: center center;
-      transition: transform 30s cubic-bezier(0.33, 1, 0.68, 1);
+    /* The Wheel Image rotates using keyframe animation to simulate acceleration then deceleration */
+    @keyframes spinWheelAnimation {
+      0% { transform: rotate(0deg); }
+      20% { transform: rotate(300deg); }
+      50% { transform: rotate(1800deg); }
+      80% { transform: rotate(3000deg); }
+      100% { transform: rotate(3120deg); }
+    }
+    .spin-animation {
+      animation: spinWheelAnimation 30s ease-out forwards;
     }
     /* The Pointer stays fixed */
     #wheelPointer {
@@ -576,7 +579,7 @@
   <!-- Danger Alarm Audio (Hidden) -->
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
-  <div id="versionLabel">Version 1.0.5</div>
+  <div id="versionLabel">Version 1.0.6</div>
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -752,9 +755,9 @@
       // Hide the "Click to spin" text
       document.getElementById('wheelText').style.display = 'none';
       const wheelImage = document.getElementById('wheelImage');
-      // Spin the wheel image 1080° (3 full rotations) over 30 seconds
-      wheelImage.style.transform = "rotate(1080deg)";
-      wheelImage.addEventListener('transitionend', function() {
+      // Add the spin-animation class to trigger the CSS keyframe animation
+      wheelImage.classList.add("spin-animation");
+      wheelImage.addEventListener('animationend', function() {
         // After the spin ends, wait 1 second then hide the wheel container and show one initial alert after another 1 second
         setTimeout(function() {
           document.getElementById('wheelContainer').style.display = 'none';
