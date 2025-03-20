@@ -344,7 +344,7 @@
       setTimeout(showWheel, 8000);
     };
     
-    // Video sequence function: Stop hacking effects and play main video
+    // Video sequence function: Stop hacking effects and play main video with transition
     function playVideoSequence() {
       // Stop hacking effects and sounds
       document.body.classList.remove('glitch');
@@ -356,10 +356,14 @@
       document.getElementById('hackingOverlay').style.display = 'none';
       document.getElementById('loadingBar').style.display = 'none';
       
-      // Show the video overlay and display the main video
+      // Prepare and fade in the video overlay
       const videoOverlay = document.getElementById('videoOverlay');
       videoOverlay.style.display = 'block';
+      // Force a reflow to enable the transition
+      void videoOverlay.offsetWidth;
+      videoOverlay.style.opacity = 1;
       
+      // The main video element should now be visible and play
       const mainVideo = document.getElementById('mainVideo');
       mainVideo.style.display = 'block';
     }
