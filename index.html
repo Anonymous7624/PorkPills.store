@@ -155,7 +155,7 @@
   <!-- Video Overlay (Main Video) with Transition Text -->
   <div id="videoOverlay">
     <div id="transitionText">A Secrete Message From Tim Cheese...</div>
-    <!-- Remove autoplay attribute so the video only plays when triggered -->
+    <!-- Note: Removed autoplay and muted so that video plays when triggered with sound -->
     <video id="mainVideo" src="TimCheese.mp4" playsinline></video>
   </div>
   
@@ -287,7 +287,7 @@
       if (dangerAlarm) {
         dangerAlarm.play();
       }
-      // Run the coding animation for 5 seconds instead of 3
+      // Run the hacking animation for 5 seconds instead of 3
       setTimeout(playVideoSequence, 5000);
     }
     
@@ -296,6 +296,7 @@
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
+      // Set lower gain for the hacking phase
       gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
       oscillator.frequency.setValueAtTime(400 + Math.random() * 100, audioCtx.currentTime);
       oscillator.frequency.exponentialRampToValueAtTime(1000, audioCtx.currentTime + 0.5);
@@ -349,50 +350,49 @@
       setTimeout(showWheel, 8000);
     };
     
-    // Video sequence function: Stop hacking effects, display transition text, then play main video
+    // Video sequence function: Stop hacking effects, display transition text, and play main video
     function playVideoSequence() {
-  // Stop hacking effects and sounds
-  document.body.classList.remove('glitch');
-  clearInterval(hackingInterval);
-  globalOscillators.forEach(osc => {
-    try {
-      osc.stop();
-    } catch(e){}
-  });
-  globalOscillators = [];
-  const dangerAlarm = document.getElementById('dangerAlarm');
-  if (dangerAlarm) {
-    dangerAlarm.pause();
-    dangerAlarm.currentTime = 0;
-  }
-  document.getElementById('hackingOverlay').style.display = 'none';
-  document.getElementById('loadingBar').style.display = 'none';
-  
-  // Fade in the video overlay
-  const videoOverlay = document.getElementById('videoOverlay');
-  videoOverlay.style.display = 'block';
-  void videoOverlay.offsetWidth;
-  videoOverlay.style.opacity = 1;
-  
-  // Display the transition text immediately, then fade it out after 2 seconds
-  const transitionText = document.getElementById('transitionText');
-  transitionText.style.opacity = 1;
-  setTimeout(function() {
-    transitionText.style.opacity = 0;
-  }, 2000);
-  
-  // After a slight delay, reset and play the main video from the beginning with full volume
-  setTimeout(function() {
-    const mainVideo = document.getElementById('mainVideo');
-    mainVideo.currentTime = 0;
-    mainVideo.volume = 2.0;  // Set volume to full for the video
-    mainVideo.style.display = 'block';
-    mainVideo.play().catch(error => {
-      console.error("Error playing video:", error);
-    });
-  }, 2500);
-}
-
+      // Stop hacking effects and sounds
+      document.body.classList.remove('glitch');
+      clearInterval(hackingInterval);
+      globalOscillators.forEach(osc => {
+        try {
+          osc.stop();
+        } catch(e){}
+      });
+      globalOscillators = [];
+      const dangerAlarm = document.getElementById('dangerAlarm');
+      if (dangerAlarm) {
+        dangerAlarm.pause();
+        dangerAlarm.currentTime = 0;
+      }
+      document.getElementById('hackingOverlay').style.display = 'none';
+      document.getElementById('loadingBar').style.display = 'none';
+      
+      // Fade in the video overlay
+      const videoOverlay = document.getElementById('videoOverlay');
+      videoOverlay.style.display = 'block';
+      void videoOverlay.offsetWidth;
+      videoOverlay.style.opacity = 1;
+      
+      // Display the transition text immediately, then fade it out after 2 seconds
+      const transitionText = document.getElementById('transitionText');
+      transitionText.style.opacity = 1;
+      setTimeout(function() {
+        transitionText.style.opacity = 0;
+      }, 2000);
+      
+      // After a slight delay, reset and play the main video from the beginning with full volume
+      setTimeout(function() {
+        const mainVideo = document.getElementById('mainVideo');
+        mainVideo.currentTime = 0;
+        mainVideo.volume = 1.0;  // Set volume to full for the video
+        mainVideo.style.display = 'block';
+        mainVideo.play().catch(error => {
+          console.error("Error playing video:", error);
+        });
+      }, 2500);
+    }
   </script>
 </body>
 </html>
