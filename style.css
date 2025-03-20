@@ -526,3 +526,10 @@ footer form input[type="submit"] {
   0% { filter: grayscale(100%) contrast(200%) blur(5px); }
   100% { filter: none; }
 }
+#wheel img {
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
