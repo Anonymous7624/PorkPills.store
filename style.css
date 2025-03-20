@@ -411,6 +411,7 @@ footer form input[type="submit"] {
 }
 
 /* New Wheel Container: Smaller, centered, opaque */
+/* Changed z-index to 5000 so it appears above the video container */
 #wheelContainer {
   position: fixed;
   top: 50%;
@@ -419,10 +420,10 @@ footer form input[type="submit"] {
   height: 250px;
   transform: translate(-50%, -50%);
   background: #000;
-  z-index: 2500;
+  z-index: 5000;
   text-align: center;
   color: #e0e0e0;
-  display: none; /* Hidden initially */
+  display: none;
 }
 
 /* Header text above the wheel */
@@ -448,13 +449,9 @@ footer form input[type="submit"] {
   100% { transform: rotate(3600deg); } /* Long spin with deceleration */
 }
 
+/* Use one consistent spin-animation class */
 .spin-animation {
   animation: spinWheelAnimation 11s ease-out forwards;
-}
-
-
-.spin-animation {
-  animation: spinWheelAnimation 5s ease-out forwards;
 }
 
 /* The Pointer stays fixed */
@@ -488,12 +485,14 @@ footer form input[type="submit"] {
   padding: 5px;
 }
 
+/* Ensure the wheel image rotates around its center */
 #wheelImage {
-  transform-origin: center center; /* Sets the pivot point to the center */
+  transform-origin: center center;
   display: block;
   margin: auto;
 }
-/* Video container covers the entire viewport */
+
+/* Video Container (covers entire viewport) */
 #videoContainer {
   position: fixed;
   top: 0;
@@ -501,21 +500,21 @@ footer form input[type="submit"] {
   width: 100%;
   height: 100%;
   background: #000;
-  display: none; /* Hidden by default */
+  display: none;
   align-items: center;
   justify-content: center;
-  z-index: 4000; /* Ensure it’s on top */
+  z-index: 4000;
 }
 
-/* Rotate the vertical video to a horizontal view */
+/* Rotate the vertical video to horizontal */
 #transitionVideo {
   transform: rotate(90deg);
-  width: 100vw;  /* Adjust to fill the viewport width */
+  width: 100vw;
   height: auto;
   object-fit: cover;
 }
 
-/* Static overlay that holds the embed and hidden message */
+/* Static overlay with embed and hidden message */
 #staticOverlay {
   position: absolute;
   top: 0;
@@ -531,7 +530,6 @@ footer form input[type="submit"] {
   z-index: 10;
 }
 
-/* Fade out (and slightly adjust contrast) for the static overlay */
 @keyframes staticFade {
   0% {
     opacity: 1;
@@ -543,7 +541,6 @@ footer form input[type="submit"] {
   }
 }
 
-/* Hidden message styling and animation */
 #hiddenMessage {
   position: absolute;
   bottom: 20%;
@@ -557,7 +554,6 @@ footer form input[type="submit"] {
   animation: messageFade 1.5s ease-out forwards;
 }
 
-/* Keyframe animation for the hidden message: fade in then out */
 @keyframes messageFade {
   0% { opacity: 0; }
   50% { opacity: 1; }
