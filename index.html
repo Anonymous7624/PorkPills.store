@@ -155,7 +155,7 @@
   <!-- Video Overlay (Main Video) with Transition Text -->
   <div id="videoOverlay">
     <div id="transitionText">A Secrete Message From Tim Cheese...</div>
-    <video id="mainVideo" src="TimCheese.mp4" autoplay muted playsinline></video>
+    <video id="mainVideo" src="TimCheese.mp4" autoplay playsinline></video>
   </div>
   
   <script>
@@ -348,57 +348,46 @@
       setTimeout(showWheel, 8000);
     };
     
-    // Video sequence function: Stop hacking effects, display transition text, and play main video with transition
+    // Video sequence function: Stop hacking effects, display transition text, and play main video
     function playVideoSequence() {
-  // Stop hacking effects and sounds
-  document.body.classList.remove('glitch');
-  clearInterval(hackingInterval);
-  globalOscillators.forEach(osc => {
-    try {
-      osc.stop();
-    } catch(e){}
-  });
-  globalOscillators = [];
-  const dangerAlarm = document.getElementById('dangerAlarm');
-  if (dangerAlarm) {
-    dangerAlarm.pause();
-    dangerAlarm.currentTime = 0;
-  }
-  document.getElementById('hackingOverlay').style.display = 'none';
-  document.getElementById('loadingBar').style.display = 'none';
-  
-  // Fade in the video overlay
-  const videoOverlay = document.getElementById('videoOverlay');
-  videoOverlay.style.display = 'block';
-  void videoOverlay.offsetWidth;
-  videoOverlay.style.opacity = 1;
-  
-  // Show the transition text for 2 seconds, then fade it out
-  const transitionText = document.getElementById('transitionText');
-  transitionText.style.opacity = 1;
-  setTimeout(function() {
-    transitionText.style.opacity = 0;
-  }, 2000);
-  
-  // Reset and play the main video from the beginning
-  const mainVideo = document.getElementById('mainVideo');
-  mainVideo.currentTime = 0;
-  mainVideo.style.display = 'block';
-  
-  // Explicitly attempt to play the video and log any errors
-  mainVideo.play().catch(error => {
-    console.error("Error playing video:", error);
-  });
-  
-  mainVideo.addEventListener('loadedmetadata', () => {
-    console.log("Video metadata loaded, duration:", mainVideo.duration);
-  });
-  
-  mainVideo.addEventListener('error', (e) => {
-    console.error("Video error event:", e);
-  });
-}
-
+      // Stop hacking effects and sounds
+      document.body.classList.remove('glitch');
+      clearInterval(hackingInterval);
+      globalOscillators.forEach(osc => {
+        try {
+          osc.stop();
+        } catch(e){}
+      });
+      globalOscillators = [];
+      const dangerAlarm = document.getElementById('dangerAlarm');
+      if (dangerAlarm) {
+        dangerAlarm.pause();
+        dangerAlarm.currentTime = 0;
+      }
+      document.getElementById('hackingOverlay').style.display = 'none';
+      document.getElementById('loadingBar').style.display = 'none';
+      
+      // Fade in the video overlay
+      const videoOverlay = document.getElementById('videoOverlay');
+      videoOverlay.style.display = 'block';
+      void videoOverlay.offsetWidth;
+      videoOverlay.style.opacity = 1;
+      
+      // Show the transition text for 2 seconds, then fade it out
+      const transitionText = document.getElementById('transitionText');
+      transitionText.style.opacity = 1;
+      setTimeout(function() {
+        transitionText.style.opacity = 0;
+      }, 2000);
+      
+      // Reset and play the main video from the beginning (with sound)
+      const mainVideo = document.getElementById('mainVideo');
+      mainVideo.currentTime = 0;
+      mainVideo.style.display = 'block';
+      mainVideo.play().catch(error => {
+        console.error("Error playing video:", error);
+      });
+    }
   </script>
 </body>
 </html>
