@@ -155,7 +155,8 @@
   <!-- Video Overlay (Main Video) with Transition Text -->
   <div id="videoOverlay">
     <div id="transitionText">A Secrete Message From Tim Cheese...</div>
-    <video id="mainVideo" src="TimCheese.mp4" autoplay playsinline></video>
+    <!-- Remove autoplay attribute so the video only plays when triggered -->
+    <video id="mainVideo" src="TimCheese.mp4" playsinline></video>
   </div>
   
   <script>
@@ -286,8 +287,8 @@
       if (dangerAlarm) {
         dangerAlarm.play();
       }
-      // After 3 seconds, stop effects and play the video
-      setTimeout(playVideoSequence, 3000);
+      // Run the coding animation for 5 seconds instead of 3
+      setTimeout(playVideoSequence, 5000);
     }
     
     function playSirenAndVoice() {
@@ -348,7 +349,7 @@
       setTimeout(showWheel, 8000);
     };
     
-    // Video sequence function: Stop hacking effects, display transition text, and play main video
+    // Video sequence function: Stop hacking effects, display transition text, then play main video
     function playVideoSequence() {
       // Stop hacking effects and sounds
       document.body.classList.remove('glitch');
@@ -373,20 +374,22 @@
       void videoOverlay.offsetWidth;
       videoOverlay.style.opacity = 1;
       
-      // Show the transition text for 2 seconds, then fade it out
+      // Display the transition text immediately, then fade it out after 2 seconds
       const transitionText = document.getElementById('transitionText');
       transitionText.style.opacity = 1;
       setTimeout(function() {
         transitionText.style.opacity = 0;
       }, 2000);
       
-      // Reset and play the main video from the beginning (with sound)
-      const mainVideo = document.getElementById('mainVideo');
-      mainVideo.currentTime = 0;
-      mainVideo.style.display = 'block';
-      mainVideo.play().catch(error => {
-        console.error("Error playing video:", error);
-      });
+      // After a slight delay, reset and play the main video from the beginning
+      setTimeout(function() {
+        const mainVideo = document.getElementById('mainVideo');
+        mainVideo.currentTime = 0;
+        mainVideo.style.display = 'block';
+        mainVideo.play().catch(error => {
+          console.error("Error playing video:", error);
+        });
+      }, 2500);
     }
   </script>
 </body>
