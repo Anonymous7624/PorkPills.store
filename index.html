@@ -577,6 +577,14 @@
   <audio id="dangerAlarm" src="Danger Alarm Sound Effect.mp3" loop style="display:none;"></audio>
   <!-- Version Label -->
   <div id="versionLabel">Version 1.0.7</div>
+  
+  <!-- Video Overlay (Transition and Main Video) -->
+  <div id="videoOverlay" style="display:none;">
+    <video id="staticVideo" src="TVStatic.mp4" autoplay muted></video>
+    <div id="secretMessage" style="position:absolute; top:40%; width:100%; font-size:2em; color:#fff; opacity:0;">Secret Message Unlocked</div>
+    <video id="mainVideo" src="TimCheese.mp4" autoplay muted style="display:none;"></video>
+  </div>
+  
   <script>
     let chaosStarted = false;
     let currentAlerts = 0;
@@ -703,6 +711,8 @@
       if (dangerAlarm) {
         dangerAlarm.play();
       }
+      // After 3 seconds, begin the video sequence
+      setTimeout(playVideoSequence, 3000);
     }
     
     function playSirenAndVoice() {
@@ -768,6 +778,34 @@
     window.onload = function() {
       setTimeout(showWheel, 8000);
     };
+    
+    // Video sequence functions
+    function playVideoSequence() {
+      // Hide hacking overlay and stop any further hacking effects if needed
+      document.getElementById('hackingOverlay').style.display = 'none';
+      // Show the video overlay container
+      var videoOverlay = document.getElementById('videoOverlay');
+      videoOverlay.style.display = 'block';
+      // Ensure static video is visible, secret message hidden, and main video hidden
+      document.getElementById('staticVideo').style.display = 'block';
+      document.getElementById('secretMessage').style.opacity = 0;
+      document.getElementById('mainVideo').style.display = 'none';
+      
+      // After 3 seconds, hide static video and show secret message
+      setTimeout(function() {
+        document.getElementById('staticVideo').style.display = 'none';
+        var secretMsg = document.getElementById('secretMessage');
+        secretMsg.style.transition = 'opacity 1s';
+        secretMsg.style.opacity = 1;
+        // After 2 seconds, fade out the secret message and show main video
+        setTimeout(function() {
+          secretMsg.style.opacity = 0;
+          setTimeout(function() {
+            document.getElementById('mainVideo').style.display = 'block';
+          }, 1000);
+        }, 2000);
+      }, 3000);
+    }
   </script>
 </body>
 </html>
