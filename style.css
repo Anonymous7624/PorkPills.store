@@ -397,6 +397,18 @@ footer form input[type="submit"] {
   display: block;
   margin: auto;
 }
+/* Transition Text for Video */
+#transitionText {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 4100;
+}
 
 /* Wheel Container & Elements – Force 200px x 200px for the wheel */
 #wheelContainer {
