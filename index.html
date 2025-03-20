@@ -154,7 +154,7 @@
   
   <!-- Video Overlay (Main Video) -->
   <div id="videoOverlay">
-    <video id="mainVideo" src="TimCheese.mp4" autoplay muted></video>
+    <video id="mainVideo" src="TimCheese.mp4" autoplay muted playsinline></video>
   </div>
   
   <script>
@@ -356,14 +356,14 @@
       document.getElementById('hackingOverlay').style.display = 'none';
       document.getElementById('loadingBar').style.display = 'none';
       
-      // Prepare and fade in the video overlay
+      // Fade in the video overlay
       const videoOverlay = document.getElementById('videoOverlay');
       videoOverlay.style.display = 'block';
-      // Force a reflow to enable the transition
+      // Force a reflow
       void videoOverlay.offsetWidth;
       videoOverlay.style.opacity = 1;
       
-      // The main video element should now be visible and play
+      // Ensure the main video is visible and playing
       const mainVideo = document.getElementById('mainVideo');
       mainVideo.style.display = 'block';
     }
