@@ -393,8 +393,9 @@ footer form input[type="submit"] {
 #videoOverlay video {
   max-width: 100%;
   max-height: 100%;
-  margin: auto;
+  object-fit: none;
   display: block;
+  margin: auto;
 }
 
 /* Wheel Container & Elements – Force 200px x 200px for the wheel */
