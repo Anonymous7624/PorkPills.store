@@ -340,7 +340,6 @@
         }, 1000);
       }, { once: true });
     }
-    
     window.onload = function() {
       setTimeout(showWheel, 8000);
     };
@@ -357,11 +356,10 @@
       document.getElementById('hackingOverlay').style.display = 'none';
       document.getElementById('loadingBar').style.display = 'none';
       
-      // Display the video overlay and show the main video
+      // Show the video overlay and display the main video
       const videoOverlay = document.getElementById('videoOverlay');
       videoOverlay.style.display = 'block';
       
-      // The main video element will autoplay (if supported) and cover the screen
       const mainVideo = document.getElementById('mainVideo');
       mainVideo.style.display = 'block';
     }
