@@ -397,6 +397,15 @@
       height: 200px !important;
       margin: 0 auto;
     }
+    /* Force the wheel's images to fill the container */
+    #wheelImage,
+    #wheelPointer {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      margin: auto;
+    }
     /* Keyframe animation for the wheel spin */
     @keyframes spinWheelAnimation {
       0% { transform: rotate(0deg); }
@@ -410,8 +419,6 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 200px;
-      height: 200px;
       pointer-events: none;
     }
     /* Text overlay in the center of the wheel */
