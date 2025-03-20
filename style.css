@@ -411,7 +411,6 @@ footer form input[type="submit"] {
 }
 
 /* New Wheel Container: Smaller, centered, opaque */
-/* Changed z-index to 5000 so it appears above the video container */
 #wheelContainer {
   position: fixed;
   top: 50%;
@@ -420,10 +419,10 @@ footer form input[type="submit"] {
   height: 250px;
   transform: translate(-50%, -50%);
   background: #000;
-  z-index: 5000;
+  z-index: 2500;
   text-align: center;
   color: #e0e0e0;
-  display: none;
+  display: none; /* Hidden initially */
 }
 
 /* Header text above the wheel */
@@ -437,21 +436,19 @@ footer form input[type="submit"] {
 /* Wheel Element */
 #wheel {
   position: relative;
-  width: 200px !important;
-  height: 200px !important;
+  width: 200px; !important;
+  height: 200px; !important;
   margin: 0 auto;
 }
 
 /* Keyframe animation for the wheel spin */
 @keyframes spinWheelAnimation {
   0% { transform: rotate(0deg); }
-  20% { transform: rotate(720deg); } /* Quick acceleration phase */
-  100% { transform: rotate(3600deg); } /* Long spin with deceleration */
+  100% { transform: rotate(1080deg); }
 }
 
-/* Use one consistent spin-animation class */
 .spin-animation {
-  animation: spinWheelAnimation 11s ease-out forwards;
+  animation: spinWheelAnimation 5s ease-out forwards;
 }
 
 /* The Pointer stays fixed */
@@ -483,79 +480,4 @@ footer form input[type="submit"] {
   font-size: 10px;
   color: #a0a0a0;
   padding: 5px;
-}
-
-/* Ensure the wheel image rotates around its center */
-#wheelImage {
-  transform-origin: center center;
-  display: block;
-  margin: auto;
-}
-
-/* Video Container (covers entire viewport) */
-#videoContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 4000;
-}
-
-/* Rotate the vertical video to horizontal */
-#transitionVideo {
-  transform: rotate(90deg);
-  width: 100vw;
-  height: auto;
-  object-fit: cover;
-}
-
-/* Static overlay with embed and hidden message */
-#staticOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: staticFade 1.5s ease-out forwards;
-  pointer-events: none;
-  z-index: 10;
-}
-
-@keyframes staticFade {
-  0% {
-    opacity: 1;
-    filter: contrast(200%);
-  }
-  100% {
-    opacity: 0;
-    filter: contrast(100%);
-  }
-}
-
-#hiddenMessage {
-  position: absolute;
-  bottom: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #0f0;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 24px;
-  letter-spacing: 2px;
-  opacity: 0;
-  animation: messageFade 1.5s ease-out forwards;
-}
-
-@keyframes messageFade {
-  0% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
 }
