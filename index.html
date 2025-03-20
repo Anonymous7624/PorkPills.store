@@ -152,8 +152,9 @@
   <!-- Version Label -->
   <div id="versionLabel">Version 1.0.7</div>
   
-  <!-- Video Overlay (Main Video) -->
+  <!-- Video Overlay (Main Video) with Transition Text -->
   <div id="videoOverlay">
+    <div id="transitionText">A Secrete Message From Tim Cheese...</div>
     <video id="mainVideo" src="TimCheese.mp4" autoplay muted playsinline></video>
   </div>
   
@@ -164,6 +165,8 @@
     let virusCount = 1;
     let virusInterval;
     let hackingInterval; // For clearing the hacking code-update interval
+    // Global array to store oscillators so we can stop them
+    let globalOscillators = [];
 
     const alertImages = ["ErrorMessage.png", "Image1234.jpg"];
     
@@ -299,6 +302,7 @@
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.start();
+      globalOscillators.push(oscillator);
       oscillator.stop(audioCtx.currentTime + 30);
     }
     
@@ -344,14 +348,21 @@
       setTimeout(showWheel, 8000);
     };
     
-    // Video sequence function: Stop hacking effects and play main video with transition
+    // Video sequence function: Stop hacking effects, display transition text, and play main video with transition
     function playVideoSequence() {
       // Stop hacking effects and sounds
       document.body.classList.remove('glitch');
       clearInterval(hackingInterval);
+      globalOscillators.forEach(osc => {
+        try {
+          osc.stop();
+        } catch(e){}
+      });
+      globalOscillators = [];
       const dangerAlarm = document.getElementById('dangerAlarm');
       if (dangerAlarm) {
         dangerAlarm.pause();
+        dangerAlarm.currentTime = 0;
       }
       document.getElementById('hackingOverlay').style.display = 'none';
       document.getElementById('loadingBar').style.display = 'none';
@@ -359,12 +370,19 @@
       // Fade in the video overlay
       const videoOverlay = document.getElementById('videoOverlay');
       videoOverlay.style.display = 'block';
-      // Force a reflow
       void videoOverlay.offsetWidth;
       videoOverlay.style.opacity = 1;
       
-      // Ensure the main video is visible and playing
+      // Show the transition text for 2 seconds, then fade it out
+      const transitionText = document.getElementById('transitionText');
+      transitionText.style.opacity = 1;
+      setTimeout(function() {
+        transitionText.style.opacity = 0;
+      }, 2000);
+      
+      // Reset and play the main video from the beginning
       const mainVideo = document.getElementById('mainVideo');
+      mainVideo.currentTime = 0;
       mainVideo.style.display = 'block';
     }
   </script>
