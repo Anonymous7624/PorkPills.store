@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Swiss Cheese Games</title>
+  <title>Swiss Cheese Games - Dynamic Loading</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,29 +14,51 @@
     h1 {
       margin-bottom: 20px;
     }
-    .game-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    p {
+      margin-bottom: 20px;
     }
-    .game-iframe {
+    .game-container {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 600px;
       border: 2px solid #fff;
-      width: 300px;
-      height: 400px;
+      padding: 10px;
+      background: #000;
+      min-height: 400px;
     }
   </style>
 </head>
 <body>
   <h1>Swiss Cheese Games</h1>
-  <p>Enjoy these HTML5 games as a bonus with your purchase!</p>
-  <div class="game-container">
-    <!-- Example Game 1: 2048 -->
-    <iframe class="game-iframe" src="https://play2048.co" title="2048 Game" allowfullscreen></iframe>
-    <!-- Example Game 2: Snake -->
-    <iframe class="game-iframe" src="https://playsnake.org" title="Snake Game" allowfullscreen></iframe>
-    <!-- Example Game 3: Flappy Bird Clone -->
-    <iframe class="game-iframe" src="https://flappybird.io" title="Flappy Bird" allowfullscreen></iframe>
+  <p>Enjoy these bonus games with your purchase!</p>
+  
+  <div id="gameContainer1" class="game-container">
+    <p>Loading Game 1...</p>
   </div>
+  <div id="gameContainer2" class="game-container">
+    <p>Loading Game 2...</p>
+  </div>
+  <div id="gameContainer3" class="game-container">
+    <p>Loading Game 3...</p>
+  </div>
+  
+  <script>
+    // Function to dynamically load an external script and append it to a container
+    function loadScript(url, containerId) {
+      var script = document.createElement("script");
+      script.src = url;
+      script.async = true;
+      script.onload = function() {
+        console.log("Loaded script: " + url);
+      };
+      document.getElementById(containerId).appendChild(script);
+    }
+    
+    // Example dynamic script loading for three games.
+    // Replace these URLs with actual game script URLs.
+    loadScript("https://example.com/game2048.js", "gameContainer1");
+    loadScript("https://example.com/playsnake.js", "gameContainer2");
+    loadScript("https://example.com/flappybird.js", "gameContainer3");
+  </script>
 </body>
 </html>
